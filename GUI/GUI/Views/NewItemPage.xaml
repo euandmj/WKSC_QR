@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GUI.Views.NewItemPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="New Item">
+    <ContentPage.Content>
+        <StackLayout Spacing="3"
+                     Padding="15">
+            <Label Text="Owner"
+                   FontSize="Medium" />
+            <Entry Text="{Binding Owner, Mode=TwoWay}"
+                   FontSize="Medium" />
+
+            <Label Text="Boat Class"
+                   FontSize="Medium" />
+            <Editor Text="{Binding BoatClass, Mode=TwoWay}"
+                    AutoSize="TextChanges"
+                    FontSize="Medium"
+                    Margin="0" />
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Zone"
+                           FontSize="Medium" />
+                    <Entry Text="{Binding ZoneChar, Mode=TwoWay}"
+                           FontSize="Large" />
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="ID"
+                           FontSize="Medium" />
+                    <Entry Text="{Binding ZoneNum, Mode=TwoWay}"
+                           FontSize="Large" />
+                </StackLayout>
+            </StackLayout>
+
+            <Label Text="Paid"
+                   FontSize="Medium" />
+            <Editor Text="todo" />
+
+            <Label Text="Due"
+                   FontSize="Medium" />
+            <Editor Text="todo" />
+
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel"
+                        Command="{Binding CancelCommand}"
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Save"
+                        Command="{Binding SaveCommand}"
+                        HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

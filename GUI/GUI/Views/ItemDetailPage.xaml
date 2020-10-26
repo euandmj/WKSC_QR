@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:GUI.Converters"
+             x:Class="GUI.Views.ItemDetailPage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <converters:PaidColorConverter x:Key="PaidColorConverter" />
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Owner"
+               FontSize="Small" />
+        <Label Text="{Binding Owner}"
+               FontSize="Medium"/>
+        
+        <Label Text="Boat"
+               FontSize="Small" />
+        <Label Text="{Binding BoatClass}"
+               FontSize="Medium"/>
+
+        <Label Text="Zone"
+               FontSize="Small" />
+        <Label Text="{Binding Zone}"
+               FontSize="Medium" />
+
+        <Label Text="DueDate"
+               FontSize="Small" />
+        <Label Text="{Binding DueDate}"
+               FontSize="Medium" BackgroundColor="{Binding HasPaid, Converter={StaticResource PaidColorConverter}}"/>
+    </StackLayout>
+    
+</ContentPage>
