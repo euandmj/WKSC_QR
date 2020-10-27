@@ -9,26 +9,32 @@
         <converters:PaidColorConverter x:Key="PaidColorConverter" />
     </ContentPage.Resources>
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Owner"
-               FontSize="Small" />
-        <Label Text="{Binding Owner}"
-               FontSize="Medium"/>
-        
+    <StackLayout Spacing="20"
+                 Padding="15"
+                 BackgroundColor="{Binding Item.ItemHasPaid, Converter={StaticResource PaidColorConverter}}">
+        <Label Text="Owner" 
+               FontAttributes="Bold"
+               FontSize="20" />
+        <Label Text="{Binding Item.Owner}"
+               FontSize="25"/>
+
         <Label Text="Boat"
-               FontSize="Small" />
-        <Label Text="{Binding BoatClass}"
-               FontSize="Medium"/>
+               FontAttributes="Bold"
+               FontSize="20" />
+        <Label Text="{Binding Item.BoatClass}"
+               FontSize="25"/>
 
         <Label Text="Zone"
-               FontSize="Small" />
-        <Label Text="{Binding Zone}"
-               FontSize="Medium" />
+               FontAttributes="Bold"
+               FontSize="20" />
+        <Label Text="{Binding Item.Zone}"
+               FontSize="25" />
 
         <Label Text="DueDate"
-               FontSize="Small" />
-        <Label Text="{Binding DueDate}"
-               FontSize="Medium" BackgroundColor="{Binding HasPaid, Converter={StaticResource PaidColorConverter}}"/>
+               FontAttributes="Bold"
+               FontSize="20" />
+        <Label Text="{Binding Item.DueDate}"
+               FontSize="25"/>
     </StackLayout>
     
 </ContentPage>

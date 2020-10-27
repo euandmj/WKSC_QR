@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qrgentest", "qrgentest\qrgentest.csproj", "{0392EBA3-765B-414B-8B83-5547782055BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0392EBA3-765B-414B-8B83-5547782055BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0392EBA3-765B-414B-8B83-5547782055BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0392EBA3-765B-414B-8B83-5547782055BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0392EBA3-765B-414B-8B83-5547782055BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5DE2791-3C1D-4C89-8668-B69357FEED6E}
+	EndGlobalSection
+EndGlobal

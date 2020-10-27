@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.ViewModels;
+using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,6 +11,13 @@ namespace GUI.Views
         public AboutPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
+            zxScanner.IsScanning = true;
         }
     }
 }

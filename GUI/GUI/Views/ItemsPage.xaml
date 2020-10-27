@@ -31,16 +31,16 @@
                         <Label Text="{Binding Owner}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
+                            FontSize="25" />
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding BoatClass}"
                                    LineBreakMode="NoWrap"
                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
+                                   FontSize="20" />
                             <Label Text="{Binding Zone}"
                                    LineBreakMode="NoWrap"
                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                   FontSize="13" />
+                                   FontSize="20" />
                         </StackLayout>
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
