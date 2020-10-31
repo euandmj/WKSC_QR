@@ -13,13 +13,17 @@ namespace GUI.ViewModels
         private YardItem _selectedItem;
         private bool _scanning = true;
         private bool _analysing = true;
+        private bool _isTorchOn = false;
+
         public ICommand ScanResultCommand { get; }
+        public ICommand ShowFlashCommand { get; }
 
         public ScanViewModel()
         {
             Title = "Scan";
 
             ScanResultCommand = new Command(OnScan);
+            ShowFlashCommand = new Command(() => IsTorchOn = !IsTorchOn);
         }
 
         public bool StarEnabled => _selectedItem != null;
@@ -35,6 +39,12 @@ namespace GUI.ViewModels
         {
             get => _analysing;
             set => SetProperty(ref _analysing, value);
+        }
+
+        public bool IsTorchOn
+        {
+            get => _isTorchOn;
+            set => SetProperty(ref _isTorchOn, value);
         }
 
         public YardItem SelectedItem

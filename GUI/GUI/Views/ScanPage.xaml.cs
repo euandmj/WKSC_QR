@@ -19,5 +19,10 @@ namespace GUI.Views
             
             zxScanner.IsScanning = true;
         }
+
+        private void QR_FlashButtonClicked(Button sender, EventArgs e)
+        {
+            zxScanner.ToggleTorch();
+        }
     }
 }

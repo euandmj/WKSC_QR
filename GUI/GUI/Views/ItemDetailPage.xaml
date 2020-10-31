@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:GUI.Converters"
              x:Class="GUI.Views.ItemDetailPage"
+             xmlns:vm="clr-namespace:GUI.ViewModels"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
         <converters:PaidColorConverter x:Key="PaidColorConverter" />
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:ItemDetailViewModel />
+    </ContentPage.BindingContext>
 
     <StackLayout Spacing="20"
                  Padding="15"

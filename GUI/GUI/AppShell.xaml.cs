@@ -19,9 +19,14 @@ namespace GUI
 
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        private async void LogoutItem_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//LoginPage");
+        }
+
+        private async void ImportDb_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

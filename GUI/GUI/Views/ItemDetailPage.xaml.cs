@@ -8,7 +8,6 @@ namespace GUI.Views
         public ItemDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ItemDetailViewModel();
         }
     }
 }
