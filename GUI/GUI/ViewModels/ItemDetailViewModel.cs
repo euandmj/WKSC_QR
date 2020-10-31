@@ -1,4 +1,4 @@
-﻿using GUI.Models;
+﻿using Core.Models;
 using System;
 using System.Diagnostics;
 using Xamarin.Forms;

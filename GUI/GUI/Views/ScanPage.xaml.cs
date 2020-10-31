@@ -6,9 +6,9 @@ using Xamarin.Forms.Xaml;
 
 namespace GUI.Views
 {
-    public partial class AboutPage : ContentPage
+    public partial class ScanPage : ContentPage
     {
-        public AboutPage()
+        public ScanPage()
         {
             InitializeComponent();
         }

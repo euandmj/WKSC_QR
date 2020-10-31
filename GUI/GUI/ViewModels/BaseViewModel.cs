@@ -5,8 +5,8 @@ using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
 
-using GUI.Models;
-using GUI.Services;
+using Core.Models;
+using Core.Services;
 
 namespace GUI.ViewModels
 {

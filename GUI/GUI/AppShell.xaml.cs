@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GUI.ViewModels;
 using GUI.Views;
 using Xamarin.Forms;
@@ -11,8 +12,11 @@ namespace GUI
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(ScanPage), typeof(ScanPage));
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Routing.RegisterRoute(nameof(RecentScansPage), typeof(RecentScansPage));
+
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

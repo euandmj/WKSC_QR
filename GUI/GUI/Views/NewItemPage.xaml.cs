@@ -4,7 +4,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using GUI.Models;
+using Core.Models;
 using GUI.ViewModels;
 
 namespace GUI.Views

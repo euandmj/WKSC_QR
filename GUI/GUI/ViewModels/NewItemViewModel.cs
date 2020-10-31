@@ -1,4 +1,4 @@
-﻿using GUI.Models;
+﻿using Core.Models;
 using System;
 using Xamarin.Forms;
 
@@ -71,7 +71,7 @@ namespace GUI.ViewModels
                 BoatClass = newclass
             };
 
-            await DataStore.AddItemAsync(newItem);
+            //await DataStore.AddItemAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

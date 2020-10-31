@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Image x:Name="fooimage"></Image>
+        <StackPanel Orientation="Vertical">
+            <Image x:Name="fooimage" Width="150" Height="150"></Image>
+            <Image x:Name="fooimage2"
+                   Width="150"
+                   Height="150"></Image>
+        </StackPanel>
     </Grid>
 </Window>

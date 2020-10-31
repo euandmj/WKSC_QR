@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GUI.Models
+namespace Core.Models
 {
     public sealed class YardItem
     {
@@ -12,16 +12,20 @@ namespace GUI.Models
 
         public YardItem(Guid id, char c, short num)
             => (Id, _zone, _zoneNum) = (id, c, num);
+        
+        public YardItem(Guid id)
+        {
+            Id = id;
+        }
 
 
         public Guid Id { get; }
         public string Owner { get; set; }
         public BoatClass BoatClass { get; set; }
-        public DateTime PaidDate { get; set; }
         public DateTime DueDate { get; set; }
 
         public bool HasPaid
-            => DueDate > PaidDate;
+            => DueDate > DateTime.Now;
 
         public string Zone
         {
@@ -42,6 +46,8 @@ namespace GUI.Models
                 _zoneNum = num;
             }
         }
+
+        public override int GetHashCode() => this.Id.GetHashCode();
     }
 
     public enum BoatClass

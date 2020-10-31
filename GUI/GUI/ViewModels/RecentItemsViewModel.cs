@@ -1,4 +1,5 @@
-﻿using GUI.Models;
+﻿using Core.Extensions;
+using Core.Models;
 using GUI.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -8,24 +9,22 @@ using Xamarin.Forms;
 
 namespace GUI.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class RecentItemsViewModel : BaseViewModel
     {
         private YardItem _selectedItem;
 
         public ObservableCollection<YardItem> Items { get; }
         public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
         public Command<YardItem> ItemTapped { get; }
 
-        public ItemsViewModel()
+        public RecentItemsViewModel()
         {
-            Title = "Recent";
+            Title = "Recently Scanned";
             Items = new ObservableCollection<YardItem>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<YardItem>(OnItemSelected);
 
-            AddItemCommand = new Command(OnAddItem);
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -35,7 +34,7 @@ namespace GUI.ViewModels
             try
             {
                 Items.Clear();
-                Items.AddRange(await DataStore.GetItemsAsync(true));
+                Items.AddRange(await DataStore.GetRecentItemsAsync());
             }
             catch (Exception ex)
             {
@@ -45,11 +44,6 @@ namespace GUI.ViewModels
             {
                 IsBusy = false;
             }
-        }
-
-        private async void OnAddItem(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 
         private async void OnItemSelected(YardItem item)
@@ -75,6 +69,6 @@ namespace GUI.ViewModels
                 SetProperty(ref _selectedItem, value);
                 OnItemSelected(value);
             }
-        }        
+        }
     }
 }

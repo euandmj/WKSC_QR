@@ -1,8 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using GUI.Services;
 using GUI.Views;
+using Core.Services;
 
 namespace GUI
 {
@@ -19,6 +19,7 @@ namespace GUI
 
         protected override void OnStart()
         {
+            Shell.Current.GoToAsync("//ScanPage");
         }
 
         protected override void OnSleep()

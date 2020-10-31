@@ -6,8 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\Item.cs" />
-    <Compile Remove="Services\MockDataStore.cs" />
+    <Compile Remove="Models\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Models\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\ItemsPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\ItemsPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +30,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\SavedItemsPage.xaml">
+    <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Data\Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ScanPage.xaml.cs">
+      <DependentUpon>ScanPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RecentScansPage.xaml.cs">
+      <DependentUpon>RecentScansPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\RecentScansPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

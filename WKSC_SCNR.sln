@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI.Android", "GUI\GUI.Android\GUI.Android.csproj", "{81C075DA-F3C9-4982-8A9B-796FB5069017}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI\GUI.csproj", "{CE7DE46F-8612-4183-B8E9-BCDF47B52113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUI", "GUI\GUI\GUI.csproj", "{CE7DE46F-8612-4183-B8E9-BCDF47B52113}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{72F47501-92C4-40B0-9032-DC6CB85E01BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{ACE78C1E-4FE3-4E03-AEE0-23068682B9B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,14 @@ Global
 		{CE7DE46F-8612-4183-B8E9-BCDF47B52113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE7DE46F-8612-4183-B8E9-BCDF47B52113}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE7DE46F-8612-4183-B8E9-BCDF47B52113}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{72F47501-92C4-40B0-9032-DC6CB85E01BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F47501-92C4-40B0-9032-DC6CB85E01BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F47501-92C4-40B0-9032-DC6CB85E01BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F47501-92C4-40B0-9032-DC6CB85E01BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACE78C1E-4FE3-4E03-AEE0-23068682B9B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE78C1E-4FE3-4E03-AEE0-23068682B9B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE78C1E-4FE3-4E03-AEE0-23068682B9B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE78C1E-4FE3-4E03-AEE0-23068682B9B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
