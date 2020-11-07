@@ -65,8 +65,9 @@ namespace GUI.ViewModels
         {
             Enum.TryParse<BoatClass>(_class, ignoreCase: true, out var newclass);
 
-            var newItem = new YardItem(_zoneChar, _zoneNum)
+            var newItem = new YardItem()
             {
+                Zone = $"{ZoneChar}{ZoneNum}",
                 Owner = _owner,
                 BoatClass = newclass
             };

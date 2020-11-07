@@ -1,38 +1,64 @@
-﻿using Core.Models;
-using System;
+﻿using Data.Models;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Data
 {
-    public class AdapterCSV
+    public class AdapterCSV<T>
     {
+        private const char DELIMITER = ',';
+        /*
+         * Parse CSV to DataTable
+         * Parse DataTable to YardItem[] 
+         */
+        protected DataTable _dataTable;
+        protected ICSVSchema<T> _schema;
+
+        public char Delimiter = DELIMITER;
 
 
+        public AdapterCSV(ICSVSchema<T> schema)
+        {
+            _dataTable = new DataTable();
+            _schema = schema;
 
 
+            foreach(var (columnName, type) in schema.Columns)
+            {
+                _dataTable.Columns.Add(columnName, type);
+            }
+        }
 
-        //public static async Task<IEnumerable<YardItem>> ReadCSV(string path, char delimiter = ',')
-        //{
-        //    var items = new HashSet<YardItem>();
 
-        //    using (var reader = new StreamReader(path))
-        //    {
-        //        while (!reader.EndOfStream)
-        //        {
-        //            var line = await reader.ReadLineAsync();
-        //            var cells = line.Split(delimiter);
+        public void ReadCSV(string path)
+        {
+            using (var reader = new StreamReader(path))
+            {
+                var cells = GetNextLine(reader);
 
-        //            yield return(new YardItem(Guid.Parse(cells[0]))
-        //            {
-        //                Owner = cells[1],
-        //                Zone = cells[2],
-        //                BoatClass = (BoatClass)Enum.Parse(typeof(BoatClass), cells[3], true),
-        //                DueDate = DateTime.Parse(cells[4])
-        //            });
-        //        }
-        //    }
-        //}
+                if (!_schema.Equals(cells))
+                    throw new InvalidDataException("csv file does not match the schema");
+
+                while (!reader.EndOfStream)
+                {
+                    cells = GetNextLine(reader);
+
+                    var items = _schema.ParseLines(cells);
+
+                    _dataTable.Rows.Add(items);
+                }
+            }
+        }
+
+        public IEnumerable<T> GetItems()
+        {
+            return _schema.ParseTable(_dataTable);
+        }
+
+        private string[] GetNextLine(StreamReader stream)
+        {
+            return stream.ReadLine()?.Split(Delimiter);
+        }
     }
 }

@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using GUI.Views;
-using Core.Services;
+using Data.Services;
 
 namespace GUI
 {

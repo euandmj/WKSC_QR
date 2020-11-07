@@ -1,32 +1,36 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Core.Models
 {
+    [JsonObject]
     public sealed class YardItem
     {
         private char _zone;
         private short _zoneNum;
 
-        public YardItem(char c, short num)
-            : this(Guid.NewGuid(), c, num) { }
-
-        public YardItem(Guid id, char c, short num)
-            => (Id, _zone, _zoneNum) = (id, c, num);
+        public YardItem()
+            : this(Guid.NewGuid()) { }
         
         public YardItem(Guid id)
         {
             Id = id;
         }
 
-
+        [JsonProperty]
         public Guid Id { get; }
+        [JsonProperty]
         public string Owner { get; set; }
+        [JsonProperty]
         public BoatClass BoatClass { get; set; }
+        [JsonProperty]
         public DateTime DueDate { get; set; }
 
+        [JsonIgnore] 
         public bool HasPaid
             => DueDate > DateTime.Now;
 
+        [JsonProperty] 
         public string Zone
         {
             get => $"{_zone}{_zoneNum}".ToUpper();
@@ -39,7 +43,7 @@ namespace Core.Models
                 var @char = value[0];
                 var numStr = value.Substring(1);
 
-                if (short.TryParse(numStr, out short num))
+                if (!short.TryParse(numStr, out short num))
                     throw new ArgumentException($"zone setter expects short parsable number. Got - {numStr}", nameof(value));
 
                 _zone = @char;

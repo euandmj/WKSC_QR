@@ -70,5 +70,7 @@ namespace GUI.ViewModels
                 OnItemSelected(value);
             }
         }
+
+        public bool IsRefreshEnabled => false;
     }
 }

@@ -28,5 +28,10 @@ namespace GUI
         {
 
         }
+
+        private async void ViewAll_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//");
+        }
     }
 }
