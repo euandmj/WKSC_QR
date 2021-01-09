@@ -21,6 +21,7 @@ namespace GUI.ViewModels
         {
             Title = "Recently Scanned";
             Items = new ObservableCollection<YardItem>();
+            Items.AddRange(DataStore.GetRecentItemsAsync().Result);
 
             ItemTapped = new Command<YardItem>(OnItemSelected);
 

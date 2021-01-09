@@ -6,6 +6,7 @@ namespace Data.Models
 {
     public interface ICSVSchema<T>
     {
+        Type AssociatedType { get; }
         (string columnName, Type type)[] Columns { get; }
 
         bool Equals(string[] splitHeaders);

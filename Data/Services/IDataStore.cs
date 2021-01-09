@@ -9,8 +9,7 @@ namespace Data.Services
         Task<T> GetItemAsync(Guid id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
         Task<IEnumerable<T>> GetRecentItemsAsync();
-        Task<bool> AddRecentItemAsync(T item);
-        Task<bool> UpdateRecentItemAsync(T item);
-        Task<bool> DeleteRecentItemAsync(Guid id);
+        void AddRecentItem(T item);
+        void DeleteRecentItem(Guid id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -20,8 +21,14 @@ namespace Data
 
         public AdapterCSV(ICSVSchema<T> schema)
         {
+            if (schema.AssociatedType != typeof(T))
+                throw new ArgumentException("T and schema type mismatch", nameof(schema));
+
+
             _dataTable = new DataTable();
             _schema = schema;
+
+
 
 
             foreach(var (columnName, type) in schema.Columns)

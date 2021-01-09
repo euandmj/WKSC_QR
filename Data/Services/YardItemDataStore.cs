@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Data.Services
         : IDataStore<YardItem>
     {
         protected readonly List<YardItem> _items;
-        protected readonly HashSet<YardItem> _recentItems = new HashSet<YardItem>();
+        protected readonly HashStack<YardItem> _recentItems = new HashStack<YardItem>();
         public YardItemDataStore()
         {
             _items = new List<YardItem>()
@@ -41,14 +42,20 @@ namespace Data.Services
             return await Task.FromResult(_recentItems);
         }
 
-        public Task<bool> AddRecentItemAsync(YardItem item)
+        public void AddRecentItem(YardItem item)
         {
-            return Task.FromResult(_recentItems.Add(item));
+            _recentItems.Push(item);
         }
 
-        public Task<bool> DeleteRecentItemAsync(Guid id)
-        {
-            return Task.FromResult(_recentItems.RemoveWhere(x => x.Id == id) != 0);
+        public void DeleteRecentItem(Guid id)
+        {            
+            var item = _recentItems.Where(x => x.Id == id);
+
+            if (item == null) return;
+
+            if (!item.Any()) return;
+
+            _recentItems.Remove(item.First());
         }
 
         public Task<bool> UpdateRecentItemAsync(YardItem item)

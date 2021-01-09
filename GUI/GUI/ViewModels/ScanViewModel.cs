@@ -67,7 +67,7 @@ namespace GUI.ViewModels
                     IsAnalysing = false;
 
                     SelectedItem = await DataStore.GetItemAsync(id);
-                    await DataStore.AddRecentItemAsync(SelectedItem);
+                    DataStore.AddRecentItem(SelectedItem);
 
                     IsScanning = true;
                     IsAnalysing = true;

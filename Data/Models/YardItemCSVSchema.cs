@@ -16,7 +16,8 @@ namespace Data.Models
             ("boat", typeof(BoatClass)),
             ("due", typeof(DateTime))
         };
-           
+
+        public Type AssociatedType => typeof(YardItem);           
 
         public bool Equals(string[] splitHeaders)
         {
