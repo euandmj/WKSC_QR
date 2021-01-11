@@ -20,8 +20,7 @@ namespace GUI.ViewModels
         public RecentItemsViewModel()
         {
             Title = "Recently Scanned";
-            Items = new ObservableCollection<YardItem>();
-            Items.AddRange(DataStore.GetRecentItemsAsync().Result);
+            Items = new ObservableCollection<YardItem>(DataStore.GetRecentItemsAsync().Result);
 
             ItemTapped = new Command<YardItem>(OnItemSelected);
 
@@ -56,10 +55,12 @@ namespace GUI.ViewModels
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.Id)}={item.Id}");
         }
 
-        public void OnAppearing()
+        public async void OnAppearing()
         {
             IsBusy = true;
             SelectedItem = null;
+            Items.Clear();
+            Items.AddRange(await DataStore.GetRecentItemsAsync());
         }
 
         public YardItem SelectedItem

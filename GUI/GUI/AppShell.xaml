@@ -100,8 +100,8 @@
               Clicked="ViewAll_Clicked" />
     <MenuItem Text="Import"
               StyleClass="MenuItemLayoutStyle"
-              IconImageSource="tab_import"
-              Clicked="ImportDb_Clicked" />
+              IconImageSource="tab_import" />
+              <!-- Clicked="ImportDb_Clicked" /> -->
     <MenuItem Text="Logout"
               StyleClass="MenuItemLayoutStyle"
               Clicked="LogoutItem_Clicked" />

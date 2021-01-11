@@ -34,11 +34,11 @@ namespace qrgentest
             qr.Options = options;
             qr.Format = ZXing.BarcodeFormat.QR_CODE;
             //var result = new Bitmap(qr.Write("0a3f673f-4ba4-4458-a266-4a1967f84aa3"));
-            var result = new Bitmap(qr.Write("58de5eac-5d74-49d8-91b0-3fb148c58b39"));
+            var result = new Bitmap(qr.Write("82253571-c5f4-42f2-81e3-20aaa0f3551c"));
 
             fooimage.Source = Convert(result);
 
-            fooimage2.Source = Convert(new Bitmap(qr.Write("0a3f673f-4ba4-4458-a266-4a1967f84aa3")));
+            fooimage2.Source = Convert(new Bitmap(qr.Write("b8ae8d13-fd78-460b-ab83-e26ac0540afe")));
         }
 
         public BitmapImage Convert(Bitmap src)

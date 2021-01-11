@@ -7,10 +7,11 @@
              xmlns:converters="clr-namespace:GUI.Converters"
              xmlns:vm="clr-namespace:GUI.ViewModels"
              Title="{Binding Title}">
-    
+    <!--
     <ContentPage.BindingContext>
         <vm:ScanViewModel />
     </ContentPage.BindingContext>
+    -->
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -31,9 +32,7 @@
                                 ScanResultCommand="{Binding ScanResultCommand}"
                                 IsScanning="{Binding IsScanning}"
                                 IsAnalyzing="{Binding IsAnalysing}"
-                                Result="{Binding QRResult, Mode=TwoWay}"            
-                                WidthRequest="300"
-                                HeightRequest="350"
+                                Result="{Binding QRResult, Mode=TwoWay}" 
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="CenterAndExpand" />
 
