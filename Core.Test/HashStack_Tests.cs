@@ -8,6 +8,19 @@ namespace Core.Test
     public class HashStack_Tests
     {
         [Test]
+        public void foo()
+        {
+            int x = 4;
+            int x2 = 6;
+            int dx = Math.Abs(x2 - x);
+
+            
+            
+        }
+
+
+
+        [Test]
         public void Push_ValueType()
         {
             var coll = new HashStack<int>();

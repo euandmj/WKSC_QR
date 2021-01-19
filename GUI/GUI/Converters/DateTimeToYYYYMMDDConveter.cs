@@ -4,22 +4,25 @@ using Xamarin.Forms;
 
 namespace GUI.Converters
 {
-    class PaidColorConverter
+    class DateTimeToYYYYMMDDConveter
         : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool paid))
-                throw new ArgumentException($"{nameof(PaidColorConverter)} expected boolean value");
-
-            return paid
-                ? Color.Green
-                : Color.Red;
+            if(value is DateTime dt)
+            {
+                return dt.ToShortDateString();
+            }
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if(value is string str)
+            {
+                return DateTime.Parse(str);
+            }
+            return null;
         }
     }
 }

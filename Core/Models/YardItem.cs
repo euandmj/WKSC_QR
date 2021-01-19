@@ -30,6 +30,10 @@ namespace Core.Models
         public bool HasPaid
             => DueDate > DateTime.Now;
 
+        [JsonIgnore]
+        public string ZoneBoat
+            => $"{Zone} - {BoatClass}";
+
         [JsonProperty] 
         public string Zone
         {

@@ -19,6 +19,7 @@
         </ResourceDictionary>
 
         <converters:PaidColorConverter x:Key="PaidColorConverter" />
+        <converters:DateTimeToYYYYMMDDConveter x:Key="DateConverter" />
     </ContentPage.Resources>
 
     <Grid>
@@ -27,12 +28,13 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+
         <zxing:ZXingScannerView x:Name="zxScanner"
-                                Grid.Row ="0"
+                                Grid.Row="0"
                                 ScanResultCommand="{Binding ScanResultCommand}"
                                 IsScanning="{Binding IsScanning}"
                                 IsAnalyzing="{Binding IsAnalysing}"
-                                Result="{Binding QRResult, Mode=TwoWay}" 
+                                Result="{Binding QRResult, Mode=TwoWay}"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="CenterAndExpand" />
 
@@ -41,24 +43,33 @@
                                    FlashButtonClicked="QR_FlashButtonClicked"
                                    />
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1"
+                    BackgroundColor="{Binding SelectedItem.HasPaid, Converter={StaticResource PaidColorConverter}}">
             <StackLayout Orientation="Vertical" 
-                         Padding="30,24,30,24" 
-                         Spacing="10"
-                         BackgroundColor="{Binding SelectedItem.HasPaid, Converter={StaticResource PaidColorConverter}}">
+                         Margin="5"
+                         Spacing="10">
 
                 <Label Text="{Binding SelectedItem.Owner}"
-                       FontSize="20" />
-                <Label Text="{Binding SelectedItem.Zone}"
-                       FontSize="20" />
-                <Label Text="{Binding SelectedItem.DueDate}"
-                       FontSize="20" />
+                       FontSize="30" />
+                <Label Text="{Binding SelectedItem.ZoneBoat}"
+                       FontSize="30" />
+                <Label Text="{Binding SelectedItem.DueDate, Converter={StaticResource DateConverter}}"
+                       FontSize="30" />
                 
-                <!--<Button Margin="0,10,0,0" Text="Save This"
+                <StackLayout.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Left"
+                                            Command="{Binding ClearSwipeCommand}" />
+                    <SwipeGestureRecognizer Direction="Right"
+                                            Command="{Binding ClearSwipeCommand}" />
+                </StackLayout.GestureRecognizers>
+
+                <!--<Button Margin="0,10,0,0"
+                        Text="Save This"
                         Command="{Binding StarFocusedCommand}"
                         IsEnabled="{Binding StarEnabled}"
                         BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />-->
+                        TextColor="White">  
+                </Button>-->
             </StackLayout>
         </ScrollView>
     </Grid>

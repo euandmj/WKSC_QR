@@ -1,7 +1,6 @@
-﻿using Core.Models;
+﻿using Android.Widget;
+using Core.Models;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ZXing;
@@ -17,6 +16,7 @@ namespace GUI.ViewModels
 
         public ICommand ScanResultCommand { get; }
         public ICommand ShowFlashCommand { get; }
+        public ICommand ClearSwipeCommand { get; }
 
         public ScanViewModel()
         {
@@ -24,6 +24,7 @@ namespace GUI.ViewModels
 
             ScanResultCommand = new Command(OnScan);
             ShowFlashCommand = new Command(() => IsTorchOn = !IsTorchOn);
+            ClearSwipeCommand = new Command(OnClear);
         }
 
         public bool StarEnabled => _selectedItem != null;
@@ -73,6 +74,11 @@ namespace GUI.ViewModels
                     IsAnalysing = true;
                 }
             });
+        }
+
+        private void OnClear(object param)
+        {
+            SelectedItem = null;
         }
     }
 }
