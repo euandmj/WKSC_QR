@@ -1,5 +1,4 @@
-﻿using Android.Widget;
-using Core.Models;
+﻿using Core.Models;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -17,17 +16,30 @@ namespace GUI.ViewModels
         public ICommand ScanResultCommand { get; }
         public ICommand ShowFlashCommand { get; }
         public ICommand ClearSwipeCommand { get; }
+        public ICommand StarCommand { get; }
 
         public ScanViewModel()
         {
             Title = "Scan";
 
             ScanResultCommand = new Command(OnScan);
-            ShowFlashCommand = new Command(() => IsTorchOn = !IsTorchOn);
             ClearSwipeCommand = new Command(OnClear);
+            StarCommand = new Command(OnStar);
+            ShowFlashCommand = new Command(() => IsTorchOn = !IsTorchOn);
         }
 
         public bool StarEnabled => _selectedItem != null;
+        public string StarText
+        {
+            get
+            {
+                if (!StarEnabled) return "";
+                return SelectedItem.Starred
+                    ? "✰"
+                    : "★";
+            }
+        }
+            
         public Result QRResult { get; set; }
 
         public bool IsScanning
@@ -55,6 +67,7 @@ namespace GUI.ViewModels
             {
                 SetProperty(ref _selectedItem, value);
                 OnPropertyChanged(nameof(StarEnabled));
+                OnPropertyChanged(nameof(StarText));
             }
         }
 
@@ -79,6 +92,12 @@ namespace GUI.ViewModels
         private void OnClear(object param)
         {
             SelectedItem = null;
+        }
+
+        private void OnStar()
+        {
+            SelectedItem.Starred = !SelectedItem.Starred;
+            OnPropertyChanged(nameof(StarText));
         }
     }
 }

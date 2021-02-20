@@ -25,6 +25,9 @@ namespace Core.Models
         public BoatClass BoatClass { get; set; }
         [JsonProperty]
         public DateTime DueDate { get; set; }
+        [JsonProperty] 
+        public bool Starred { get; set; }
+
 
         [JsonIgnore] 
         public bool HasPaid

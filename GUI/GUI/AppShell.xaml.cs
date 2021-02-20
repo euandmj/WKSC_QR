@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Widget;
 using GUI.ViewModels;
 using GUI.Views;
 using Xamarin.Forms;
@@ -26,12 +27,12 @@ namespace GUI
 
         private async void ImportDb_Clicked(object sender, EventArgs e)
         {
-
+            // TODO:
         }
 
         private async void ViewAll_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//");
+            // TODO:
         }
     }
 }

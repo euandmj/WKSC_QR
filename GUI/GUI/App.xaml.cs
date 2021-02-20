@@ -19,7 +19,7 @@ namespace GUI
 
         protected override void OnStart()
         {
-            Shell.Current.GoToAsync("//ScanPage");
+            Shell.Current.GoToAsync($"//{nameof(ScanPage)}");
         }
 
         protected override void OnSleep()
