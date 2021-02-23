@@ -15,8 +15,7 @@
     </ContentPage.BindingContext>
 
     <StackLayout Spacing="20"
-                 Padding="15"
-                 BackgroundColor="{Binding Item.ItemHasPaid, Converter={StaticResource PaidColorConverter}}">
+                 Padding="15">
         <Label Text="Owner" 
                FontAttributes="Bold"
                FontSize="20" />
@@ -35,10 +34,13 @@
         <Label Text="{Binding Item.Zone}"
                FontSize="25" />
 
+
+
         <Label Text="DueDate"
                FontAttributes="Bold"
                FontSize="20" />
         <Label Text="{Binding Item.DueDate}"
+               BackgroundColor="{Binding Item.HasPaid, Converter={StaticResource PaidColorConverter}}"
                FontSize="25"/>
     </StackLayout>
     

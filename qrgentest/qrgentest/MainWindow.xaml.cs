@@ -45,7 +45,6 @@ namespace qrgentest
 
             var item = new YardItem() { Zone = "E2", BoatClass = BoatClass.GP14, Owner = "Obi Wan Jones", DueDate = DateTime.Now.AddDays(1) };
 
-            var conv = new YardItemQRSerialiser();
 
             var bmp = conv.Serialize(item);
 
