@@ -6,7 +6,9 @@ namespace Core.Models
     [JsonObject]
     public sealed class YardItem
     {
+        [JsonIgnore]
         private char _zone;
+        [JsonIgnore]
         private short _zoneNum;
 
         public YardItem()
@@ -17,7 +19,7 @@ namespace Core.Models
             Id = id;
         }
 
-        [JsonProperty]
+        [JsonIgnore]
         public Guid Id { get; }
         [JsonProperty]
         public string Owner { get; set; }

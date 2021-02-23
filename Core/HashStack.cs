@@ -7,17 +7,23 @@ namespace Core
     /// <summary>
     /// A collection which behaves like a <see cref="Stack{T}"/> other than that when pushing an 
     /// object into this stack, if the object is already contained within the stack then the object will be removed and placed
-    /// at the top or 0th index.
+    /// at the topmost index
+    /// Has performance of <see cref="List{T}"/> and NOT <see cref="HashSet{T}"/>
     /// </summary>
     public class HashStack<T>
-        : IEnumerable<T>
+        : IEnumerable<T>, IReadOnlyCollection<T>, ICollection
 
     {
         protected readonly IList<T> _internalStack = new List<T>();
+        private readonly object syncLock = new object();
 
         public int Count => _internalStack.Count;
 
         public bool IsReadOnly => true;
+
+        public bool IsSynchronized => false; // TODO: make threadsafe?
+
+        public object SyncRoot => syncLock;
 
         public HashStack() { }
 
@@ -75,12 +81,20 @@ namespace Core
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)this._internalStack).GetEnumerator();
+            return this._internalStack.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable)this._internalStack).GetEnumerator();
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            for (int i = 0; i < array.Length && i < this.Count; i++)
+            {
+                array.SetValue(this[i], i);
+            }
         }
     }
 }

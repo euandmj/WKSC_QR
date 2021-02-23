@@ -1,9 +1,12 @@
 ﻿using System.Drawing;
+using Core;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using ZXing;
 using ZXing.QrCode;
+using Core.Models;
+using System;
 
 namespace qrgentest
 {
@@ -17,28 +20,38 @@ namespace qrgentest
             InitializeComponent();
 
 
-            //var options = new QrCodeEncodingOptions
-            //{
-            //    DisableECI = true,
-            //    CharacterSet = "UTF-8",
-            //    Width = 250,
-            //    Height = 250,
-            //};
-            //var writer = new BarcodeWriter();
-            //writer.Format = BarcodeFormat.QR_CODE;
-            //writer.Options = options;
+            var options = new QrCodeEncodingOptions
+            {
+                DisableECI = true,
+                CharacterSet = "UTF-8",
+                Width = 250,
+                Height = 250,
+            };
+            var writer = new BarcodeWriter();
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
 
 
 
-            //var qr = new ZXing.BarcodeWriter();
-            //qr.Options = options;
-            //qr.Format = ZXing.BarcodeFormat.QR_CODE;
-            ////var result = new Bitmap(qr.Write("0a3f673f-4ba4-4458-a266-4a1967f84aa3"));
+            var qr = new ZXing.BarcodeWriter();
+            qr.Options = options;
+            qr.Format = ZXing.BarcodeFormat.QR_CODE;
+            //var result = new Bitmap(qr.Write("0a3f673f-4ba4-4458-a266-4a1967f84aa3"));
             //var result = new Bitmap(qr.Write("82253571-c5f4-42f2-81e3-20aaa0f3551c"));
 
             //fooimage.Source = Convert(result);
 
-            //fooimage2.Source = Convert(new Bitmap(qr.Write("b8ae8d13-fd78-460b-ab83-e26ac0540afe")));
+            //fooimage.Source = Convert(new Bitmap(qr.Write("b8ae8d13-fd78-460b-ab83-e26ac0540afe")));
+
+            var item = new YardItem() { Zone = "E2", BoatClass = BoatClass.GP14, Owner = "Obi Wan Jones", DueDate = DateTime.Now.AddDays(1) };
+
+            var conv = new YardItemQRSerialiser();
+
+            var bmp = conv.Serialize(item);
+
+            //var x = qr.Write(bmp);
+            fooimage2.Source = Convert(bmp);
+
         }
 
         public BitmapImage Convert(Bitmap src)

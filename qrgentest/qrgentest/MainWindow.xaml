@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:qrgentest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="450"
+        Width="800">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Image x:Name="fooimage" Width="150" Height="150"></Image>
-            <Image x:Name="fooimage2"
+            <Image x:Name="fooimage"
                    Width="150"
                    Height="150"></Image>
+            <Image x:Name="fooimage2"
+                   Height="260"
+                   Margin="321,0,174,0" />
         </StackPanel>
     </Grid>
 </Window>

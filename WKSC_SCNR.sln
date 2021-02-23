@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Test", "Data.Test\Data.Test.csproj", "{EF1DD8C7-801D-4278-A6F9-F0DD7B7F71EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Test", "Core.Test\Core.Test.csproj", "{953028DA-3938-4B83-A658-8FD43E0C1A05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Test", "Core.Test\Core.Test.csproj", "{953028DA-3938-4B83-A658-8FD43E0C1A05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR", "QR\QR.csproj", "{875AA409-2B07-42FE-8C99-5A1688DB965E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{953028DA-3938-4B83-A658-8FD43E0C1A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{953028DA-3938-4B83-A658-8FD43E0C1A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{953028DA-3938-4B83-A658-8FD43E0C1A05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{875AA409-2B07-42FE-8C99-5A1688DB965E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{875AA409-2B07-42FE-8C99-5A1688DB965E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{875AA409-2B07-42FE-8C99-5A1688DB965E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{875AA409-2B07-42FE-8C99-5A1688DB965E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

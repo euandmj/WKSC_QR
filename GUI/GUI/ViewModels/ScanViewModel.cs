@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using QR;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -8,6 +9,8 @@ namespace GUI.ViewModels
 {
     public class ScanViewModel : BaseViewModel
     {
+        private readonly IQREncoder<YardItem> _qRSerialiser = new QRBase64Encoder<YardItem>();
+
         private YardItem _selectedItem;
         private bool _scanning = true;
         private bool _analysing = true;
@@ -73,19 +76,20 @@ namespace GUI.ViewModels
 
         private void OnScan()
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
-                if (Guid.TryParse(QRResult.Text, out Guid id))
+                IsScanning = false;
+                IsAnalysing = false;
+
+                if (_qRSerialiser.TryDecode(QRResult.Text, out YardItem item))
                 {
-                    IsScanning = false;
-                    IsAnalysing = false;
-
-                    SelectedItem = await DataStore.GetItemAsync(id);
-                    DataStore.AddRecentItem(SelectedItem);
-
-                    IsScanning = true;
-                    IsAnalysing = true;
+                    SelectedItem = item;
+                    // push this scanned item as recently scanned. 
+                    DataStore.AddItem(item);
                 }
+
+                IsScanning = true;
+                IsAnalysing = true;
             });
         }
 
