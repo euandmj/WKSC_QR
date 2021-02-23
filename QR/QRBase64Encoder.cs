@@ -4,6 +4,7 @@ using ZXing;
 using ZXing.QrCode;
 using System.Drawing;
 using QR.Exceptions;
+using ZXing.Rendering;
 
 namespace QR
 {
@@ -12,7 +13,7 @@ namespace QR
     {
         private static readonly System.Text.Encoding Encoding = System.Text.Encoding.UTF8;
 
-        private readonly IBarcodeWriter<Bitmap> _qrWriter;
+        private readonly BarcodeWriter<Bitmap> _qrWriter;
 
         public QRBase64Encoder(int width = 250, int height = 250)
         {
@@ -24,8 +25,10 @@ namespace QR
                     DisableECI = true,
                     CharacterSet = "UTF-8",
                     Width = width,
-                    Height = height,
-                }
+                    Height = height                    
+                },
+                //Renderer = new ZXing.Rendering.BitmapRenderer()
+
             };
         }
 
@@ -46,6 +49,7 @@ namespace QR
         {
             if (item == null) throw new ArgumentNullException(nameof(item));
 
+            //_qrWriter.Renderer = renderer;
             try
             {
                 var json = Serialize(item);
