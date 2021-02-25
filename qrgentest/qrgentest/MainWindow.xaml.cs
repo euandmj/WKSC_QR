@@ -7,6 +7,9 @@ using ZXing;
 using ZXing.QrCode;
 using Core.Models;
 using System;
+using ZXing.Rendering;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace qrgentest
 {
@@ -25,12 +28,13 @@ namespace qrgentest
                 DisableECI = true,
                 CharacterSet = "UTF-8",
                 Width = 250,
-                Height = 250,
+                Height = 250
             };
+            
             var writer = new BarcodeWriter();
             writer.Format = BarcodeFormat.QR_CODE;
             writer.Options = options;
-
+            writer.Renderer = new BitmapRenderer();
 
 
             var qr = new ZXing.BarcodeWriter();
@@ -46,13 +50,18 @@ namespace qrgentest
             var item = new YardItem() { Zone = "E2", BoatClass = BoatClass.GP14, Owner = "Obi Wan Jones", DueDate = DateTime.Now.AddDays(1) };
 
 
-            var bmp = conv.Serialize(item);
 
             //var x = qr.Write(bmp);
-            fooimage2.Source = Convert(bmp);
+
+            var conv = new QR_FWK.QRBase64Encoder<YardItem>();
+
+            //var bmp = Encode(item, writer);
+            var bmp = conv.Encode(item);
+
+            fooimage.Source = Convert(bmp);
 
         }
-
+        
         public BitmapImage Convert(Bitmap src)
         {
             MemoryStream ms = new MemoryStream();
@@ -63,6 +72,55 @@ namespace qrgentest
             image.StreamSource = ms;
             image.EndInit();
             return image;
+        }
+
+        private string Serialize(YardItem item)
+        {
+            return JsonConvert.SerializeObject(item);
+        }
+
+        private YardItem Deserialize(string json)
+        {
+            if (json is null)
+                throw new ArgumentNullException(nameof(json));
+
+            return JsonConvert.DeserializeObject<YardItem>(json);
+        }
+        public Bitmap Encode(YardItem item, BarcodeWriter writer)
+        {
+            if (item == null) throw new ArgumentNullException(nameof(item));
+
+            //_qrWriter.Renderer = renderer;
+            try
+            {
+                var json = Serialize(item);
+                var bytes = System.Text.Encoding.UTF8.GetBytes(json);
+                string b64 = System.Convert.ToBase64String(bytes);
+                return writer.Write(b64);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error creating bitmap from {typeof(YardItem)}", ex);
+            }
+        }
+        public bool TryDecode(string rawString, out YardItem item)
+        {
+            if (string.IsNullOrEmpty(rawString)) throw new ArgumentNullException(nameof(rawString));
+
+            item = default;
+
+            try
+            {
+                var b64 = System.Convert.FromBase64String(rawString);
+                var json = System.Text.Encoding.UTF8.GetString(b64);
+                item = Deserialize(json);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

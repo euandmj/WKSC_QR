@@ -5,6 +5,7 @@ namespace Core.Models
 {
     [JsonObject]
     public sealed class YardItem
+        : IEquatable<YardItem>
     {
         [JsonIgnore]
         private char _zone;
@@ -60,7 +61,20 @@ namespace Core.Models
             }
         }
 
-        public override int GetHashCode() => this.Id.GetHashCode();
+        public override int GetHashCode() => this.Zone.GetHashCode();
+
+        public override bool Equals(object obj)
+        {
+            return 
+                obj is YardItem other 
+                ? Equals(other)
+                : GetHashCode() == obj.GetHashCode();
+        }
+
+        public bool Equals(YardItem other)
+        {
+            return this.Zone == other.Zone;
+        }
     }
 
     public enum BoatClass

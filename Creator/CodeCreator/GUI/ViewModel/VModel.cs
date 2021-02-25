@@ -1,17 +1,17 @@
 ﻿using GUI.Commands;
 using GUI.View;
 using Core.Models;
-using QR;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Encoding;
 
 namespace GUI.ViewModel
 {
     public class VModel
         : BaseViewModel
     {
-        private readonly IQREncoder<YardItem> _qRSerialiser = new QRBase64Encoder<YardItem>();
+        private readonly IQREncoder<YardItem> _qRSerialiser = new ZXingQREncoder<YardItem>();
 
         private object _selectedItem;
 

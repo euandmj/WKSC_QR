@@ -1,5 +1,5 @@
-﻿using Core.Models;
-using QR;
+﻿using Core.Encoding;
+using Core.Models;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,7 +9,7 @@ namespace GUI.ViewModels
 {
     public class ScanViewModel : BaseViewModel
     {
-        private readonly IQREncoder<YardItem> _qRSerialiser = new QRBase64Encoder<YardItem>();
+        private readonly IQRDecoder<YardItem> _qRSerialiser = new ZxingQRDecoder<YardItem>();
 
         private YardItem _selectedItem;
         private bool _scanning = true;

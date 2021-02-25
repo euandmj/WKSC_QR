@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QR", "..\..\QR\QR.csproj", "{5621C5F8-137F-45AF-AB29-D5C982BF9969}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\..\Data\Data.csproj", "{90ED54CD-F770-486C-8CF5-C5A4C885C674}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\..\Core\Core.csproj", "{147A83D6-6006-4116-8E26-BAE85F271731}"
@@ -22,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5621C5F8-137F-45AF-AB29-D5C982BF9969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5621C5F8-137F-45AF-AB29-D5C982BF9969}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5621C5F8-137F-45AF-AB29-D5C982BF9969}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5621C5F8-137F-45AF-AB29-D5C982BF9969}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90ED54CD-F770-486C-8CF5-C5A4C885C674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90ED54CD-F770-486C-8CF5-C5A4C885C674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90ED54CD-F770-486C-8CF5-C5A4C885C674}.Release|Any CPU.ActiveCfg = Release|Any CPU

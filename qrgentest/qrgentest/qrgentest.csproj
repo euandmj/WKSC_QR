@@ -68,7 +68,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="YardItemQRSerialiser.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,6 +76,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Backup_QREncoder.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -114,9 +114,9 @@
       <Project>{5cf89fe4-bc93-49d3-abbf-0fc22ddeff98}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConsoleApp1\ConsoleApp1.csproj">
-      <Project>{c3906b2e-1642-432b-9058-5c61c1fb3f5e}</Project>
-      <Name>ConsoleApp1</Name>
+    <ProjectReference Include="..\QR_FWK\QR_FWK.csproj">
+      <Project>{406453d6-c6d6-42c0-b055-1fe1a35a0880}</Project>
+      <Name>QR_FWK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

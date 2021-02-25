@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QR.Exceptions
+namespace Core.Exceptions
 {
     public class BitmapSerializationException
         : Exception
