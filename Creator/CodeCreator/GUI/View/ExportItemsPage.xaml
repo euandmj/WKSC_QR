@@ -11,7 +11,10 @@
 
         <Image x:Name="bmp"
                Width="150"
-               Height="150"></Image>
+               Height="150"
+               >
+            
+        </Image>
         
     </Grid>
 </Window>

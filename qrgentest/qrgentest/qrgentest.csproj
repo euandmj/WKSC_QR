@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ZXingQREncoder.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,10 +114,6 @@
     <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{5cf89fe4-bc93-49d3-abbf-0fc22ddeff98}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QR_FWK\QR_FWK.csproj">
-      <Project>{406453d6-c6d6-42c0-b055-1fe1a35a0880}</Project>
-      <Name>QR_FWK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

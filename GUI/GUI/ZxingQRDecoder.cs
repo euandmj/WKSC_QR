@@ -1,5 +1,4 @@
 ﻿using Core.Encoding;
-using Core.Models;
 using Newtonsoft.Json;
 using System;
 using System.Text;

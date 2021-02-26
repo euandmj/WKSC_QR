@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Encoding;
+using System.Windows.Media;
 
 namespace GUI.ViewModel
 {
@@ -41,13 +42,11 @@ namespace GUI.ViewModel
 
                 if (bmp != null)
                 {
-                    var win = new ExportItemsPage(bmp);
+                    var win = new ExportItemsPage(bmp.ToBitmapImage());
                     win.ShowDialog();
                 }
             });
         }
-
-
 
 
         public Command CreateCommand { get => OnCreateCommand(); }

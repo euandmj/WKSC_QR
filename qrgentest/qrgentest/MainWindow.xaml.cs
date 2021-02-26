@@ -23,6 +23,8 @@ namespace qrgentest
             InitializeComponent();
 
 
+
+
             var options = new QrCodeEncodingOptions
             {
                 DisableECI = true,
@@ -30,7 +32,7 @@ namespace qrgentest
                 Width = 250,
                 Height = 250
             };
-            
+
             var writer = new BarcodeWriter();
             writer.Format = BarcodeFormat.QR_CODE;
             writer.Options = options;
@@ -50,13 +52,9 @@ namespace qrgentest
             var item = new YardItem() { Zone = "E2", BoatClass = BoatClass.GP14, Owner = "Obi Wan Jones", DueDate = DateTime.Now.AddDays(1) };
 
 
-
-            //var x = qr.Write(bmp);
-
-            var conv = new QR_FWK.QRBase64Encoder<YardItem>();
-
-            //var bmp = Encode(item, writer);
-            var bmp = conv.Encode(item);
+            var enc = new ZXingQREncoder<YardItem>();
+            //var bmp = writer.Write("hello world2");
+            var bmp = enc.Encode(item);
 
             fooimage.Source = Convert(bmp);
 

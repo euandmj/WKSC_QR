@@ -1,26 +1,32 @@
-﻿using System.Drawing;
-using System.IO;
+﻿using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace GUI
 {
+
     public static class Extensions
     {
+        /* https://gist.github.com/nuitsjp/d9d3380a48277958c90c6926c77b616e */
+        [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool DeleteObject([In] IntPtr hObject);
 
-
-
-        public static BitmapImage ToBitmapImage(this Bitmap src)
+        public static ImageSource ToBitmapImage(this Bitmap src)
         {
-            using (var ms = new MemoryStream())
+            var handle = src.GetHbitmap();
+            try
             {
-                src.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-                var image = new BitmapImage();
-                image.BeginInit();
-                ms.Seek(0, SeekOrigin.Begin);
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
+                return Imaging.CreateBitmapSourceFromHBitmap(handle, 
+                                                            IntPtr.Zero, 
+                                                            Int32Rect.Empty, 
+                                                            BitmapSizeOptions.FromEmptyOptions());
             }
+            finally { DeleteObject(handle); }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows;
+using System.Windows.Media;
 
 namespace GUI.View
 {
@@ -8,11 +9,11 @@ namespace GUI.View
     /// </summary>
     public partial class ExportItemsPage : Window
     {
-        public ExportItemsPage(Bitmap img)
+        public ExportItemsPage(ImageSource img)
         {
             InitializeComponent();
 
-            bmp.Source = img.ToBitmapImage();
+            bmp.Source = img;
         }
     }
 }

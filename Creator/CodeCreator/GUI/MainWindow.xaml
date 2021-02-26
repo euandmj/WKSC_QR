@@ -36,7 +36,8 @@
 
             <Button Content="Create"
                     Width="100"
-                    Command="{Binding CreateCommand}" />
+                    Command="{Binding CreateCommand}"
+                    />
 
 
 
@@ -44,7 +45,5 @@
 
 
 
-
-
-        </Grid>
+    </Grid>
 </Window>
