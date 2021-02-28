@@ -11,10 +11,9 @@ namespace Data.Models
         public (string columnName, Type type)[] Columns
             => new (string columnName, Type type)[]
         {
-            ("name", typeof(string)),
-            ("zone", typeof(string)),
-            ("boat", typeof(BoatClass)),
-            ("due", typeof(DateTime))
+            ("ROW", typeof(string)),
+            ("CLASS", typeof(string)),
+            ("OWNER", typeof(string))
         };
 
         public Type AssociatedType => typeof(YardItem);           
@@ -46,24 +45,29 @@ namespace Data.Models
 
         public object[] ParseLines(string[] cells)
         {
+            // catch conversion on each line
             try
             {
                 return new object[]
                 {
+                    //ParseLine<string>(cells[0]),
+                    //ParseLine<string>(cells[1]),
+                    //ParseLine(cells[2], (x) => (BoatClass)Enum.Parse(typeof(BoatClass), cells[2])),
+                    //ParseLine(cells[2], (x) => DateTime.Parse(cells[3]))
                     ParseLine<string>(cells[0]),
                     ParseLine<string>(cells[1]),
-                    ParseLine(cells[2], (x) => (BoatClass)Enum.Parse(typeof(BoatClass), cells[2])),
-                    ParseLine(cells[2], (x) => DateTime.Parse(cells[3]))
+                    ParseLine<string>(cells[5])
                 };
             }
-            catch(IndexOutOfRangeException)
-            {
-                throw;
-            }
-            catch(FormatException)
-            {
-                throw;
-            }
+            catch (Exception ex) { return new object[] { 1, 2, 3, 4 }; }
+            //catch(IndexOutOfRangeException)
+            //{
+            //    throw;
+            //}
+            //catch(FormatException)
+            //{
+            //    throw;
+            //}
         }
 
         public YardItem ParseRow(DataRow dr)
@@ -72,16 +76,18 @@ namespace Data.Models
             {
                 return new YardItem()
                 {
-                    Owner = (string)dr["name"],
-                    Zone = (string)dr["zone"],
-                    BoatClass = (BoatClass)dr["boat"],
-                    DueDate = (DateTime)dr["due"]
+                    //Owner = (string)dr["name"],
+                    Zone = dr[0].ToString(),
+                    BoatClass = dr[1].ToString(),
+                    Owner = dr[2].ToString()
+                    
                 };
             }
-            catch(InvalidCastException)
-            {
-                throw;
-            }
+            catch (Exception ex) { return YardItem.Invalid; }
+            //catch (InvalidCastException)
+            //{
+            //    throw;
+            //}
         }
 
         public IEnumerable<YardItem> ParseTable(DataTable dt)

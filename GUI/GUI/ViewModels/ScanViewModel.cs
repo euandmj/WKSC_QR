@@ -1,4 +1,5 @@
-﻿using Core.Encoding;
+﻿using Android.Widget;
+using Core.Encoding;
 using Core.Models;
 using System;
 using System.Windows.Input;
@@ -87,7 +88,7 @@ namespace GUI.ViewModels
                     // push this scanned item as recently scanned. 
                     DataStore.AddItem(item);
                 }
-
+                else { Toast.MakeText(Android.App.Application.Context, "Failed to Decode", ToastLength.Short).Show(); }
                 IsScanning = true;
                 IsAnalysing = true;
             });

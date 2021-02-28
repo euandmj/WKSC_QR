@@ -1,14 +1,15 @@
-﻿using Core.Encoding;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Text;
 
-namespace GUI
+namespace Core.Encoding
 {
-    class ZxingQRDecoder<TSource>
+    /// <summary>
+    /// Decode from base64 and deserialize
+    /// </summary>
+    public class ZxingQRDecoder<TSource>
         : IQRDecoder<TSource>
     {
-        private static readonly Encoding Encoding = Encoding.UTF8;
+        private static readonly System.Text.Encoding Encoding = System.Text.Encoding.UTF8;
 
         private TSource Deserialize(string json)
         {

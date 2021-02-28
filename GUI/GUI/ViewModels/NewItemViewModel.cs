@@ -69,7 +69,7 @@ namespace GUI.ViewModels
             {
                 Zone = $"{ZoneChar}{ZoneNum}",
                 Owner = _owner,
-                BoatClass = newclass
+                BoatClass = _class
             };
 
             //await DataStore.AddItemAsync(newItem);

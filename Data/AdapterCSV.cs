@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace Data
 {
@@ -44,23 +45,42 @@ namespace Data
             {
                 var cells = GetNextLine(reader);
 
-                if (!_schema.Equals(cells))
-                    throw new InvalidDataException("csv file does not match the schema");
+                //if (!_schema.Equals(cells))
+                //    throw new InvalidDataException("csv file does not match the schema");
 
                 while (!reader.EndOfStream)
                 {
                     cells = GetNextLine(reader);
 
-                    var items = _schema.ParseLines(cells);
+                    // detect schema and record into the Schema.
+                    // try to stay flexible, assert and and remember ranges: 
+                    // i.e. if name is sometimes col 3 or 4, try
 
-                    _dataTable.Rows.Add(items);
+                    bool validLine = cells.Any(x => !string.IsNullOrWhiteSpace(x));
+
+                    if(validLine)
+                    {
+                        var items = _schema.ParseLines(cells);
+
+                        _dataTable.Rows.Add(items);
+
+                    }
+
                 }
             }
         }
 
         public IEnumerable<T> GetItems()
         {
+            try
+            {
             return _schema.ParseTable(_dataTable);
+
+            }catch(Exception ex)
+            {
+                return null;
+
+            }
         }
 
         private string[] GetNextLine(StreamReader stream)

@@ -20,14 +20,19 @@ namespace Core.Models
             Id = id;
         }
 
+        //public string One { get; set; }
+        //public string Two { get; set; }
+
         [JsonIgnore]
         public Guid Id { get; }
         [JsonProperty]
         public string Owner { get; set; }
         [JsonProperty]
-        public BoatClass BoatClass { get; set; }
+        public string BoatClass { get; set; }
         [JsonProperty]
-        public DateTime DueDate { get; set; }
+        public DateTime DueDate { get; set; } = DateTime.MinValue;
+        [JsonProperty]
+        public short SailNumber { get; set; }
         [JsonProperty] 
         public bool Starred { get; set; }
 
@@ -46,18 +51,27 @@ namespace Core.Models
             get => $"{_zone}{_zoneNum}".ToUpper();
             set
             {
-                // parse zoneChar and zoneShort from value
-                if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
-                if (value.Length < 2) throw new ArgumentException("zone setter expects {char}{number}", nameof(value));
+                try
+                {
+                    // parse zoneChar and zoneShort from value
+                    if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(value));
+                    if (value.Length < 2) throw new ArgumentException("zone setter expects {char}{number}", nameof(value));
 
-                var @char = value[0];
-                var numStr = value.Substring(1);
+                    var @char = value[0];
+                    var numStr = value.Substring(1);
 
-                if (!short.TryParse(numStr, out short num))
-                    throw new ArgumentException($"zone setter expects short parsable number. Got - {numStr}", nameof(value));
+                    if (!short.TryParse(numStr, out short num))
+                        throw new ArgumentException($"zone setter expects short parsable number. Got - {numStr}", nameof(value));
 
-                _zone = @char;
-                _zoneNum = num;
+                    _zone = @char;
+                    _zoneNum = num;
+                }
+                catch(ArgumentException) // catch proper except
+                {
+                    if(short.TryParse(value, out short num)){
+                        _zoneNum = num;
+                    }
+                }
             }
         }
 
@@ -75,6 +89,17 @@ namespace Core.Models
         {
             return this.Zone == other.Zone;
         }
+
+        public static YardItem Invalid
+        {
+            get
+            {
+                return new YardItem(Guid.Empty)
+                {
+                    Owner = "INVALID_YARD_ITEM"
+                };
+            }            
+        }
     }
 
     public enum BoatClass
@@ -83,6 +108,9 @@ namespace Core.Models
         Unknown = 0,
         Falcon,
         Laser,
-        GP14
+        GP14,
+        Oppy
+
+            
     }
 }
