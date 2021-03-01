@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Data.Models
+namespace Data.CSV
 {
     public interface ICSVSchema<T>
     {
         Type AssociatedType { get; }
-        (string columnName, Type type)[] Columns { get; }
-
-        bool Equals(string[] splitHeaders);
+        IColumnSchema ColumnSchema { get; }
         T ParseRow(DataRow dr);
         IEnumerable<T> ParseTable(DataTable dr);
         object[] ParseLines(string[] items);

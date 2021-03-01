@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace GUI.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool isBusy = false;

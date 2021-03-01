@@ -68,11 +68,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="App.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\ConfigLoader.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\VModel.cs" />
+    <Compile Include="ViewModel\TableWizardViewModel.cs" />
+    <Compile Include="ViewModel\DataTableEmbeddViewModel.cs" />
+    <Compile Include="View\ColumnRowPicker.xaml.cs">
+      <DependentUpon>ColumnRowPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DataTableEmbedd.xaml.cs">
+      <DependentUpon>DataTableEmbedd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ExportItemsPage.xaml.cs">
       <DependentUpon>ExportItemsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TableWizard.xaml.cs">
+      <DependentUpon>TableWizard.xaml</DependentUpon>
     </Compile>
     <Compile Include="ZXingQREncoder.cs" />
     <Page Include="MainWindow.xaml">
@@ -89,9 +102,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ColumnRowPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DataTableEmbedd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ExportItemsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TableWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

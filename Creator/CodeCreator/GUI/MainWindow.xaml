@@ -3,47 +3,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI"
+        xmlns:local="clr-namespace:GUI.View"
+        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid
-        Margin="50 25">
-
+        Title="MainWindow" Height="1050" Width="1650">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
+        <local:DataTableEmbedd
+            x:Name="ctlDatatable"
+            Grid.Row="0"
+            Grid.Column="0"
+            >
+            
+        </local:DataTableEmbedd>
 
 
-        <DataGrid ItemsSource="{Binding DataSource}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                  IsReadOnly="True"
-                  Grid.Row="0"
-                  Grid.Column="0">
-
-        </DataGrid>
-
-
-
-        <StackPanel IsEnabled="{Binding IsExportEnabled}"
-                    Margin="15"
-                    Grid.Column="1"
-                    Orientation="Vertical">
-
-            <Button Content="Create"
-                    Width="100"
-                    Command="{Binding CreateCommand}"
-                    />
-
-
-
-        </StackPanel>
-
-
+        <local:TableWizard x:Name="ctlWizard" Grid.Row="0"
+                           Grid.Column="1">
+            
+        </local:TableWizard>
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
     </Grid>
 </Window>
