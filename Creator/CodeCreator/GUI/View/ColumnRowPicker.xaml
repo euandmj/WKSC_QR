@@ -6,9 +6,9 @@
           xmlns:local="clr-namespace:GUI.View"
           mc:Ignorable="d"
           StaysOpenOnEdit="True"
+          SelectedIndex="0"
           ItemsSource="{Binding ItemSource, Mode=OneTime}"
           IsReadOnly="{Binding IsReadOnly}"
-          SelectedIndex="0"
           d:DesignHeight="450"
           d:DesignWidth="800">
 </ComboBox>

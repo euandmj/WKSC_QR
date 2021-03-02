@@ -20,10 +20,6 @@ namespace GUI.ViewModel
     public class DataTableEmbeddViewModel
         : BaseViewModel
     {
-        private const string path = @"C:\WKSC_SCNR\storage.csv";
-
-
-        private string _errorText;
         private ICollection<YardItem> _dataSource;
         private IColumnSchema _columnSchema;
         private readonly IQREncoder<YardItem> _qRSerialiser = new ZXingQREncoder<YardItem>();
@@ -43,26 +39,32 @@ namespace GUI.ViewModel
             //    //new YardItem() { Zone = "F12", BoatClass = BoatClass.Laser, Owner = "Indiana Jones" }
             //};
 
-            //_configWatcher.Filter = "*.config";
-            //_configWatcher.Changed += (s, e) => Init();
+            Init(AppConfig.Config);
 
-            if(AppConfig.Config != null)
+            AppConfig.NewEvent += (s, e) =>
             {
                 Init(AppConfig.Config);
-            }
+            };
         }
 
-        public void Init(Config cfg)
+        private void Init(Config cfg)
         {
-            _columnSchema = cfg.Schema;
-            InitDataSource();
+            if (cfg == null) return;
+            try
+            {
+                _columnSchema = cfg.Schema;
+                InitDataSource();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed Loading Data Table.", MessageBoxButton.OK);
+            }
         }
 
         private void InitDataSource()
         {
             if (AppConfig.Config.SpreadsheetFile == null)
             {
-                ErrText = "invalid schema or file";
                 return;
             }
 
@@ -110,16 +112,6 @@ namespace GUI.ViewModel
         }
         public bool IsExportEnabled => SelectedItem != null;
         public string DebugRowText => $"Rows: {DataSource?.Count}";
-        public Visibility ErrorVisibility { get; set; }
-        
-        public string ErrText
-        {
-            get => _errorText;
-            set
-            {
-                SetProperty(ref _errorText, value);
-            }
-        }
 
     }
 }

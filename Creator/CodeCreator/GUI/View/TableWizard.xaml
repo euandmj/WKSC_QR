@@ -55,20 +55,20 @@
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbClass"
-                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ClassColumn}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ClassColumn, Mode=TwoWay}"
                                        IsReadOnly="False" />
                 <Label Content="Boat Class &quot;CLASS&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbSail"
-                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SailNumberColumn}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SailNumberColumn, Mode=TwoWay}"
                                        IsReadOnly="False" />
                 <Label Content="Sail Number &quot;SAIL NO&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
-                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OwnerColumn}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OwnerColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                        x:Name="cbOwner"
                                        IsReadOnly="False" />
                 <Label Content="Owner &quot;OWNER&quot;" />
@@ -76,7 +76,7 @@
 
             <Button Margin="15"
                     Content="Save Configuration"
-                    Click="Save_Click"
+                    IsEnabled="{Binding CanSave}"
                     Command="{Binding SaveConfigCommand}" />
 
         </StackPanel>

@@ -18,12 +18,11 @@ namespace GUI.ViewModel
         private string ownerCol = AppConfig.Config.OwnerColumn.ToString();
         private string _selectedFile = AppConfig.Config.SpreadsheetFile;
 
-        private bool _canSave;
-
         public TableWizardViewModel()
         {
 
             LoadFileCommand = new Command((x) => OnLoadFile());
+            SaveConfigCommand = new Command((x) => OnSaveConfig());
         }
 
         private void OnLoadFile()
@@ -40,6 +39,22 @@ namespace GUI.ViewModel
             }
         }
 
+        private void OnSaveConfig()
+        {
+            AppConfig.SetConfig(new Configuration.Config
+            {
+                SpreadsheetFile = SelectedCSVFile,
+                ClassColumn = ClassColumn,
+                OwnerColumn = OwnerColumn,
+                RowColumnn = RowColumn,
+                SailColumn = SailNumberColumn 
+            });
+
+            Configuration.ConfigLoader.Save(AppConfig.Config);
+
+        }
+
+        public ICommand SaveConfigCommand { get; set; }
         public ICommand LoadFileCommand { get; set; }
         public string SelectedCSVFile
         {
@@ -65,6 +80,19 @@ namespace GUI.ViewModel
         {
             get => ownerCol;
             set => SetProperty(ref ownerCol, value);
+        }
+
+        public bool CanSave
+        {
+            get => true;
+            //{
+            //    return RowColumn != null
+            //        && ClassColumn != null
+            //        && SailNumberColumn != null
+            //        && OwnerColumn != null
+            //        && !string.IsNullOrWhiteSpace(SelectedCSVFile);
+            //}
+
         }
 
     }

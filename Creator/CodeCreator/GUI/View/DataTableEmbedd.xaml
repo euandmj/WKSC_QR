@@ -17,29 +17,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
-
-        <Border Background="Green"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Visibility="Hidden"
-                Grid.RowSpan="5"
-                Grid.ColumnSpan="5">
-            <Label Foreground="Red"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Content="{Binding ErrText}" />
-        </Border>
+        </Grid.RowDefinitions>       
 
         <Label Content="{Binding DebugRowText}"
                Grid.Row="0" />
 
-
         <DataGrid ItemsSource="{Binding DataSource}"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                   IsReadOnly="True"
-                  HorizontalScrollBarVisibility="Visible"
-                  VerticalScrollBarVisibility="Visible"
+                  HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True"
                   AutoGenerateColumns="False"
                   Grid.Row="1"
@@ -57,7 +44,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-
+        
         <StackPanel IsEnabled="{Binding IsExportEnabled}"
                     Margin="15"
                     Grid.Column="1"

@@ -21,41 +21,12 @@ namespace GUI.View
     /// </summary>
     public partial class TableWizard : UserControl
     {
-        private const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public event EventHandler NewConfigSaved;
-
         private readonly TableWizardViewModel vm;
 
         public TableWizard()
         {
             InitializeComponent();
             DataContext = vm = new TableWizardViewModel();
-        }
-
-        private int GetCol(object letter)
-        {            
-            return alphabet.IndexOf((char)letter);
-        }
-
-        private char ToCol(int index)
-        {
-            return alphabet[index];
-        }
-
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            AppConfig.Config = new Configuration.Config
-            {
-                SpreadsheetFile = vm.SelectedCSVFile,
-                ClassColumn = GetCol(cbClass.SelectedItem),
-                OwnerColumn = GetCol(cbOwner.SelectedItem),
-                RowColumnn = GetCol(cbRow.SelectedItem),
-                SailColumn = GetCol(cbSail.SelectedItem)
-            };
-
-            Configuration.ConfigLoader.Save(AppConfig.Config);
-
-            NewConfigSaved?.Invoke(null, EventArgs.Empty);
         }
     }
 }

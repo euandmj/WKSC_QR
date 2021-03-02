@@ -6,16 +6,23 @@ namespace Data.Models
     public class YardItemColumnSchema
         : IColumnSchema
     {
+        private const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
-        public YardItemColumnSchema(params (string, int)[] columns)
+        public YardItemColumnSchema(params (string, string)[] columns)
         {
             Columns = new Dictionary<string, int>(columns.Length);
 
             foreach(var (col, index) in columns)
             {
-                Columns[col] = index;
+                if (index == null) continue;
+                Columns[col] = GetCol(index);
             }
+        }
+
+        private int GetCol(string letter)
+        {
+            return alphabet.IndexOf(char.Parse(letter));
         }
 
         public int this[string index] => Columns[index];

@@ -29,14 +29,6 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-
-
-            ctlWizard.NewConfigSaved += this.CtlWizard_NewConfigSaved;
-        }
-
-        private void CtlWizard_NewConfigSaved(object sender, EventArgs e)
-        {
-            ctlDatatable.Init();
         }
     }
 }

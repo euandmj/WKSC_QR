@@ -9,13 +9,13 @@ namespace GUI.Configuration
         [JsonProperty]
         public string SpreadsheetFile { get; set; }
         [JsonProperty]
-        public int RowColumnn { get; set; }
+        public string RowColumnn { get; set; } = "A";
         [JsonProperty] 
-        public int ClassColumn { get; set; }
+        public string ClassColumn { get; set; } = "A";
         [JsonProperty]
-        public int SailColumn { get; set; }
+        public string SailColumn { get; set; } = "A";
         [JsonProperty]
-        public int OwnerColumn { get; set; }
+        public string OwnerColumn { get; set; } = "A";
 
 
         [JsonIgnore]

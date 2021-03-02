@@ -33,7 +33,8 @@ namespace GUI.Configuration
                 var file = File.ReadAllText(AppConfig.ConfigPath);
 
 
-                return JsonConvert.DeserializeObject<Config>(file) ?? new Config();
+                return JsonConvert.DeserializeObject<Config>(file) 
+                    ?? new Config();
             }
             catch (Exception ex)
             {
