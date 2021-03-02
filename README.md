@@ -6,3 +6,5 @@
 ## TODO:
 - fix mobile data model
 - distinguish prints??
+- reload table
+- file bar
