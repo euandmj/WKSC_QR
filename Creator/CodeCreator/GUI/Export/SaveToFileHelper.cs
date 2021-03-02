@@ -35,12 +35,13 @@ namespace GUI.Export
             {
                 try
                 {
-                    var bmp = encoder.Encode(item);
+                    using (var bmp = encoder.Encode(item))
+                    {
+                        var path = Path.Combine(directory, $"{DateTime.Now:dd-MM-yyyy} - {item.Owner}.bmp");
 
-                    var path = Path.Combine(directory, $"{DateTime.Now:dd-MM-yyyy} - {item.Owner}.bmp");
-
-                    bmp.Save(path);
-                    created.Add(path);
+                        bmp.Save(path);
+                        created.Add(path);
+                    }
                 }
                 catch (IOException)
                 {
