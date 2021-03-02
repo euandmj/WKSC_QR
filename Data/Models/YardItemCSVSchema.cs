@@ -43,19 +43,15 @@ namespace Data.Models
             // catch conversion on each line
             try
             {
-                return new object[]
+                var objs = new List<object>(ColumnSchema.Columns.Count);
+                foreach (var col in ColumnSchema.Columns)
                 {
-                    //ParseLine<string>(cells[0]),
-                    //ParseLine<string>(cells[1]),
-                    //ParseLine(cells[2], (x) => (BoatClass)Enum.Parse(typeof(BoatClass), cells[2])),
-                    //ParseLine(cells[2], (x) => DateTime.Parse(cells[3]))
-                    ParseLine<string>(cells[0]),
-                    ParseLine<string>(cells[1]),
-                    ParseLine<string>(cells[2]),
-                    ParseLine<string>(cells[5])
-                };
+                    objs.Add(ParseLine<string>(cells[col.Value]));
+                }
+
+                return objs.ToArray();             
             }
-            catch (Exception ex) { return new object[] { 1, 2, 3, 4 }; }
+            catch (Exception ex) { return null; }
             //catch(IndexOutOfRangeException)
             //{
             //    throw;
@@ -74,23 +70,20 @@ namespace Data.Models
                 {
                     Zone        = dr[ZONE_Col].ToString(),
                     BoatClass   = dr[CLASS_Col].ToString(),
-                    SailNumber  = short.Parse(dr[SAIL_Col].ToString()),
+                    SailNumber  = dr[SAIL_Col].ToString(),
                     Owner       = dr[OWNER_Col].ToString()
-                    
                 };
             }
-            catch (Exception ex) { return YardItem.Invalid; }
-            //catch (InvalidCastException)
-            //{
-            //    throw;
-            //}
+            catch (Exception ex) { return null; }
         }
 
         public IEnumerable<YardItem> ParseTable(DataTable dt)
         {
             foreach(DataRow row in dt.Rows)
             {
-                yield return ParseRow(row);
+                var yardItem = ParseRow(row);
+
+                if (yardItem != null) yield return yardItem;
             }
         }
     }

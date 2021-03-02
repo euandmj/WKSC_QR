@@ -50,7 +50,6 @@ namespace GUI.View
 
         readonly char[] ColumnPickerOpts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-
         public ColumnRowPickerViewModel(PickerMode mode, bool isReadOnly = false)
         {
             if(mode == PickerMode.Column)
@@ -60,7 +59,6 @@ namespace GUI.View
             }
             else { throw new NotImplementedException(nameof(mode)); }
         }
-
 
         public char[] ItemSource { get; private set; }
         public bool IsReadOnly { get; set; }

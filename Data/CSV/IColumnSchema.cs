@@ -9,7 +9,10 @@ namespace Data.CSV
     {
         [JsonProperty]
         IDictionary<string, int> Columns { get; set; }
-        
+
+        [JsonIgnore]
+        int Count { get; }
+
         int this[string index]
         {
             get;

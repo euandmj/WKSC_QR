@@ -12,15 +12,19 @@ namespace GUI.ViewModel
     class TableWizardViewModel
         : BaseViewModel
     {
+        private string rowCol = AppConfig.Config.RowColumnn.ToString();
+        private string classCol = AppConfig.Config.ClassColumn.ToString();
+        private string sailNoCol = AppConfig.Config.SailColumn.ToString();
+        private string ownerCol = AppConfig.Config.OwnerColumn.ToString();
+        private string _selectedFile = AppConfig.Config.SpreadsheetFile;
+
         private bool _canSave;
-        private string _selectedFile;
 
         public TableWizardViewModel()
         {
 
             LoadFileCommand = new Command((x) => OnLoadFile());
         }
-
 
         private void OnLoadFile()
         {
@@ -36,20 +40,32 @@ namespace GUI.ViewModel
             }
         }
 
-        
-      
-
-
+        public ICommand LoadFileCommand { get; set; }
         public string SelectedCSVFile
         {
             get => _selectedFile;
             set => SetProperty(ref _selectedFile, value);
         }
-        public ICommand LoadFileCommand { get; set; }
-        public string RowColumn { get; set; }
-        public string ClassColumn { get; set; }
-        public string SailNumberColumn { get; set; }
-        public string OwnerColumn { get; set; }
+        public string RowColumn
+        {
+            get => rowCol;
+            set => SetProperty(ref rowCol, value);
+        }
+        public string ClassColumn
+        {
+            get => classCol;
+            set => SetProperty(ref classCol, value);
+        }
+        public string SailNumberColumn
+        {
+            get => sailNoCol;
+            set => SetProperty(ref sailNoCol, value);
+        }
+        public string OwnerColumn
+        {
+            get => ownerCol;
+            set => SetProperty(ref ownerCol, value);
+        }
 
     }
 }

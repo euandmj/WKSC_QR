@@ -14,13 +14,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <local:DataTableEmbedd
             x:Name="ctlDatatable"
             Grid.Row="0"
-            Grid.Column="0"
+            Grid.Column="0"            
             >
             
         </local:DataTableEmbedd>

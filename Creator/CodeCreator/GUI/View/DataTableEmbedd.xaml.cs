@@ -21,6 +21,8 @@ namespace GUI.View
     /// </summary>
     public partial class DataTableEmbedd : UserControl
     {
+        //private readonly DataTableEmbeddViewModel vm; 
+
         public DataTableEmbedd()
         {
             InitializeComponent();
@@ -29,8 +31,8 @@ namespace GUI.View
 
         public void Init()
         {
-            DataContext = new DataTableEmbeddViewModel();
 
+            DataContext = new DataTableEmbeddViewModel();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Data.CSV;
-using System;
 using System.Collections.Generic;
 
 namespace Data.Models
@@ -22,6 +21,8 @@ namespace Data.Models
         public int this[string index] => Columns[index];
 
         public IDictionary<string, int> Columns { get; set; }
+
+        public int Count => Columns.Count;
 
         public bool Equals(IColumnSchema other)
         {

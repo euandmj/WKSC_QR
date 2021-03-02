@@ -37,7 +37,6 @@
 
                 <Label Content="Import Spreadsheet" />
 
-
             </StackPanel>
 
 
@@ -48,7 +47,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
-                                       SelectedValue="{Binding RowColumn}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RowColumn, Mode=TwoWay}"
                                        x:Name="cbRow"
                                        IsReadOnly="False" />
                 <Label Content="Boat Row &quot;ROW&quot;" />
@@ -56,20 +55,20 @@
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbClass"
-                                       SelectedValue="{Binding ClassColumn}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ClassColumn}"
                                        IsReadOnly="False" />
                 <Label Content="Boat Class &quot;CLASS&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbSail"
-                                       SelectedValue="{Binding SailNumberColumn, Mode=TwoWay}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SailNumberColumn}"
                                        IsReadOnly="False" />
                 <Label Content="Sail Number &quot;SAIL NO&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
-                                       SelectedValue="{Binding OwnerColumn, Mode=TwoWay}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OwnerColumn}"
                                        x:Name="cbOwner"
                                        IsReadOnly="False" />
                 <Label Content="Owner &quot;OWNER&quot;" />

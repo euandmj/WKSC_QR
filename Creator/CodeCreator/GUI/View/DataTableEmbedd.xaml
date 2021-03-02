@@ -15,7 +15,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
         <Border Background="Green"
@@ -39,6 +40,8 @@
                   IsReadOnly="True"
                   HorizontalScrollBarVisibility="Visible"
                   VerticalScrollBarVisibility="Visible"
+                  ScrollViewer.CanContentScroll="True"
+                  AutoGenerateColumns="False"
                   Grid.Row="1"
                   Grid.Column="0">
             <DataGrid.Columns>
@@ -46,6 +49,11 @@
                                     Binding="{Binding Owner}" />
                 <DataGridTextColumn Header="Row"
                                     Binding="{Binding Zone}" />
+                <DataGridTextColumn Header="Sail Number"
+                                    Binding="{Binding SailNumber}" />
+                <DataGridTextColumn Header="Class"
+                                    Binding="{Binding BoatClass}"
+                                    Width="*"/>
             </DataGrid.Columns>
 
         </DataGrid>

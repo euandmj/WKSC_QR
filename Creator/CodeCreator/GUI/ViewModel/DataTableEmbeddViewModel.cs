@@ -13,6 +13,7 @@ using Data.CSV;
 using System.IO;
 using Newtonsoft.Json;
 using System.Windows;
+using GUI.Configuration;
 
 namespace GUI.ViewModel
 {
@@ -26,11 +27,6 @@ namespace GUI.ViewModel
         private ICollection<YardItem> _dataSource;
         private IColumnSchema _columnSchema;
         private readonly IQREncoder<YardItem> _qRSerialiser = new ZXingQREncoder<YardItem>();
-        //private readonly FileSystemWatcher _configWatcher = new FileSystemWatcher(AppConfig.)
-        //{
-        //    NotifyFilter = NotifyFilters.LastWrite,
-        //    EnableRaisingEvents = true
-        //};
 
         private YardItem _selectedItem;
 
@@ -52,17 +48,13 @@ namespace GUI.ViewModel
 
             if(AppConfig.Config != null)
             {
-                Init();
+                Init(AppConfig.Config);
             }
         }
 
-        public void Init()
+        public void Init(Config cfg)
         {
-            _columnSchema = new YardItemColumnSchema(
-                    (YardItemCSVSchema.ZONE_Col, AppConfig.Config.RowColumnn),
-                    (YardItemCSVSchema.CLASS_Col, AppConfig.Config.ClassColumn),
-                    (YardItemCSVSchema.SAIL_Col, AppConfig.Config.SailColumn),
-                    (YardItemCSVSchema.OWNER_Col, AppConfig.Config.OwnerColumn));
+            _columnSchema = cfg.Schema;
             InitDataSource();
         }
 

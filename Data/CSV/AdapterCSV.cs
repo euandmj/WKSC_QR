@@ -42,18 +42,14 @@ namespace Data.CSV
             {
                 using (var reader = new StreamReader(path))
                 {
-                    var cells = GetNextLine(reader);
+                    //string[] cells = null;
 
                     //if (!_schema.Equals(cells))
                     //    throw new InvalidDataException("csv file does not match the schema");
 
                     while (!reader.EndOfStream)
                     {
-                        cells = GetNextLine(reader);
-
-                        // detect schema and record into the Schema.
-                        // try to stay flexible, assert and and remember ranges: 
-                        // i.e. if name is sometimes col 3 or 4, try
+                        var cells = GetNextLine(reader);
 
                         bool validLine = cells.Any(x => !string.IsNullOrWhiteSpace(x));
 
@@ -61,8 +57,10 @@ namespace Data.CSV
                         {
                             var items = _schema.ParseLines(cells);
 
-                            _dataTable.Rows.Add(items);
-
+                            if(items != null)
+                            {
+                                _dataTable.Rows.Add(items);
+                            }
                         }
 
                     }

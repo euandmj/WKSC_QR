@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Data.CSV;
+using Data.Models;
+using Newtonsoft.Json;
 
 namespace GUI.Configuration
 {
@@ -21,7 +18,15 @@ namespace GUI.Configuration
         public int OwnerColumn { get; set; }
 
 
-
+        [JsonIgnore]
+        public IColumnSchema Schema
+        {
+            get => new YardItemColumnSchema(
+                    (YardItemCSVSchema.ZONE_Col, RowColumnn),
+                    (YardItemCSVSchema.CLASS_Col, ClassColumn),
+                    (YardItemCSVSchema.SAIL_Col, SailColumn),
+                    (YardItemCSVSchema.OWNER_Col, OwnerColumn));
+            }
 
     }
 }
