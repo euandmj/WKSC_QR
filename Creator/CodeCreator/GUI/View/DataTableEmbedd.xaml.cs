@@ -27,6 +27,7 @@ namespace GUI.View
         {
             InitializeComponent();
             DataContext = new DataTableEmbeddViewModel();
+
         }
 
         public void Init()

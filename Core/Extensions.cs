@@ -16,7 +16,12 @@ namespace Core.Extensions
         }
 
 
-       
+        public static void AddRange<T>(this ISet<T> @this, IEnumerable<T> items)
+        {
+
+            foreach (var item in items)
+                @this.Add(item);
+        }
 
     }
 }

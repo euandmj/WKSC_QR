@@ -19,16 +19,24 @@
         <local:DataTableEmbedd
             x:Name="ctlDatatable"
             Grid.Row="0"
-            Grid.Column="0"            
+            Grid.Column="0" 
             >
             
         </local:DataTableEmbedd>
 
 
-        <local:TableWizard x:Name="ctlWizard" Grid.Row="0"
-                           Grid.Column="1">
-            
-        </local:TableWizard>
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0"
+                    Grid.Column="1">
+
+
+            <local:TableWizard x:Name="ctlWizard">
+
+            </local:TableWizard>
+
+        </StackPanel>
+        
+        
         
         
         

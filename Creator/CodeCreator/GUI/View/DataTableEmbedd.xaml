@@ -22,9 +22,11 @@
         <Label Content="{Binding DebugRowText}"
                Grid.Row="0" />
 
-        <DataGrid ItemsSource="{Binding DataSource}"
+        <DataGrid x:Name="dg"
+                  ItemsSource="{Binding DataSource}"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                   IsReadOnly="True"
+                  SelectionMode="Extended"
                   HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True"
@@ -51,10 +53,15 @@
                     Grid.Row="1"
                     Orientation="Vertical">
 
-            <Button Content="Create"
+            <Button Content="Export"
                     Width="100"
+                    CommandParameter="{Binding ElementName=dg, Path=SelectedItems}"
                     Command="{Binding CreateCommand}" />
 
+            <!--<Button Content="Print"
+                    Width="100"
+                    CommandParameter="{Binding ElementName=dg, Path=SelectedItems}"
+                    Command="{Binding PrintCommand}" />-->
 
 
         </StackPanel>

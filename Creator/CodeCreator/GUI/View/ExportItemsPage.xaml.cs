@@ -1,6 +1,7 @@
-﻿using System.Drawing;
+﻿using Core.Models;
+using GUI.ViewModel;
+using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Media;
 
 namespace GUI.View
 {
@@ -9,11 +10,17 @@ namespace GUI.View
     /// </summary>
     public partial class ExportItemsPage : Window
     {
-        public ExportItemsPage(ImageSource img)
+        public ExportItemsPage(ICollection<YardItem> imgs)
         {
             InitializeComponent();
 
-            bmp.Source = img;
+
+            DataContext = new ExportItemsViewModel(imgs);
+
         }
     }
+
+
+    
+
 }

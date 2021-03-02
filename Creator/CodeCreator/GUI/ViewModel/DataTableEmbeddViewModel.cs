@@ -14,6 +14,8 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Windows;
 using GUI.Configuration;
+using System.Collections;
+using System.Windows.Input;
 
 namespace GUI.ViewModel
 {
@@ -22,7 +24,6 @@ namespace GUI.ViewModel
     {
         private ICollection<YardItem> _dataSource;
         private IColumnSchema _columnSchema;
-        private readonly IQREncoder<YardItem> _qRSerialiser = new ZXingQREncoder<YardItem>();
 
         private YardItem _selectedItem;
 
@@ -38,6 +39,8 @@ namespace GUI.ViewModel
             //    //new YardItem() { Zone = "E2", BoatClass = BoatClass.GP14, Owner = "Obi Wan Jones", DueDate = DateTime.Now.AddDays(1) },
             //    //new YardItem() { Zone = "F12", BoatClass = BoatClass.Laser, Owner = "Indiana Jones" }
             //};
+
+            CreateCommand = new Command(x => OnCreate(x));
 
             Init(AppConfig.Config);
 
@@ -75,25 +78,20 @@ namespace GUI.ViewModel
             }
         }
 
-
-        private Command OnCreateCommand()
+        private void OnCreate(object x)
         {
-            return new Command((x) =>
-            {
-                var bmp = _qRSerialiser.Encode(SelectedItem);
+            var ll = x as IList;
+                
+            if (ll.Count == 0) return;
 
+            var list = ll.Cast<YardItem>();
 
-                if (bmp != null)
-                {
-                    var win = new ExportItemsPage(bmp.ToBitmapImage());
-                    win.ShowDialog();
-                }
-            });
+            var page = new ExportItemsPage(list.ToList());
+            page.ShowDialog();
         }
 
 
-        public Command CreateCommand { get => OnCreateCommand(); }
-
+        public ICommand CreateCommand { get; }
 
         public YardItem SelectedItem
         {
@@ -103,8 +101,8 @@ namespace GUI.ViewModel
                 SetProperty(ref _selectedItem, value);
                 OnPropertyChanged(nameof(IsExportEnabled));
             }
-
         }
+
         public ICollection<YardItem> DataSource
         {
             get => _dataSource;

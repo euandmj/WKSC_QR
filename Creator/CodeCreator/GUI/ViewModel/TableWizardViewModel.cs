@@ -1,10 +1,5 @@
-﻿using Data.CSV;
-using Data.Models;
-using GUI.Commands;
+﻿using GUI.Commands;
 using Microsoft.Win32;
-using Newtonsoft.Json;
-using System;
-using System.IO;
 using System.Windows.Input;
 
 namespace GUI.ViewModel
@@ -41,17 +36,19 @@ namespace GUI.ViewModel
 
         private void OnSaveConfig()
         {
-            AppConfig.SetConfig(new Configuration.Config
+            using (_ = new WaitCursor())
             {
-                SpreadsheetFile = SelectedCSVFile,
-                ClassColumn = ClassColumn,
-                OwnerColumn = OwnerColumn,
-                RowColumnn = RowColumn,
-                SailColumn = SailNumberColumn 
-            });
+                AppConfig.SetConfig(new Configuration.Config
+                {
+                    SpreadsheetFile = SelectedCSVFile,
+                    ClassColumn = ClassColumn,
+                    OwnerColumn = OwnerColumn,
+                    RowColumnn = RowColumn,
+                    SailColumn = SailNumberColumn
+                });
 
-            Configuration.ConfigLoader.Save(AppConfig.Config);
-
+                Configuration.ConfigLoader.Save(AppConfig.Config);
+            }               
         }
 
         public ICommand SaveConfigCommand { get; set; }

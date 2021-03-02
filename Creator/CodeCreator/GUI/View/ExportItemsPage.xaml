@@ -5,16 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View"
         mc:Ignorable="d"
-        Title="ExportItemsPage" ResizeMode="NoResize" Height="450" Width="800"
+        Title="ExportItemsPage"
+        ResizeMode="NoResize"
+        Height="450"
+        Width="800"
         WindowStartupLocation="CenterOwner">
     <Grid>
 
+
+
         <Image x:Name="bmp"
                Width="150"
-               Height="150"
-               >
-            
+               Height="150">
+
         </Image>
-        
+
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Label Content="Codes must be saved before printing"
+                   FontSize="20" />
+            <Label Content="{Binding Message}"
+                   FontSize="24" />
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                <Button Content="Save"
+                        Command="{Binding ExportCommand}" />
+                <Button Content="Print"
+                        IsEnabled="{Binding IsPrintEnabled}"
+                        Command="{Binding PrintCommand}" />
+
+            </StackPanel>
+
+          
+
+
+
+
+        </StackPanel>
+
     </Grid>
 </Window>
