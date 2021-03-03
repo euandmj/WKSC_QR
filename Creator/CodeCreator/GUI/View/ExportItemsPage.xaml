@@ -9,14 +9,11 @@
         ResizeMode="NoResize"
         Height="450"
         Width="800"
-        WindowStartupLocation="CenterOwner">
-    <Grid>
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>      
 
-
-
-        
-
-        <StackPanel Orientation="Vertical"
+        <StackPanel Orientation="Vertical"                    
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <Image x:Name="bmp"
@@ -28,12 +25,25 @@
 
 
             <Label Content="Codes must be saved before printing"
+                   HorizontalAlignment="Center"
                    FontSize="20" />
             <Label Content="{Binding Message}"
+                   HorizontalAlignment="Center"
                    FontSize="24" />
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="FontSize"
+                                Value="20" />
+                        <Setter Property="Padding"
+                                Value="5" />
+                        <Setter Property="Margin"
+                                Value="3" />
+                    </Style>
+                           
+                </StackPanel.Resources>
 
                 <Button Content="Save"
                         Command="{Binding ExportCommand}" />

@@ -1,11 +1,6 @@
-﻿using Data.CSV;
+﻿using GUI.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using GUI.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GUI
 {
@@ -23,14 +18,12 @@ namespace GUI
             private set => _config = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public static event EventHandler NewEvent;
+        public static event EventHandler ConfigChanged;
 
         public static void SetConfig(Config newcfg)
         {
-            if (newcfg == null) throw new ArgumentNullException(nameof(newcfg));
-
-            _config = newcfg;
-            NewEvent?.Invoke(null, EventArgs.Empty);
+            _config = newcfg ?? throw new ArgumentNullException(nameof(newcfg));
+            ConfigChanged?.Invoke(null, EventArgs.Empty);
         }
     }
 }

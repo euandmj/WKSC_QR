@@ -31,6 +31,7 @@
                   VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True"
                   AutoGenerateColumns="False"
+                  FontSize="17"
                   Grid.Row="1"
                   Grid.Column="0">
             <DataGrid.Columns>
@@ -48,13 +49,15 @@
         </DataGrid>
         
         <StackPanel IsEnabled="{Binding IsExportEnabled}"
-                    Margin="15"
+                    Margin="10 0 0 0"
                     Grid.Column="1"
                     Grid.Row="1"
                     Orientation="Vertical">
 
             <Button Content="Export"
+                    Padding="3"
                     Width="100"
+                    FontSize="20"
                     CommandParameter="{Binding ElementName=dg, Path=SelectedItems}"
                     Command="{Binding CreateCommand}" />
 

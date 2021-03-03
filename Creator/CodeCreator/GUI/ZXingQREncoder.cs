@@ -47,23 +47,6 @@ namespace GUI
                 var bytes = Encoding.GetBytes(json);
                 string b64 = Convert.ToBase64String(bytes);
                 return _qrWriter.Write(b64);
-
-
-
-
-
-                //var options = new QrCodeEncodingOptions
-                //{
-                //    DisableECI = true,
-                //    CharacterSet = "UTF-8",
-                //    Width = 250,
-                //    Height = 250
-                //};
-                //var writer = new BarcodeWriter();
-                //writer.Format = BarcodeFormat.QR_CODE;
-                //writer.Options = options;
-                //writer.Renderer = new BitmapRenderer();
-                //return writer.Write("hello world");
             }
             catch (Exception ex)
             {

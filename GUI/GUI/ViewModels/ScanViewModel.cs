@@ -1,7 +1,6 @@
 ﻿using Android.Widget;
 using Core.Encoding;
 using Core.Models;
-using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ZXing;

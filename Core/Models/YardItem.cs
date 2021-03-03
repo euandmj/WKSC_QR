@@ -7,11 +7,6 @@ namespace Core.Models
     public sealed class YardItem
         : IEquatable<YardItem>
     {
-        [JsonIgnore]
-        private char _zone;
-        [JsonIgnore]
-        private short _zoneNum;
-
         public YardItem()
             : this(Guid.NewGuid()) { }
         
@@ -20,7 +15,7 @@ namespace Core.Models
             Id = id;
         }
 
-        [JsonIgnore]
+        [JsonProperty]
         public Guid Id { get; }
         [JsonProperty]
         public string Owner { get; set; }
@@ -30,7 +25,7 @@ namespace Core.Models
         public DateTime DueDate { get; set; } = DateTime.MinValue;
         [JsonProperty]
         public string SailNumber { get; set; }
-        [JsonProperty] 
+        [JsonIgnore] 
         public bool Starred { get; set; }
         [JsonProperty]
         public string Zone { get; set; }

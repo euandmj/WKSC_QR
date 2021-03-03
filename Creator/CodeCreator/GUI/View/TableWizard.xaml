@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GUI.View"
              mc:Ignorable="d"
+             Margin="5"
              d:DesignHeight="450"
              d:DesignWidth="450">
+
+    <UserControl.Resources>
+        <Style TargetType="Label"
+               BasedOn="{StaticResource StyleLabel}" />
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -68,7 +75,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <local:ColumnRowPicker PickerMode="Column"
-                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OwnerColumn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OwnerColumn, Mode=TwoWay}"
                                        x:Name="cbOwner"
                                        IsReadOnly="False" />
                 <Label Content="Owner &quot;OWNER&quot;" />

@@ -44,7 +44,7 @@ namespace GUI.ViewModel
 
             Init(AppConfig.Config);
 
-            AppConfig.NewEvent += (s, e) =>
+            AppConfig.ConfigChanged += (s, e) =>
             {
                 Init(AppConfig.Config);
             };
@@ -75,6 +75,8 @@ namespace GUI.ViewModel
             {
                 adapter.ReadCSV(AppConfig.Config.SpreadsheetFile);
                 DataSource = adapter.GetItems().ToList();
+                SelectedItem = null;
+                OnPropertyChanged(nameof(DebugRowText));
             }
         }
 
