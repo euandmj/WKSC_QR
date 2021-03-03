@@ -10,10 +10,12 @@ namespace GUI.View
     /// </summary>
     public partial class ExportItemsPage : Window
     {
-        public ExportItemsPage(ICollection<YardItem> imgs)
+        public ExportItemsPage(ICollection<YardItem> imgs, Window parent)
         {
             InitializeComponent();
 
+
+            Owner = parent;
 
             DataContext = new ExportItemsViewModel(imgs);
 

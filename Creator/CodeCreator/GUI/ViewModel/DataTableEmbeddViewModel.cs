@@ -86,7 +86,7 @@ namespace GUI.ViewModel
 
             var list = ll.Cast<YardItem>();
 
-            var page = new ExportItemsPage(list.ToList());
+            var page = new ExportItemsPage(list.ToList(), parent);
             page.ShowDialog();
         }
 

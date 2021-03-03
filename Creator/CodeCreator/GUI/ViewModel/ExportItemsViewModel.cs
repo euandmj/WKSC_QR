@@ -6,7 +6,9 @@ using GUI.Export;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace GUI.ViewModel
 {
@@ -22,10 +24,15 @@ namespace GUI.ViewModel
         {
             _itemsToExport = images ?? throw new ArgumentNullException(nameof(images));
 
+            DbgImgSrc =
+                _qrEncoder.Encode(images.First()).ToBitmapImage();
+
             _createdPaths = new HashSet<string>(_itemsToExport.Count);
             ExportCommand = new Command(x => OnExport());
             PrintCommand = new Command(x => OnPrint());
         }
+
+        public ImageSource DbgImgSrc { get; }
 
         private void OnExport()
         {

@@ -39,7 +39,10 @@ namespace Core.Models
         [JsonIgnore] 
         public bool HasPaid
             => DueDate > DateTime.Now;
-       
+
+        [JsonIgnore]
+        public string ZoneBoat
+            => $"{Zone} - {BoatClass}";
 
 
         public override int GetHashCode() => this.Zone.GetHashCode();

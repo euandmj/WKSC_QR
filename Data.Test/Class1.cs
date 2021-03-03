@@ -13,25 +13,5 @@ namespace Data.Test
     [TestFixture]
     public class Class1
     {
-        //private const string validData
-
-
-        //[SetUp]
-        //public void Setup()
-        //{
-
-        //}
-
-
-        [Test]
-        public void foo()
-        {
-
-            var csv = new AdapterCSV<YardItem>(new YardItemCSVSchema());
-
-            csv.ReadCSV("fakedb.csv");
-
-            var ooo = csv.GetItems().ToList();
-        }
     }
 }

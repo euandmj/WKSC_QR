@@ -14,15 +14,19 @@
 
 
 
-        <Image x:Name="bmp"
-               Width="150"
-               Height="150">
-
-        </Image>
+        
 
         <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
+            <Image x:Name="bmp"
+                   Source="{Binding DbgImgSrc}"
+                   Width="150"
+                   Height="150">
+
+            </Image>
+
+
             <Label Content="Codes must be saved before printing"
                    FontSize="20" />
             <Label Content="{Binding Message}"

@@ -48,7 +48,7 @@ namespace GUI.View
     class ColumnRowPickerViewModel : BaseViewModel
     {
 
-        readonly char[] ColumnPickerOpts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+        readonly IEnumerable<string> ColumnPickerOpts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Select(x => x.ToString());
 
         public ColumnRowPickerViewModel(PickerMode mode, bool isReadOnly = false)
         {
@@ -60,7 +60,7 @@ namespace GUI.View
             else { throw new NotImplementedException(nameof(mode)); }
         }
 
-        public char[] ItemSource { get; private set; }
+        public IEnumerable<string> ItemSource { get; private set; }
         public bool IsReadOnly { get; set; }
 
     }
