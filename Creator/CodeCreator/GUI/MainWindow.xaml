@@ -4,48 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View"
-        
         mc:Ignorable="d"
-        Title="MainWindow" Height="1050" Width="1650">
-    <Grid>
+        Title="MainWindow"
+        Height="1050"
+        Width="1650">
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <local:DataTableEmbedd
-            x:Name="ctlDatatable"
-            Grid.Row="0"
-            Grid.Column="0" 
-            >
-            
+        <local:DataTableEmbedd x:Name="ctlDatatable"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"
+                               Grid.Column="0">
+
         </local:DataTableEmbedd>
 
 
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="0"
-                    Grid.Column="1">
+        <local:TableWizard x:Name="ctlWizard"
+                           Grid.Row="0"
+                           Grid.Column="1">
+
+        </local:TableWizard>
 
 
-            <local:TableWizard x:Name="ctlWizard">
 
-            </local:TableWizard>
+        <local:RecentQRFolder x:Name="ctlRecent"
+                              Grid.Column="1"
+                              Grid.Row="1"
+                              Height="auto">
 
-        </StackPanel>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        </local:RecentQRFolder>
+
+
+
+
+
+
+
+
+
 
     </Grid>
 </Window>

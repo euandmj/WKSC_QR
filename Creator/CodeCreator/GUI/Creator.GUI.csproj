@@ -92,6 +92,14 @@
     <Compile Include="View\ExportItemsPage.xaml.cs">
       <DependentUpon>ExportItemsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FolderPicker\FileEventArgs.cs" />
+    <Compile Include="View\FolderPicker\QRFileItemControl.xaml.cs">
+      <DependentUpon>QRFileItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FolderPicker\QRFileItemModel.cs" />
+    <Compile Include="View\FolderPicker\RecentQRFolder.xaml.cs">
+      <DependentUpon>RecentQRFolder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TableWizard.xaml.cs">
       <DependentUpon>TableWizard.xaml</DependentUpon>
     </Compile>
@@ -126,6 +134,14 @@
     <Page Include="View\ExportItemsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FolderPicker\QRFileItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FolderPicker\RecentQRFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TableWizard.xaml">
       <SubType>Designer</SubType>
@@ -168,6 +184,10 @@
       <Project>{90ed54cd-f770-486c-8cf5-c5a4c885c674}</Project>
       <Name>Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="View\FolderPicker\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
