@@ -16,10 +16,16 @@
 
     <StackLayout Spacing="20"
                  Padding="15">
+        <StackLayout.Resources>
+            <Style TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Black" />
+            </Style>
+        </StackLayout.Resources>
         <Label Text="Owner" 
                FontAttributes="Bold"
                FontSize="20" />
-        <Label Text="{Binding Item.Owner}"
+        <Label Text="{Binding Item.Owner}" 
                FontSize="25"/>
 
         <Label Text="Boat"

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Shell;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Media;
 
 namespace GUI.View.FolderPicker
 {
@@ -15,8 +17,19 @@ namespace GUI.View.FolderPicker
             _width = w;
             Path = path;
             Mode = mode;
+
+
+            if (File.Exists(path))
+            {
+                using (var f = ShellFile.FromFilePath(path))
+                {
+                    Image = f.Thumbnail.SmallBitmapSource;
+                }
+            }
         }
 
+
+        public ImageSource Image { get; }
         public IComparable Comparator { get; protected set; }
 
         public string Path { get; }
@@ -81,4 +94,6 @@ namespace GUI.View.FolderPicker
         Cell
     }
 
+
+   
 }

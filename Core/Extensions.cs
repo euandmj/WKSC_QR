@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Core.Extensions
 {
@@ -21,6 +23,15 @@ namespace Core.Extensions
 
             foreach (var item in items)
                 @this.Add(item);
+        }
+
+        public static bool Replace<T>(this ISet<T> @this, T newObj) where T : IComparable<T>
+        {
+            if(@this.Remove(newObj))
+            {
+                return @this.Add(newObj);
+            }
+            return false;
         }
 
     }

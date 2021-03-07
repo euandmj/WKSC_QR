@@ -18,8 +18,10 @@ namespace GUI.Export
                 dia.EnsurePathExists = true;
                 var res = dia.ShowDialog();
 
-                path = dia.FileName;
-
+                if (res != CommonFileDialogResult.Cancel)
+                    path = dia.FileName;
+                else
+                    path = string.Empty;
                 return res;
             }
         }

@@ -32,13 +32,16 @@
                  ItemsSource="{Binding Items}"
                  SelectedItem="{Binding SelectedItem}"
                  FlowDirection="LeftToRight">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Height"
+                            Value="25" />
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <Border Background="Black"
-                                Height="25"
-                                Width="25" />
-                        <Label Content="{Binding Path}" />
+                        <Label Content="{Binding Path}" Height="25" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
