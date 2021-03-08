@@ -36,12 +36,12 @@ namespace GUI.ViewModel
 
         private void OnExport()
         {
-            if (ExportYardItemUtility.TryGetFolder(out string directory) == CommonFileDialogResult.Cancel)
-                return;
+            //if (ExportYardItemUtility.TryGetFolder(out string directory) == CommonFileDialogResult.Cancel)
+            //    return;
 
 
             _createdPaths.AddRange(
-                ExportYardItemUtility.SaveToFile(directory, 
+                ExportYardItemUtility.SaveToFile(Global.OutputPath, 
                                                 _itemsToExport, 
                                                 _qrEncoder));
 
@@ -56,6 +56,7 @@ namespace GUI.ViewModel
 
 
         public string Message => $"Exporting {_itemsToExport.Count} QR codes";
+        public string SaveToHelperText => $"saving to {Global.OutputPath}";
         public ICommand ExportCommand { get; }
         public ICommand PrintCommand { get; }
 

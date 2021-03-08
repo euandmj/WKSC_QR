@@ -16,6 +16,7 @@ using System.Windows;
 using GUI.Configuration;
 using System.Collections;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace GUI.ViewModel
 {
@@ -41,6 +42,8 @@ namespace GUI.ViewModel
             //};
 
             CreateCommand = new Command(x => OnCreate(x));
+            RefreshCommand = new Command(_ => Init(AppConfig.Config));
+            OpenCommand = new Command(_ => Process.Start(Global.OutputPath));
 
             Init(AppConfig.Config);
 
@@ -55,8 +58,11 @@ namespace GUI.ViewModel
             if (cfg == null) return;
             try
             {
-                _columnSchema = cfg.Schema;
-                InitDataSource();
+                using (_ = new WaitCursor())
+                {
+                    _columnSchema = cfg.Schema;
+                    InitDataSource();
+                }
             }
             catch(Exception ex)
             {
@@ -94,6 +100,8 @@ namespace GUI.ViewModel
 
 
         public ICommand CreateCommand { get; }
+        public ICommand RefreshCommand { get; }
+        public ICommand OpenCommand { get; }
 
         public YardItem SelectedItem
         {

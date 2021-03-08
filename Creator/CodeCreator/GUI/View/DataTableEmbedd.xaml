@@ -48,18 +48,31 @@
 
         </DataGrid>
         
-        <StackPanel IsEnabled="{Binding IsExportEnabled}"
+        <StackPanel 
                     Margin="10 0 0 0"
                     Grid.Column="1"
                     Grid.Row="1"
                     Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Padding"
+                            Value="3" />
+                    <Setter Property="FontSize"
+                            Value="20" />
+                </Style>
+            </StackPanel.Resources>
 
             <Button Content="Export"
-                    Padding="3"
-                    Width="100"
-                    FontSize="20"
+                    IsEnabled="{Binding IsExportEnabled}"
                     CommandParameter="{Binding ElementName=dg, Path=SelectedItems}"
                     Command="{Binding CreateCommand}" />
+            
+            <Button Content="Refresh"
+                    Margin="0 40 0 0"
+                    Command="{Binding RefreshCommand}" />
+            <Button Content="Open Codes"
+                    Margin="0 3 0 0"
+                    Command="{Binding OpenCommand}" />
 
             <!--<Button Content="Print"
                     Width="100"

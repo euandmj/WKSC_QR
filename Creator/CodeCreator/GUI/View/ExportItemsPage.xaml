@@ -27,7 +27,7 @@
             <Label Content="Codes must be saved before printing"
                    HorizontalAlignment="Center"
                    FontSize="20" />
-            <Label Content="{Binding Message}"
+            <Label Content="{Binding Message, Mode=OneTime}"
                    HorizontalAlignment="Center"
                    FontSize="24" />
 
@@ -52,8 +52,11 @@
                         Command="{Binding PrintCommand}" />
 
             </StackPanel>
+            
+            
+            <Label Content="{Binding SaveToHelperText, Mode=OneTime}" HorizontalAlignment="Center" />
 
-          
+
 
 
 
