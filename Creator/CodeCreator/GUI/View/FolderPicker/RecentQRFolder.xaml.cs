@@ -25,7 +25,7 @@ namespace GUI.View
         {
             InitializeComponent();
 
-            DataContext = vm = new QRFolder_ViewModel(@"C:\out", new QRFileItemComparer());
+            DataContext = vm = new QRFolder_ViewModel(Global.OutputPath, new QRFileItemComparer());
 
         }
 

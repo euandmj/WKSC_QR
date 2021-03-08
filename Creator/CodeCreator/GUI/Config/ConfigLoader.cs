@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace GUI.Configuration
 {
@@ -17,7 +13,7 @@ namespace GUI.Configuration
             try
             {
                 var json = JsonConvert.SerializeObject(cfg);
-                File.WriteAllText(AppConfig.ConfigPath, json);
+                File.WriteAllText(Global.ConfigPath, json);
             }
             catch(Exception ex)
             {
@@ -30,7 +26,10 @@ namespace GUI.Configuration
         {
             try
             {
-                var file = File.ReadAllText(AppConfig.ConfigPath);
+                if (!File.Exists(Global.ConfigPath))
+                    Save(new Config());
+
+                var file = File.ReadAllText(Global.ConfigPath);
 
 
                 return JsonConvert.DeserializeObject<Config>(file) 

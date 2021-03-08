@@ -38,7 +38,7 @@ namespace GUI.ViewModel
         {
             using (_ = new WaitCursor())
             {
-                AppConfig.SetConfig(new Configuration.Config
+                AppConfig.Config = (new Configuration.Config
                 {
                     SpreadsheetFile = SelectedCSVFile,
                     ClassColumn = ClassColumn,
