@@ -136,6 +136,9 @@
       <DependentUpon>RecentQRFolder.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FolderPicker\lib\SortMode.cs" />
+    <Compile Include="View\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TableWizard.xaml.cs">
       <DependentUpon>TableWizard.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FolderPicker\RecentQRFolder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HelpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

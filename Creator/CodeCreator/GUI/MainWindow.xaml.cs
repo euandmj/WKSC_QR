@@ -1,5 +1,6 @@
 ﻿using Core.Encoding;
 using Core.Models;
+using GUI.Commands;
 using GUI.View;
 using GUI.ViewModel;
 using System;
@@ -29,6 +30,20 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+
+
+            DataContext = this;
+        }
+
+
+        public ICommand OpenHelpCommand
+        {
+            get => new Command((x) =>
+            {
+
+                var help = new HelpPage();
+                help.ShowDialog();
+            });
         }
     }
 }

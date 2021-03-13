@@ -4,9 +4,8 @@
 
 ## TODO:
 - distinguish prints??
-- reload table
-- file bar
-- Trim text on name etc
+- configure month duration if we go with it
+	- alternates are have the spreadsheet decide
 
 
 To determine if paid: 

@@ -17,6 +17,9 @@ namespace GUI.Configuration
         [JsonProperty]
         public string OwnerColumn { get; set; } = "A";
 
+        [JsonProperty]
+        public int StickerValidDurationMonths { get; set; } = 12;
+
 
         [JsonIgnore]
         public IColumnSchema Schema

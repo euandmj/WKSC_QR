@@ -4,6 +4,7 @@ using Core.Models;
 using Core.PDFArranger;
 using GUI.Commands;
 using GUI.Export;
+using GUI.View;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,7 +30,7 @@ namespace GUI.ViewModel
             // set debug qr image
             DbgImgSrc =
                 _qrEncoder.Encode(images.First()).ToBitmapImage();
-
+            
             _createdPaths = new HashSet<string>(_itemsToExport.Count);
             PrintCommand = new Command(x => OnPrint());
             ExportCommand = new Command(x => OnExport());
@@ -47,6 +48,8 @@ namespace GUI.ViewModel
                 {
                     foreach (var batch in _itemsToExport.Batch(100))
                     {
+                        foreach (var item in _itemsToExport) item.DueDate = DateTime.Now.AddYears(AppConfig.Config.StickerValidDurationMonths);
+
                         var bitmaps = _qrEncoder.Encode(batch).ToList();
                         using (var pageBuilder = new BitmapPageBuilder(bitmaps))
                         {

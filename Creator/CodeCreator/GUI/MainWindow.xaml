@@ -56,7 +56,7 @@
             </Menu.Resources>
 
             <MenuItem Header="File">                      
-                <MenuItem Header="Help"/>
+                <MenuItem Header="Help" Command="{Binding OpenHelpCommand}"/>
             </MenuItem>
         </Menu>
 
