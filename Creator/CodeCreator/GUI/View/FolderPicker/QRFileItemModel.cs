@@ -1,6 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Shell;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media;
 
@@ -31,8 +30,8 @@ namespace GUI.View.FolderPicker
 
         public ImageSource Image { get; }
         public IComparable Comparator { get; protected set; }
-
         public string Path { get; }
+        public string Name => Path.Substring(Path.LastIndexOf('\\'));
         public int X { get; set; }
         public int Y { get; set; }
         public DateTime Created { get; set; }
@@ -47,6 +46,9 @@ namespace GUI.View.FolderPicker
                 {
                     case SortMode.Path:
                         Comparator = Path;
+                        break;
+                    case SortMode.Date:
+                        Comparator = Created;
                         break;
                     case SortMode.Cell:
                         Comparator = X + Y;
@@ -68,32 +70,4 @@ namespace GUI.View.FolderPicker
             return Comparator.GetHashCode();
         }
     }
-
-    class QRFileItemComparer
-        : IEqualityComparer<QRFileItemModel>, IComparer<QRFileItemModel>
-    {
-        public int Compare(QRFileItemModel x, QRFileItemModel y)
-        {
-            return x.CompareTo(y);
-        }
-
-        public bool Equals(QRFileItemModel x, QRFileItemModel y)
-        {
-            return x.Equals(y);
-        }
-
-        public int GetHashCode(QRFileItemModel obj)
-        {
-            return obj.GetHashCode();
-        }
-    }
-
-    public enum SortMode
-    {
-        Path,
-        Cell
-    }
-
-
-   
 }

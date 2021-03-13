@@ -125,14 +125,17 @@
     <Compile Include="View\ExportItemsPage.xaml.cs">
       <DependentUpon>ExportItemsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\FolderPicker\FileEventArgs.cs" />
+    <Compile Include="View\FolderPicker\lib\FileEventArgs.cs" />
+    <Compile Include="View\FolderPicker\lib\QRFileItemComparer.cs" />
     <Compile Include="View\FolderPicker\QRFileItemControl.xaml.cs">
       <DependentUpon>QRFileItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FolderPicker\QRFileItemModel.cs" />
+    <Compile Include="View\FolderPicker\RecentQRFolderViewModel.cs" />
     <Compile Include="View\FolderPicker\RecentQRFolder.xaml.cs">
       <DependentUpon>RecentQRFolder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FolderPicker\lib\SortMode.cs" />
     <Compile Include="View\TableWizard.xaml.cs">
       <DependentUpon>TableWizard.xaml</DependentUpon>
     </Compile>
@@ -220,7 +223,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="View\FolderPicker\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

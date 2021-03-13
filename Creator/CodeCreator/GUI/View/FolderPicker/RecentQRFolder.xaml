@@ -31,6 +31,7 @@
                  HorizontalContentAlignment="Center"
                  ItemsSource="{Binding Items}"
                  SelectedItem="{Binding SelectedItem}"
+                 MouseDoubleClick="_container_MouseDoubleClick"
                  FlowDirection="LeftToRight">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
