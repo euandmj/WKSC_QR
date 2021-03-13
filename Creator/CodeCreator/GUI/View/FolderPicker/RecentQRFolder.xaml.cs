@@ -32,7 +32,8 @@ namespace GUI.View
 
         private void _container_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            System.Diagnostics.Process.Start(vm.SelectedItem.Path);
+            if(vm.SelectedItem.Path != null)
+                System.Diagnostics.Process.Start(vm.SelectedItem.Path);
         }
     }
 

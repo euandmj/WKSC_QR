@@ -1,10 +1,12 @@
 ﻿using Microsoft.WindowsAPICodePack.Shell;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Media;
 
 namespace GUI.View.FolderPicker
 {
+    [DebuggerDisplay("{Name}")]
     public class QRFileItemModel
       : IComparable<QRFileItemModel>
     {
@@ -13,10 +15,7 @@ namespace GUI.View.FolderPicker
 
         public QRFileItemModel(int w, SortMode mode, string path)
         {
-            _width = w;
-            Path = path;
-            Mode = mode;
-
+            
 
             if (File.Exists(path))
             {
@@ -24,7 +23,11 @@ namespace GUI.View.FolderPicker
                 {
                     Image = f.Thumbnail.SmallBitmapSource;
                 }
+                Created = File.GetCreationTime(path);
             }
+            _width = w;
+            Path = path;
+            Mode = mode;
         }
 
 

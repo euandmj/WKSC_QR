@@ -32,6 +32,7 @@ namespace GUI.View.FolderPicker
                 throw new ArgumentNullException(nameof(path), "path does not exist");
 
             Items = new ObservableCollection<QRFileItemModel>();
+            SortMode = SortMode.Date;
             _watcher = new FileSystemWatcher(path)
             {
                 EnableRaisingEvents = true,
@@ -69,12 +70,23 @@ namespace GUI.View.FolderPicker
                     throw;
                 }
             }
+
+            
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedAction action, object item)
         {
             //CollectionChanged?.Invoke(this,
             //    new NotifyCollectionChangedEventArgs(action, item));
+        }
+
+        private void Sort()
+        {
+            var sorted = Items.OrderByDescending(x => x.Comparator).ToList();
+            for (int i = 0; i < sorted.Count; i++)
+            {
+                Items.Move(Items.IndexOf(sorted[i]), i);
+            }
         }
 
         private void Clean()

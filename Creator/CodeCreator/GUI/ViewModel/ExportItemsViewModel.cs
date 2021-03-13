@@ -71,7 +71,7 @@ namespace GUI.ViewModel
             }
             finally
             {
-                SaveToHelperText = $"Exported {pageCount} pages to {Global.OutputPath}";
+                SaveToHelperText = $"Exported {pageCount} page(s) to {Global.OutputPath}";
             }
             //_createdPaths.AddRange(
             //    ExportYardItemUtility.SaveToFile(
@@ -89,7 +89,7 @@ namespace GUI.ViewModel
 
         private string _saveToHelperText;
         public string SaveToHelperText { get => _saveToHelperText; set => SetProperty(ref _saveToHelperText, value); }
-        public string Message => $"Exporting {_itemsToExport.Count} QR codes";
+        public string Message => $"Exporting {_itemsToExport.Count} QR code(s)";
         public ICommand ExportCommand { get; }
         public ICommand PrintCommand { get; }
         public ICommand OpenFolderCommand { get; }

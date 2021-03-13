@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View"
         mc:Ignorable="d"
+
         Title="MainWindow"
         Height="1050"
         Width="1650">
@@ -15,11 +16,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <local:DataTableEmbedd x:Name="ctlDatatable"
-                               Grid.Row="0"
+                               Grid.Row="1"
                                Grid.RowSpan="2"
                                Grid.Column="0">
 
@@ -27,16 +29,15 @@
 
 
         <local:TableWizard x:Name="ctlWizard"
-                           Grid.Row="0"
+                           Grid.Row="1"
                            Grid.Column="1">
 
         </local:TableWizard>
 
 
-
         <local:RecentQRFolder x:Name="ctlRecent"
                               Grid.Column="1"
-                              Grid.Row="1"
+                              Grid.Row="2"
                               Height="auto">
 
 
@@ -46,6 +47,18 @@
 
 
 
+        <Menu Grid.Row="0" Grid.ColumnSpan="99" Background="Red" Foreground="White" FontWeight="Bold">
+            <Menu.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Foreground"
+                            Value="Black" />
+                </Style>
+            </Menu.Resources>
+
+            <MenuItem Header="File">                      
+                <MenuItem Header="Help"/>
+            </MenuItem>
+        </Menu>
 
 
 
