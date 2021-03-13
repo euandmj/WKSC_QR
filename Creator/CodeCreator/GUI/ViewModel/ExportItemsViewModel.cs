@@ -2,6 +2,7 @@
 using Core.Encoding;
 using Core.Extensions;
 using Core.Models;
+using Core.PDFArranger;
 using GUI.Commands;
 using GUI.Export;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -28,8 +29,9 @@ namespace GUI.ViewModel
             DbgImgSrc =
                 _qrEncoder.Encode(images.First()).ToBitmapImage();
 
-            var qpg = new QRPageGenerator(_qrEncoder.Encode(images.First()));
-
+            var qpg = new QRPageGenerator(_qrEncoder.Encode(images));
+            qpg.Build();
+            qpg.Save();
 
 
 

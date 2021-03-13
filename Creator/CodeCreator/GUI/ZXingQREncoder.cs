@@ -2,6 +2,7 @@
 using Core.Exceptions;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using ZXing;
 using ZXing.QrCode;
@@ -16,7 +17,7 @@ namespace GUI
 
         private readonly BarcodeWriter _qrWriter;
 
-        public ZXingQREncoder(int width = 250, int height = 250)
+        public ZXingQREncoder(int width = 200, int height = 200)
         {
             _qrWriter = new BarcodeWriter()
             {
@@ -52,6 +53,15 @@ namespace GUI
             {
                 throw new BitmapSerializationException($"Error creating bitmap from {typeof(TSource)}", ex);
             }
+        }
+
+        public IEnumerable<Bitmap> Encode(IEnumerable<TSource> items)
+        {
+            if (items == null) throw new ArgumentNullException(nameof(items));
+
+            foreach (var item in items)
+                yield return Encode(item);
+
         }
     }
 }

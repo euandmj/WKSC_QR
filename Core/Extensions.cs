@@ -34,5 +34,31 @@ namespace Core.Extensions
             return false;
         }
 
+        public static IEnumerable<IEnumerable<TSource>> Batch<TSource>(
+                  this IEnumerable<TSource> source, int size)
+        {
+            /* https://github.com/morelinq/MoreLINQ/blob/master/MoreLinq/Batch.cs */
+            TSource[] bucket = null;
+            var count = 0;
+
+            foreach (var item in source)
+            {
+                if (bucket == null)
+                    bucket = new TSource[size];
+
+                bucket[count++] = item;
+                if (count != size)
+                    continue;
+
+                yield return bucket;
+
+                bucket = null;
+                count = 0;
+            }
+
+            if (bucket != null && count > 0)
+                yield return bucket.Take(count).ToArray();
+        }
+
     }
 }
