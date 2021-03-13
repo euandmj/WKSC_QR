@@ -1,4 +1,5 @@
-﻿using Core.Encoding;
+﻿using Core;
+using Core.Encoding;
 using Core.Extensions;
 using Core.Models;
 using GUI.Commands;
@@ -26,6 +27,11 @@ namespace GUI.ViewModel
 
             DbgImgSrc =
                 _qrEncoder.Encode(images.First()).ToBitmapImage();
+
+            var qpg = new QRPageGenerator(_qrEncoder.Encode(images.First()));
+
+
+
 
             _createdPaths = new HashSet<string>(_itemsToExport.Count);
             ExportCommand = new Command(x => OnExport());
