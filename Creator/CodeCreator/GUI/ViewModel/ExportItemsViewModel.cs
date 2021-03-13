@@ -1,14 +1,14 @@
-﻿using Core;
-using Core.Encoding;
+﻿using Core.Encoding;
 using Core.Extensions;
 using Core.Models;
 using Core.PDFArranger;
 using GUI.Commands;
 using GUI.Export;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -26,34 +26,58 @@ namespace GUI.ViewModel
         {
             _itemsToExport = images ?? throw new ArgumentNullException(nameof(images));
 
+            // set debug qr image
             DbgImgSrc =
                 _qrEncoder.Encode(images.First()).ToBitmapImage();
 
-            var qpg = new QRPageGenerator(_qrEncoder.Encode(images));
-            qpg.Build();
-            qpg.Save();
-
-
-
             _createdPaths = new HashSet<string>(_itemsToExport.Count);
-            ExportCommand = new Command(x => OnExport());
             PrintCommand = new Command(x => OnPrint());
+            ExportCommand = new Command(x => OnExport());
+            OpenFolderCommand = new Command(x => Process.Start(Global.OutputPath));
         }
 
         public ImageSource DbgImgSrc { get; }
 
         private void OnExport()
         {
-            //if (ExportYardItemUtility.TryGetFolder(out string directory) == CommonFileDialogResult.Cancel)
-            //    return;
+            int pageCount = 0;
+            try
+            {
+                using (_ = new WaitCursor())
+                {
+                    foreach (var batch in _itemsToExport.Batch(100))
+                    {
+                        var bitmaps = _qrEncoder.Encode(batch).ToList();
+                        using (var pageBuilder = new BitmapPageBuilder(bitmaps))
+                        {
+                            pageBuilder.Build();
+
+                            _createdPaths.AddRange(pageBuilder.Save(Global.OutputPath));
+                            pageCount += pageBuilder.Count;
+                        }
 
 
-            _createdPaths.AddRange(
-                ExportYardItemUtility.SaveToFile(Global.OutputPath, 
-                                                _itemsToExport, 
-                                                _qrEncoder));
-
-
+                        if (bitmaps != null)
+                        {
+                            foreach (var bmp in bitmaps)
+                                bmp.Dispose();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Failed saving qr codes");
+            }
+            finally
+            {
+                SaveToHelperText = $"Exported {pageCount} pages to {Global.OutputPath}";
+            }
+            //_createdPaths.AddRange(
+            //    ExportYardItemUtility.SaveToFile(
+            //        Global.OutputPath,
+            //        _itemsToExport,
+            //        _qrEncoder));
             OnPropertyChanged(nameof(IsPrintEnabled));
         }
 
@@ -63,10 +87,12 @@ namespace GUI.ViewModel
         }
 
 
+        private string _saveToHelperText;
+        public string SaveToHelperText { get => _saveToHelperText; set => SetProperty(ref _saveToHelperText, value); }
         public string Message => $"Exporting {_itemsToExport.Count} QR codes";
-        public string SaveToHelperText => $"saving to {Global.OutputPath}";
         public ICommand ExportCommand { get; }
         public ICommand PrintCommand { get; }
+        public ICommand OpenFolderCommand { get; }
 
         public bool IsPrintEnabled => _createdPaths.Count > 0;
     }

@@ -7,6 +7,7 @@ using System.Drawing;
 using ZXing;
 using ZXing.QrCode;
 using ZXing.Rendering;
+using Core.Extensions;
 
 namespace GUI
 {

@@ -6,6 +6,7 @@ using System.Linq;
 namespace Core.PDFArranger
 {
     class Page
+        : IDisposable
     {
         private const int PER_PAGE = 5; // x2 wide
 
@@ -18,18 +19,21 @@ namespace Core.PDFArranger
         private const float rWIDTHmm = 99.1f;
         private const float rHEIGHTmm = 57.3f;
 
-        private readonly Bitmap _host;
+        private bool _built = false;
+        private bool disposedValue;
+
         private readonly Graphics _graphics;
         private readonly IEnumerable<Bitmap> _codes;
-
 
         public Page(IEnumerable<Bitmap> codes)
         {
             _codes = codes;
-            _host = new Bitmap(pxWidth, pxHeight);
-            _graphics = Graphics.FromImage(_host);
+            _graphics = Graphics.FromImage(Bitmap);
             _graphics.PageUnit = GraphicsUnit.Millimeter;
         }
+
+
+        public Bitmap Bitmap { get; } = new Bitmap(pxWidth, pxHeight);
 
         private IEnumerable<(float x, float y)> GetCoords()
         {
@@ -47,6 +51,8 @@ namespace Core.PDFArranger
 
         public void Build()
         {
+            if (_built) throw new InvalidProgramException("already built");
+
             _graphics.FillRectangle(Brushes.White, 0, 0, mmWIDTH, mmHEIGHT);
 
             foreach (var ((x, y), bmp) in GetCoords().Zip(_codes, Tuple.Create))
@@ -55,10 +61,25 @@ namespace Core.PDFArranger
             }
         }
 
-        public void Save(string path)
-        {
 
-            _host.Save(path);
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    Bitmap.Dispose();
+                    _graphics.Dispose();
+                }
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

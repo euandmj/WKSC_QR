@@ -12,6 +12,12 @@
     <UserControl.Resources>
         <Style TargetType="Label"
                BasedOn="{StaticResource StyleLabel}" />
+        <Style TargetType="Button" x:Key="LargeButton">
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Padding"
+                    Value="3" />
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -35,19 +41,16 @@
                             Value="Left" />
                 </Style>
             </StackPanel.Resources>
+            <Button Content="Import Spreadsheet"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource LargeButton}"
+                    Command="{Binding LoadFileCommand}" />
 
-            <StackPanel Orientation="Horizontal">
-                <Button Content="..."
-                        Width="15"
-                        HorizontalAlignment="left"
-                        Command="{Binding LoadFileCommand}" />
-
-                <Label Content="Import Spreadsheet" />
-
-            </StackPanel>
-
+            
 
             <Label Foreground="OrangeRed"
+                   Margin="15 15 0 0"
+                   FontStyle="Italic"
                    Content="{Binding SelectedCSVFile}" />
 
             <Label Content="Please select the columns for the following fields:" />
@@ -83,6 +86,7 @@
 
             <Button Margin="15"
                     Content="Save Configuration"
+                    Style="{StaticResource LargeButton}"
                     IsEnabled="{Binding CanSave}"
                     Command="{Binding SaveConfigCommand}" />
 

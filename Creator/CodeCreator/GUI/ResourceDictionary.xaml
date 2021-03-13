@@ -6,6 +6,6 @@
     <Style x:Key="StyleLabel"
            TargetType="Label">
         <Setter Property="FontSize"
-                Value="18" />
+                Value="20" />
     </Style>
 </ResourceDictionary>

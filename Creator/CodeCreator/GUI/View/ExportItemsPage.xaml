@@ -52,9 +52,13 @@
                         Command="{Binding PrintCommand}" />
 
             </StackPanel>
-            
-            
-            <Label Content="{Binding SaveToHelperText, Mode=OneTime}" HorizontalAlignment="Center" />
+
+
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink Command="{Binding OpenFolderCommand}">
+                    <TextBlock Text="{Binding SaveToHelperText}" />
+                </Hyperlink>
+            </TextBlock>
 
 
 
