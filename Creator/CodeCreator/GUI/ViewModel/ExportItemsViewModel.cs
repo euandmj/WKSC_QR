@@ -48,9 +48,13 @@ namespace GUI.ViewModel
                 {
                     foreach (var batch in _itemsToExport.Batch(100))
                     {
-                        foreach (var item in _itemsToExport) item.DueDate = DateTime.Now.AddYears(AppConfig.Config.StickerValidDurationMonths);
+                        string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));
+
+                        foreach (var item in _itemsToExport) 
+                            item.DueDate = DateTime.Now.AddYears(AppConfig.Config.StickerValidDurationMonths);
 
                         var bitmaps = _qrEncoder.Encode(batch).ToList();
+
                         using (var pageBuilder = new BitmapPageBuilder(bitmaps))
                         {
                             pageBuilder.Build();

@@ -35,6 +35,8 @@ namespace Core.PDFArranger
 
         public Bitmap Bitmap { get; } = new Bitmap(pxWidth, pxHeight);
 
+        public string Name { get; set; }
+
         private IEnumerable<(float x, float y)> GetCoords()
         {
             for (float y = 0; y < PER_PAGE; y++)

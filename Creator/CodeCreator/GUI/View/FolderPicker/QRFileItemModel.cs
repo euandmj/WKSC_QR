@@ -27,12 +27,14 @@ namespace GUI.View.FolderPicker
             }
             _width = w;
             Path = path;
+            FileName = System.IO.Path.GetFileName(path);
             Mode = mode;
         }
 
 
         public ImageSource Image { get; }
         public IComparable Comparator { get; protected set; }
+        public string FileName { get; }
         public string Path { get; }
         public string Name => Path.Substring(Path.LastIndexOf('\\'));
         public int X { get; set; }

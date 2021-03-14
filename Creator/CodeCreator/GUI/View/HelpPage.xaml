@@ -10,6 +10,7 @@
         Title="HelpPage" Height="500" Width="600">
     <StackPanel Margin="0 150"
                 Orientation="Vertical"
+                VerticalAlignment="Center"
                 HorizontalAlignment="Center">
         <StackPanel.Resources>
             <Style TargetType="TextBlock">

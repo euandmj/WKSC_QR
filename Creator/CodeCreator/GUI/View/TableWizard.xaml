@@ -38,7 +38,9 @@
             <StackPanel.Resources>
                 <Style TargetType="StackPanel">
                     <Setter Property="HorizontalAlignment"
-                            Value="Left" />
+                            Value="Right" />
+                    <Setter Property="Margin"
+                            Value="0 0 35 0" />
                 </Style>
             </StackPanel.Resources>
             <Button Content="Import Spreadsheet"
@@ -56,32 +58,32 @@
             <Label Content="Please select the columns for the following fields:" />
 
             <StackPanel Orientation="Horizontal">
+                <Label Content="Boat Row &quot;ROW&quot;" />
                 <local:ColumnRowPicker PickerMode="Column"
                                        SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.RowColumn, Mode=TwoWay}"
                                        x:Name="cbRow"
                                        IsReadOnly="False" />
-                <Label Content="Boat Row &quot;ROW&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Boat Class &quot;CLASS&quot;" />
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbClass"
                                        SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ClassColumn, Mode=TwoWay}"
                                        IsReadOnly="False" />
-                <Label Content="Boat Class &quot;CLASS&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Sail Number &quot;SAIL NO&quot;" />
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbSail"
                                        SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SailNumberColumn, Mode=TwoWay}"
                                        IsReadOnly="False" />
-                <Label Content="Sail Number &quot;SAIL NO&quot;" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
+                <Label Content="Owner &quot;OWNER&quot;" />
                 <local:ColumnRowPicker PickerMode="Column"
                                        SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.OwnerColumn, Mode=TwoWay}"
                                        x:Name="cbOwner"
                                        IsReadOnly="False" />
-                <Label Content="Owner &quot;OWNER&quot;" />
             </StackPanel>
 
             <Button Margin="15"

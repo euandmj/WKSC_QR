@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View"
+        MinHeight="480"
+        MinWidth="640"
         mc:Ignorable="d"
-
-        Title="MainWindow"
+        Title="WKSC QR Creator"
+        Icon="Resources/club.png"
         Height="1050"
         Width="1650">
     <Grid ShowGridLines="False">

@@ -42,7 +42,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="{Binding Path}" Height="25" />
+                        <Label Content="{Binding Created}" Height="25" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

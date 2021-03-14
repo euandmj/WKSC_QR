@@ -11,11 +11,15 @@ namespace Core.PDFArranger
     {
         private const int PER_PAGE = 10;
 
+        private readonly string _path;
         private ICollection<Page> _pages = new List<Page>();
         private bool disposedValue;
 
         public BitmapPageBuilder(IEnumerable<Bitmap> src)
         {
+            //_path = path;
+            //if (!Directory.Exists(path)) throw new ArgumentException("the path " + path + " does not exist.");
+
             foreach(var bucket in src.Batch(PER_PAGE))
             {
                 _pages.Add(new Page(bucket));

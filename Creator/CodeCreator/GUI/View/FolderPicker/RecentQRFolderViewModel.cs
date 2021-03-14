@@ -70,14 +70,15 @@ namespace GUI.View.FolderPicker
                     throw;
                 }
             }
+            Sort();
 
-            
+
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedAction action, object item)
         {
-            //CollectionChanged?.Invoke(this,
-            //    new NotifyCollectionChangedEventArgs(action, item));
+            CollectionChanged?.Invoke(this,
+                new NotifyCollectionChangedEventArgs(action, item));
         }
 
         private void Sort()
@@ -87,6 +88,7 @@ namespace GUI.View.FolderPicker
             {
                 Items.Move(Items.IndexOf(sorted[i]), i);
             }
+            OnPropertyChanged(nameof(Items));
         }
 
         private void Clean()
@@ -158,6 +160,7 @@ namespace GUI.View.FolderPicker
             {
 
                 Items.Add(newItem);
+                Sort();
             });
         }
 
@@ -167,6 +170,7 @@ namespace GUI.View.FolderPicker
             {
                 Clean();
                 Items.Add(newItem);
+                Sort();
 
             });
         }
