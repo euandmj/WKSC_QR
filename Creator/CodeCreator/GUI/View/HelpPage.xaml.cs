@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace GUI.View
     public partial class HelpPage : Window
     {
         const string HELP_Import = @"\help\Help_Import.docx";
+        const string HELP_Export = @"\help\Help_Export.docx";     
 
         public HelpPage()
         {
@@ -33,12 +35,13 @@ namespace GUI.View
             string dir = string.Empty;
             try
             {
-                dir = Directory.GetCurrentDirectory() + which;
+                
+                dir = Assembly.GetExecutingAssembly().Location + which;
                 Process.Start(dir);
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error opening help file " + dir);
+                MessageBox.Show("Error opening help file " + dir, ex.Message);
             }
         }
 
@@ -54,7 +57,7 @@ namespace GUI.View
 
         private void HowToExport_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenHelp(HELP_Export);
         }
     }
 }

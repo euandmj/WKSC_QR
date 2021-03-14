@@ -80,6 +80,7 @@
     <None Include="App.config" />
     <None Include="Creator.Startup_TemporaryKey.pfx" />
     <Content Include="Help\Help_Import.docx" />
+    <Content Include="Help\Help_Export.docx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GUI\Creator.GUI.csproj">

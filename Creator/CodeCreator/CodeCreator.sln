@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C93C5462-7B5F-4481-B2EF-F9AFCE8E1E78}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		..\..\help\Help_Import.docx = ..\..\help\Help_Import.docx
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creator.GUI", "GUI\Creator.GUI.csproj", "{E559A853-3949-48DF-A1F6-C1F8D84B8F3B}"
