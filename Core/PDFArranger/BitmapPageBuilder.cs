@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace Core.PDFArranger
@@ -41,8 +42,9 @@ namespace Core.PDFArranger
             foreach(var page in _pages)
             {
                 var bmp = page.Bitmap;
-                var filename = Path.Combine(path, $"{Path.GetRandomFileName()}.bmp");
-                bmp.Save(filename);
+                var filename = Path.Combine(path, $"{Path.GetRandomFileName()}.png");
+                bmp.Save(filename, ImageFormat.Png);
+
 
                 yield return filename;
             }

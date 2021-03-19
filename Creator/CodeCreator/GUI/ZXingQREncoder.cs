@@ -7,11 +7,10 @@ using System.Drawing;
 using ZXing;
 using ZXing.QrCode;
 using ZXing.Rendering;
-using Core.Extensions;
 
 namespace GUI
 {
-    class ZXingQREncoder<TSource>
+    public class ZXingQREncoder<TSource>
         : IQREncoder<TSource>
     {
         private static readonly System.Text.Encoding Encoding = System.Text.Encoding.UTF8;

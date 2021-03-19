@@ -9,10 +9,10 @@ namespace Data.Models
     public class YardItemCSVSchema
         : ICSVSchema<YardItem>
     {
-        public static readonly string ZONE_Col      = "ROW";
-        public static readonly string CLASS_Col     = "CLASS";
-        public static readonly string SAIL_Col      = "SAIL";
-        public static readonly string OWNER_Col     = "OWNER";
+        public const string ZONE_Col      = "ROW";
+        public const string CLASS_Col     = "CLASS";
+        public const string SAIL_Col      = "SAIL";
+        public const string OWNER_Col     = "OWNER";
 
         public YardItemCSVSchema(IColumnSchema cols)
         {

@@ -10,8 +10,9 @@ namespace Core.PDFArranger
     {
         private const int PER_PAGE = 5; // x2 wide
 
-        private const int pxWidth = 2480;
-        private const int pxHeight = 3508;
+
+        private const int pxWidth = 793;
+        private const int pxHeight = 1122;
 
         private const int mmWIDTH = 210;
         private const int mmHEIGHT = 297;
@@ -43,8 +44,8 @@ namespace Core.PDFArranger
             {
                 float posY = 5.25f + (y * 57.3f);
 
-                float posX1 = 4.9f;
-                float posX2 = (mmWIDTH / 2) + 4.9f;
+                float posX1 = 4.9f + 15;
+                float posX2 = (mmWIDTH / 2) + 4.9f + 15;
 
                 yield return (posX1, posY);
                 yield return (posX2, posY);

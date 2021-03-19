@@ -6,8 +6,8 @@ namespace Data.Services
 {
     public interface IDataStore<T>
     {        
-        Task<T> GetItemAsync(Guid id);
-        Task<IEnumerable<T>> GetItemsAsync();
+        Task<T> GetItem(Guid id);
+        Task<IEnumerable<T>> GetItems();
         void AddItem(T item);
         void DeleteItem(Guid id);
     }

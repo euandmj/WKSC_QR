@@ -34,12 +34,12 @@ namespace Data.Services
 #endif
         }    
 
-        public async Task<YardItem> GetItemAsync(Guid id)
+        public async Task<YardItem> GetItem(Guid id)
         {
             return await Task.FromResult(_recentItems.FirstOrDefault(x => x.Id == id));
         }
 
-        public async Task<IEnumerable<YardItem>> GetItemsAsync()
+        public async Task<IEnumerable<YardItem>> GetItems()
         {
             // Todo: if forceRefresh then reload from database.
             return await Task.FromResult(_recentItems);
