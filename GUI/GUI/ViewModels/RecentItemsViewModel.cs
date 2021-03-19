@@ -20,7 +20,7 @@ namespace GUI.ViewModels
         public RecentItemsViewModel()
         {
             Title = "Recently Scanned";
-            Items = new ObservableCollection<YardItem>(DataStore.GetItemsAsync().Result);
+            Items = new ObservableCollection<YardItem>(DataStore.GetItems().Result);
 
             ItemTapped = new Command<YardItem>(OnItemSelected);
 
@@ -34,7 +34,7 @@ namespace GUI.ViewModels
             try
             {
                 Items.Clear();
-                Items.AddRange(await DataStore.GetItemsAsync());
+                Items.AddRange(await DataStore.GetItems());
             }
             catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace GUI.ViewModels
             IsBusy = true;
             SelectedItem = null;
             Items.Clear();
-            Items.AddRange(await DataStore.GetItemsAsync());
+            Items.AddRange(await DataStore.GetItems());
         }
 
         public YardItem SelectedItem
