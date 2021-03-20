@@ -1,10 +1,10 @@
 ﻿using Core.Encoding;
-using Core.Extensions;
 using Core.Models;
 using Core.PDFArranger;
 using GUI.Commands;
 using GUI.Export;
 using GUI.View;
+using Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

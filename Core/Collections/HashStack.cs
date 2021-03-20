@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core
+namespace Core.Collections
 {
     /// <summary>
     /// A collection which behaves like a <see cref="Stack{T}"/> other than that when pushing an 

@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Threading;
-using System.Linq;
-using System;
-using System.Collections;
-using System.Runtime.CompilerServices;
 
-namespace Core
+namespace Core.Collections
 {
     public class SortedObservableSet<T>
        : ICollection<T>, INotifyCollectionChanged, INotifyPropertyChanged

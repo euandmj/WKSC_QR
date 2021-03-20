@@ -1,6 +1,6 @@
+using Core.Collections;
 using NUnit.Framework;
 using System;
-using Core;
 
 namespace Core.Test
 {
@@ -14,7 +14,6 @@ namespace Core.Test
             int x2 = 6;
             int dx = Math.Abs(x2 - x);
 
-            
             
         }
 
@@ -59,6 +58,7 @@ namespace Core.Test
             Assert.IsTrue(coll[2] == byZero);
 
             coll.Push(byZero);
+
 
             Assert.IsTrue(coll[0] == byZero);
             Assert.AreEqual(coll.Count, 3);
