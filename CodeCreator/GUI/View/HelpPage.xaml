@@ -27,11 +27,6 @@
             </Hyperlink>
         </TextBlock>
 
-        <TextBlock>
-            <Hyperlink Click="HowToSelect_Click">
-                <TextBlock Text="How to select columns" />
-            </Hyperlink>
-        </TextBlock>
 
         <TextBlock>
             <Hyperlink Click="HowToExport_Click">
@@ -40,6 +35,11 @@
         </TextBlock>
 
 
+        <TextBlock>
+            <Hyperlink Click="HowToDuration">
+                <TextBlock Text="How to set the duration for codes" />
+            </Hyperlink>
+        </TextBlock>
 
 
 

@@ -23,9 +23,7 @@ namespace GUI
         {
             get => new Command((x) =>
             {
-
-                var help = new HelpPage();
-                help.ShowDialog();
+                new HelpPage().ShowDialog();
             });
         }
     }
