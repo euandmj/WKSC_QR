@@ -1,6 +1,7 @@
 ﻿using Data.CSV;
 using Data.Models;
 using Newtonsoft.Json;
+using System;
 
 namespace GUI.Configuration
 {
@@ -18,7 +19,7 @@ namespace GUI.Configuration
         public string OwnerColumn { get; set; } = "A";
 
         [JsonProperty]
-        public int StickerValidDurationMonths { get; set; } = 12;
+        public DateTime ValidUntil { get; set; } = DateTime.Now.AddYears(1);
 
 
         [JsonIgnore]

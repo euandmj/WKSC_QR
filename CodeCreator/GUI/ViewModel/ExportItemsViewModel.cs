@@ -19,18 +19,23 @@ namespace GUI.ViewModel
         : BaseViewModel
     {
         private readonly ISet<string> _createdPaths;
-
         private readonly IQREncoder<YardItem> _qrEncoder = new ZXingQREncoder<YardItem>();
         private readonly ICollection<YardItem> _itemsToExport;
+
+        private DateTime _selectedDate;
 
         public ExportItemsViewModel(ICollection<YardItem> images)
         {
             _itemsToExport = images ?? throw new ArgumentNullException(nameof(images));
 
+            SelectedDate = AppConfig.Config.ValidUntil;
+
+
             // set debug qr image
+#if DEBUG
             DbgImgSrc =
                 _qrEncoder.Encode(images.First()).ToBitmapImage();
-            
+#endif
             _createdPaths = new HashSet<string>(_itemsToExport.Count);
             PrintCommand = new Command(x => OnPrint());
             ExportCommand = new Command(x => OnExport());
@@ -51,7 +56,7 @@ namespace GUI.ViewModel
                         string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));
 
                         foreach (var item in _itemsToExport) 
-                            item.DueDate = DateTime.Now.AddYears(AppConfig.Config.StickerValidDurationMonths);
+                            item.DueDate = AppConfig.Config.ValidUntil;
 
                         var bitmaps = _qrEncoder.Encode(batch).ToList();
 
@@ -100,6 +105,11 @@ namespace GUI.ViewModel
         public ICommand ExportCommand { get; }
         public ICommand PrintCommand { get; }
         public ICommand OpenFolderCommand { get; }
+        public DateTime SelectedDate
+        {
+            get => _selectedDate;
+            set => SetProperty(ref _selectedDate, value);
+        }
 
         public bool IsPrintEnabled => _createdPaths.Count > 0;
     }
