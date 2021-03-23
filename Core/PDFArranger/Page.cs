@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Core.PDFArranger
 {
-    class Page
+    public class Page
         : IDisposable
     {
         private const int PER_PAGE = 5; // x2 wide
