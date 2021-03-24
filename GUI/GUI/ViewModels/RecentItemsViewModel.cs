@@ -1,4 +1,4 @@
-﻿using Core.Extensions;
+﻿using Core;
 using Core.Models;
 using GUI.Views;
 using System;
