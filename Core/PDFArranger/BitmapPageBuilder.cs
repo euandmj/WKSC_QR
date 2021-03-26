@@ -9,11 +9,12 @@ namespace Core.PDFArranger
     public class BitmapPageBuilder
         : IBitmapPageBuilder
     {
-        private const int PER_PAGE = 10;
 
-        private readonly string _path;
-        private ICollection<Page> _pages = new List<Page>();
+
         private bool disposedValue;
+        private readonly string _path;
+        protected const int PER_PAGE = 10;
+        protected ICollection<Page> _pages = new List<Page>();
 
         public BitmapPageBuilder(IEnumerable<Bitmap> src)
         {
@@ -27,6 +28,7 @@ namespace Core.PDFArranger
         }
 
         public int Count => _pages.Count;
+
 
         public void Build()
         {

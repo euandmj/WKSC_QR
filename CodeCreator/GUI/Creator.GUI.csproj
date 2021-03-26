@@ -118,6 +118,12 @@
     <Compile Include="ViewModel\ExportItemsViewModel.cs" />
     <Compile Include="ViewModel\TableWizardViewModel.cs" />
     <Compile Include="ViewModel\DataTableEmbeddViewModel.cs" />
+    <Compile Include="View\CellPicker\ClickableCell.xaml.cs">
+      <DependentUpon>ClickableCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CellPicker\DataGridCellClick.xaml.cs">
+      <DependentUpon>DataGridCellClick.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ColumnRowPicker.xaml.cs">
       <DependentUpon>ColumnRowPicker.xaml</DependentUpon>
     </Compile>
@@ -161,6 +167,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CellPicker\ClickableCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CellPicker\DataGridCellClick.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="View\CellPicker\lib\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

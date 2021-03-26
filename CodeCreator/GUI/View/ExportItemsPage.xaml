@@ -4,24 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View"
+        xmlns:cpkr="clr-namespace:GUI.View.CellPicker"
         Closed="Window_Closed"
         mc:Ignorable="d"
         Title="ExportItemsPage"
         ResizeMode="NoResize"
         Icon="../Resources/club.png"
-        Height="450"
+        Height="600"
         Width="800"        
         ShowInTaskbar="True"
         WindowStartupLocation="CenterScreen">
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+        <cpkr:DataGridCellClick Width="350"
+                                Grid.Row="0">
+
+        </cpkr:DataGridCellClick>
+
+
+
+
+
+
+
 
         <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             
             <Label Content="{Binding Message, Mode=OneTime}"
-                   Margin="0 0 0 50"
                    HorizontalAlignment="Center"
                    FontSize="24" />
             
@@ -32,9 +53,12 @@
 
             </Image>-->
 
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Label Content="Valid Until: " FontSize="18" />
-                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" FontSize="20" />
+            <StackPanel HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                <Label Content="Valid Until: "
+                       FontSize="18" />
+                <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                            FontSize="20" />
             </StackPanel>
 
 
