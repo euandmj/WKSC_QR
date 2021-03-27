@@ -19,21 +19,27 @@ namespace GUI.View.CellPicker
 {
     /// <summary>
     /// Interaction logic for DataGridCellClick.xaml
+    /// 
+    /// The Parent control which holds the datagrid with cells populated with 
+    /// <see cref="ClickableCell"/> referenced with <see cref="CellCollection"/>
+    /// 
+    /// 
+    /// 
     /// </summary>
     public partial class DataGridCellClick : UserControl, IDisposable
     {
-        private readonly IList<ClickableCell> _innerList = new List<ClickableCell>();
         private bool disposedValue;
 
         public int Columns { get; set; } = 2;
-        public int Rows { get; set; } = 5;
+        public int Rows { get; set; } = 5;       
 
-        public int CheckedCount => dg.Children.OfType<ClickableCell>().Where(x => x.IsChecked).Count();
-        public int UncheckedCount => (Rows * Columns) - CheckedCount;
+        public int CheckedCount { get; set; }
 
         public DataGridCellClick()
         {
             InitializeComponent();
+
+            CellCollection = new List<ClickableCell>(Columns * Rows);
 
             // Create rows + columns
             dg.ColumnDefinitions.AddRange(Columns);
@@ -41,6 +47,9 @@ namespace GUI.View.CellPicker
 
             BuildCells();
         }
+
+        public readonly IList<ClickableCell> CellCollection;
+
 
         private void BuildCells()
         {
@@ -51,12 +60,21 @@ namespace GUI.View.CellPicker
 
                 var lbl = new ClickableCell(row + 1, col);
 
-                _innerList.Add(lbl);
+                CellCollection.Add(lbl);
                 dg.Children.Add(lbl);
 
+
                 lbl.PreviewMouseLeftButtonDown += this.OnCellClickProxy;
+                lbl.Checked += OnChecked;
+                lbl.Unchecked += OnUnchecked;
             }
         }
+
+        private void OnChecked(object sender, RoutedEventArgs e)
+            => CheckedCount++;
+
+        private void OnUnchecked(object sender, RoutedEventArgs e)
+            => CheckedCount--;
 
 
         private void OnCellClickProxy(object sender, MouseButtonEventArgs e)
@@ -75,12 +93,13 @@ namespace GUI.View.CellPicker
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (CellCollection is null) return;
+
             var n = (int)e.NewValue;
 
-            
-            for(int i = 0; i < _innerList.Count; i++)
+            for(int i = 0; i < CellCollection.Count; i++)
             {
-                var ctl = _innerList[i];
+                var ctl = CellCollection[i];
 
                 ctl.IsChecked = i < n;
             }
@@ -95,9 +114,20 @@ namespace GUI.View.CellPicker
                     foreach(var ctl in dg.Children.OfType<ClickableCell>())
                     {
                         ctl.PreviewMouseLeftButtonDown -= this.OnCellClickProxy;
+                        ctl.Unchecked -= this.OnUnchecked;
+                        ctl.Checked -= this.OnChecked;
                     }
                 }
                 disposedValue = true;
+            }
+        }
+
+        public IEnumerable<int> GetWhiteList()
+        {
+            for(int i = 0; i < CellCollection.Count; i++)
+            {
+                if(CellCollection[i].IsChecked)
+                    yield return i;
             }
         }
 

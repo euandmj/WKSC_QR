@@ -124,6 +124,7 @@
     <Compile Include="View\CellPicker\DataGridCellClick.xaml.cs">
       <DependentUpon>DataGridCellClick.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CellPicker\lib\CellCheckedEventArgs.cs" />
     <Compile Include="View\ColumnRowPicker.xaml.cs">
       <DependentUpon>ColumnRowPicker.xaml</DependentUpon>
     </Compile>
@@ -236,7 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="View\CellPicker\lib\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

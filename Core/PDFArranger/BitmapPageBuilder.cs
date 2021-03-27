@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace Core.PDFArranger
 {
     public class BitmapPageBuilder
         : IBitmapPageBuilder
     {
+        public const int PER_PAGE = 10;
 
 
         private bool disposedValue;
         private readonly string _path;
-        protected const int PER_PAGE = 10;
         protected ICollection<Page> _pages = new List<Page>();
 
         public BitmapPageBuilder(IEnumerable<Bitmap> src)
@@ -27,6 +28,7 @@ namespace Core.PDFArranger
             }
         }
 
+
         public int Count => _pages.Count;
 
 
@@ -37,6 +39,16 @@ namespace Core.PDFArranger
                 page.Build();
             }
         }
+
+        public void BuildWithWhitelist(ISet<int> whitelist)
+        {
+            var firstPage = _pages.First();
+
+            if (firstPage is null) throw new InvalidProgramException("no first page built.");
+
+            firstPage.BuildWithWhitelist(whitelist);
+        }
+
 
         public IEnumerable<string> Save(string path)
         {

@@ -1,10 +1,10 @@
-﻿using Core.Encoding;
+﻿using Core;
+using Core.Encoding;
 using Core.Models;
 using Core.PDFArranger;
 using GUI.Commands;
 using GUI.Export;
-using GUI.View;
-using Core;
+using GUI.View.CellPicker;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,6 +44,42 @@ namespace GUI.ViewModel
 
         public ImageSource DbgImgSrc { get; }
 
+        private int SaveCappedPage()
+        {
+            /*
+             * TODO: 
+             * allow for more than one saves - removing from source list isnt okay
+             * handle num cells clicked > exported items
+             * tidy
+             * 
+             */
+
+
+            var cutItems = _itemsToExport.Take(CheckedCount).ToArray();
+            var bmps = _qrEncoder.Encode(cutItems);
+            using (var builder = new BitmapPageBuilder(bmps))
+            {
+                var whiteList = new HashSet<int>(GetWhiteList());
+
+                if (whiteList is null) throw new InvalidProgramException($"whitelist is null, {nameof(GetWhiteList)} likely null");
+
+                builder.BuildWithWhitelist(whiteList);
+
+                _createdPaths.AddRange(builder.Save(Global.OutputPath));
+
+                foreach (var bmp in bmps) 
+                    bmp.Dispose();
+
+                foreach (var item in cutItems)
+                    _itemsToExport.Remove(item);
+
+                return builder.Count;
+            }
+        }
+
+        public Func<IEnumerable<int>> GetWhiteList;
+
+
         private void OnExport()
         {
             int pageCount = 0;
@@ -51,9 +87,15 @@ namespace GUI.ViewModel
             {
                 using (_ = new WaitCursor())
                 {
+                    // unless all cells have been picked, take the first page out and process it seperately. 
+                    if(CheckedCount != BitmapPageBuilder.PER_PAGE)
+                    {
+                        pageCount += SaveCappedPage();
+                    }
+
                     foreach (var batch in _itemsToExport.Batch(100))
                     {
-                        string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));
+                        //string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));
 
                         foreach (var item in _itemsToExport) 
                             item.DueDate = AppConfig.Config.ValidUntil;
@@ -102,6 +144,7 @@ namespace GUI.ViewModel
         private string _saveToHelperText;
         public string SaveToHelperText { get => _saveToHelperText; set => SetProperty(ref _saveToHelperText, value); }
         public string Message => $"Exporting {_itemsToExport.Count} QR code(s)";
+     
         public ICommand ExportCommand { get; }
         public ICommand PrintCommand { get; }
         public ICommand OpenFolderCommand { get; }
@@ -112,5 +155,11 @@ namespace GUI.ViewModel
         }
 
         public bool IsPrintEnabled => _createdPaths.Count > 0;
+
+        public IList<ClickableCell> Cells { get; set; }
+
+        public int CheckedCount => Cells.Where(x => x.IsChecked).Count();
+
+
     }
 }

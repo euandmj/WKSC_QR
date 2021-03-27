@@ -24,13 +24,23 @@ namespace GUI.View.CellPicker
     /// </summary>
     public partial class ClickableCell : UserControl
     {
+        public event RoutedEventHandler Checked;
+        public event RoutedEventHandler Unchecked;
+
+
         private readonly Brush _defbg;
 
+        public bool IsChecked 
+        { 
+            get => (bool)cb.IsChecked; 
+            set
+            {
+                cb.IsChecked = value;
+            }
+        }
 
-        public bool IsChecked { get => (bool)cb.IsChecked; set => cb.IsChecked = value; }
-
-        public int Row { get; set; }
-        public int Column { get; set; }
+        public int Row { get; }
+        public int Column { get; }
 
 
         public ClickableCell(int row, int column)
@@ -43,6 +53,12 @@ namespace GUI.View.CellPicker
             Grid.SetColumn(this, column);
 
             _defbg = cb.Background;
+
+            cb.Checked += (s, e) => Checked?.Invoke(s, e);
+            cb.Unchecked += (s, e) => Unchecked?.Invoke(s, e);
+
+            Row = row;
+            Column = column;
         }
 
         private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -65,14 +81,11 @@ namespace GUI.View.CellPicker
 
             private bool isChecked = true;
 
-
-
             public bool IsChecked
             {
                 get => isChecked;
                 set => SetProperty(ref isChecked, value);
             }
-
         }
     }
 

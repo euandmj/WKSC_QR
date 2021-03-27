@@ -10,6 +10,8 @@ namespace GUI.View
     /// </summary>
     public partial class ExportItemsPage : Window
     {
+        private readonly ExportItemsViewModel vm;
+
         public ExportItemsPage(ICollection<YardItem> imgs, Window parent)
         {
             InitializeComponent();
@@ -17,8 +19,15 @@ namespace GUI.View
 
             Owner = parent;
 
-            DataContext = new ExportItemsViewModel(imgs);
+
+            DataContext = vm = new ExportItemsViewModel(imgs)
+            {
+                Cells = dgcc.CellCollection,
+                GetWhiteList = dgcc.GetWhiteList
+            };
         }
+
+
 
         private void Window_Closed(object sender, System.EventArgs e)
         {

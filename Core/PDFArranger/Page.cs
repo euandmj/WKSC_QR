@@ -64,6 +64,26 @@ namespace Core.PDFArranger
             }
         }
 
+        public void BuildWithWhitelist(ISet<int> whitelist)
+        {
+            if (_built) throw new InvalidProgramException("already built");
+
+            _graphics.FillRectangle(Brushes.White, 0, 0, mmWIDTH, mmHEIGHT);
+
+            // iterate through the bitmaps
+            // 
+
+            var coords = GetCoords().ToList();
+
+            foreach(var (bmp, wl_i) in _codes.Zip(whitelist, Tuple.Create))
+            {
+                var (x, y) = coords.ElementAt(wl_i);
+
+                _graphics.DrawImage(bmp, x, y);
+            }
+        }
+
+
 
         protected virtual void Dispose(bool disposing)
         {
