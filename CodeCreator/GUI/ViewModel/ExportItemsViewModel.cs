@@ -44,18 +44,17 @@ namespace GUI.ViewModel
 
         public ImageSource DbgImgSrc { get; }
 
-        private int SaveCappedPage()
+        private int SaveCappedPage(IList<YardItem> itemsCopy)
         {
             /*
              * TODO: 
-             * allow for more than one saves - removing from source list isnt okay
              * handle num cells clicked > exported items
              * tidy
              * 
              */
 
 
-            var cutItems = _itemsToExport.Take(CheckedCount).ToArray();
+            var cutItems = itemsCopy.Take(CheckedCount).ToArray();
             var bmps = _qrEncoder.Encode(cutItems);
             using (var builder = new BitmapPageBuilder(bmps))
             {
@@ -71,7 +70,7 @@ namespace GUI.ViewModel
                     bmp.Dispose();
 
                 foreach (var item in cutItems)
-                    _itemsToExport.Remove(item);
+                    itemsCopy.Remove(item);
 
                 return builder.Count;
             }
@@ -83,6 +82,8 @@ namespace GUI.ViewModel
         private void OnExport()
         {
             int pageCount = 0;
+            var itemsCopy = _itemsToExport.ToList();
+
             try
             {
                 using (_ = new WaitCursor())
@@ -90,14 +91,14 @@ namespace GUI.ViewModel
                     // unless all cells have been picked, take the first page out and process it seperately. 
                     if(CheckedCount != BitmapPageBuilder.PER_PAGE)
                     {
-                        pageCount += SaveCappedPage();
+                        pageCount += SaveCappedPage(itemsCopy);
                     }
 
-                    foreach (var batch in _itemsToExport.Batch(100))
+                    foreach (var batch in itemsCopy.Batch(100))
                     {
                         //string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));
 
-                        foreach (var item in _itemsToExport) 
+                        foreach (var item in itemsCopy) 
                             item.DueDate = AppConfig.Config.ValidUntil;
 
                         var bitmaps = _qrEncoder.Encode(batch).ToList();
@@ -126,13 +127,8 @@ namespace GUI.ViewModel
             finally
             {
                 SaveToHelperText = $"Exported {pageCount} page(s) to {Global.OutputPath}";
+                OnPropertyChanged(nameof(IsPrintEnabled));
             }
-            //_createdPaths.AddRange(
-            //    ExportYardItemUtility.SaveToFile(
-            //        Global.OutputPath,
-            //        _itemsToExport,
-            //        _qrEncoder));
-            OnPropertyChanged(nameof(IsPrintEnabled));
         }
 
         private void OnPrint()
