@@ -20,37 +20,56 @@ namespace GUI.View.CellPicker
     /// <summary>
     /// Interaction logic for DataGridCellClick.xaml
     /// </summary>
-    public partial class DataGridCellClick : UserControl
+    public partial class DataGridCellClick : UserControl, IDisposable
     {
-        private IList<ClickableCell> _innerList = new List<ClickableCell>();
+        private readonly IList<ClickableCell> _innerList = new List<ClickableCell>();
+        private bool disposedValue;
 
         public int Columns { get; set; } = 2;
         public int Rows { get; set; } = 5;
 
         public int CheckedCount => dg.Children.OfType<ClickableCell>().Where(x => x.IsChecked).Count();
-
+        public int UncheckedCount => (Rows * Columns) - CheckedCount;
 
         public DataGridCellClick()
         {
             InitializeComponent();
 
-            
-
+            // Create rows + columns
             dg.ColumnDefinitions.AddRange(Columns);
             dg.RowDefinitions.AddRange(Rows);
 
+            BuildCells();
+        }
 
-            for(int i = 0; i < Columns * Rows; i++)
+        private void BuildCells()
+        {
+            for (int i = 0; i < Columns * Rows; i++)
             {
                 int row = i / Columns;
                 int col = i % Columns;
-                var lbl = new ClickableCell();
-                _innerList.Add(lbl);
-                Grid.SetRow(lbl, row + 1);
-                Grid.SetColumn(lbl, col);
-                dg.Children.Add(lbl);
-            }
 
+                var lbl = new ClickableCell(row + 1, col);
+
+                _innerList.Add(lbl);
+                dg.Children.Add(lbl);
+
+                lbl.PreviewMouseLeftButtonDown += this.OnCellClickProxy;
+            }
+        }
+
+
+        private void OnCellClickProxy(object sender, MouseButtonEventArgs e)
+        {
+            if(sender is ClickableCell cell)
+            {
+                // if theres only one checked cell block the event args to
+                // stop it being unticked
+                if (cell.IsChecked && CheckedCount == 1)
+                {
+                    e.Handled = true;
+                }
+            }
 
         }
 
@@ -65,6 +84,28 @@ namespace GUI.View.CellPicker
 
                 ctl.IsChecked = i < n;
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    foreach(var ctl in dg.Children.OfType<ClickableCell>())
+                    {
+                        ctl.PreviewMouseLeftButtonDown -= this.OnCellClickProxy;
+                    }
+                }
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 

@@ -26,6 +26,7 @@
 
 
         <cpkr:DataGridCellClick Width="350"
+                                x:Name="dgcc"
                                 Grid.Row="0">
 
         </cpkr:DataGridCellClick>

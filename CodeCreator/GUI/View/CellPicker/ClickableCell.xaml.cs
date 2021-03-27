@@ -33,11 +33,15 @@ namespace GUI.View.CellPicker
         public int Column { get; set; }
 
 
-        public ClickableCell()
+        public ClickableCell(int row, int column)
         {
             InitializeComponent();
 
             DataContext = new ClickableCellViewModel();
+
+            Grid.SetRow(this, row);
+            Grid.SetColumn(this, column);
+
             _defbg = cb.Background;
         }
 

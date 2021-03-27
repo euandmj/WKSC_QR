@@ -26,6 +26,8 @@ namespace GUI.View
 
             AppConfig.Config.ValidUntil = vm.SelectedDate;
             Configuration.ConfigLoader.Save(AppConfig.Config);
+
+            dgcc.Dispose();
         }
     }
 
