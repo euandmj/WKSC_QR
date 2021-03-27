@@ -58,25 +58,29 @@ namespace Core.PDFArranger
 
             _graphics.FillRectangle(Brushes.White, 0, 0, mmWIDTH, mmHEIGHT);
 
+            // enumerate the coordinates-codes            
             foreach (var ((x, y), bmp) in GetCoords().Zip(_codes, Tuple.Create))
             {
                 _graphics.DrawImage(bmp, x, y);
             }
         }
 
+        /// <summary>
+        /// Draw on QR codes only to specified cells. 
+        /// </summary>
+        /// <param name="whitelist">contains indices of the flattened grid that will be drawn into</param>
         public void BuildWithWhitelist(ISet<int> whitelist)
         {
             if (_built) throw new InvalidProgramException("already built");
 
             _graphics.FillRectangle(Brushes.White, 0, 0, mmWIDTH, mmHEIGHT);
 
-            // iterate through the bitmaps
-            // 
-
             var coords = GetCoords().ToList();
 
+            // enumerate codes-whitelist
             foreach(var (bmp, wl_i) in _codes.Zip(whitelist, Tuple.Create))
             {
+                // get the pixel coordinates of this particular white list indice
                 var (x, y) = coords.ElementAt(wl_i);
 
                 _graphics.DrawImage(bmp, x, y);

@@ -48,32 +48,59 @@ namespace GUI.ViewModel
         {
             /*
              * TODO: 
-             * handle num cells clicked > exported items
              * tidy
              * 
              */
 
-
             var cutItems = itemsCopy.Take(CheckedCount).ToArray();
             var bmps = _qrEncoder.Encode(cutItems);
+
             using (var builder = new BitmapPageBuilder(bmps))
             {
                 var whiteList = new HashSet<int>(GetWhiteList());
-
-                if (whiteList is null) throw new InvalidProgramException($"whitelist is null, {nameof(GetWhiteList)} likely null");
 
                 builder.BuildWithWhitelist(whiteList);
 
                 _createdPaths.AddRange(builder.Save(Global.OutputPath));
 
+                // clean up and remove used items
                 foreach (var bmp in bmps) 
                     bmp.Dispose();
-
                 foreach (var item in cutItems)
                     itemsCopy.Remove(item);
 
                 return builder.Count;
             }
+        }
+        
+        private int SavePages(IList<YardItem> items)
+        {
+            int pageCount = 0;
+
+            foreach (var batch in items.Batch(100))
+            {
+                //string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));                        
+
+                var bitmaps = _qrEncoder.Encode(batch);
+
+                using (var pageBuilder = new BitmapPageBuilder(bitmaps))
+                {
+                    pageBuilder.Build();
+
+                    _createdPaths.AddRange(pageBuilder.Save(Global.OutputPath));
+
+                    pageCount += pageBuilder.Count;
+                }
+
+                // cleanup
+                if (bitmaps != null)
+                {
+                    foreach (var bmp in bitmaps)
+                        bmp.Dispose();
+                }
+            }
+
+            return pageCount;
         }
 
         public Func<IEnumerable<int>> GetWhiteList;
@@ -81,43 +108,22 @@ namespace GUI.ViewModel
 
         private void OnExport()
         {
-            int pageCount = 0;
+            int savedCount = 0;
             var itemsCopy = _itemsToExport.ToList();
+
+            foreach (var item in itemsCopy)
+                item.DueDate = AppConfig.Config.ValidUntil;
 
             try
             {
                 using (_ = new WaitCursor())
                 {
-                    // unless all cells have been picked, take the first page out and process it seperately. 
+                    // check if we need to build a 'special first page'
                     if(CheckedCount != BitmapPageBuilder.PER_PAGE)
                     {
-                        pageCount += SaveCappedPage(itemsCopy);
+                        savedCount += SaveCappedPage(itemsCopy);
                     }
-
-                    foreach (var batch in itemsCopy.Batch(100))
-                    {
-                        //string aggregateFileName = string.Join(",", batch.Select(x => x.ZoneBoat));
-
-                        foreach (var item in itemsCopy) 
-                            item.DueDate = AppConfig.Config.ValidUntil;
-
-                        var bitmaps = _qrEncoder.Encode(batch).ToList();
-
-                        using (var pageBuilder = new BitmapPageBuilder(bitmaps))
-                        {
-                            pageBuilder.Build();
-
-                            _createdPaths.AddRange(pageBuilder.Save(Global.OutputPath));
-                            pageCount += pageBuilder.Count;
-                        }
-
-
-                        if (bitmaps != null)
-                        {
-                            foreach (var bmp in bitmaps)
-                                bmp.Dispose();
-                        }
-                    }
+                    savedCount += SavePages(itemsCopy);
                 }
             }
             catch (Exception ex)
@@ -126,7 +132,8 @@ namespace GUI.ViewModel
             }
             finally
             {
-                SaveToHelperText = $"Exported {pageCount} page(s) to {Global.OutputPath}";
+                itemsCopy = null;
+                SaveToHelperText = $"Exported {savedCount} page(s) to {Global.OutputPath}";
                 OnPropertyChanged(nameof(IsPrintEnabled));
             }
         }
