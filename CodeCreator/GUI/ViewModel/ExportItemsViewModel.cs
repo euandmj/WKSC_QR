@@ -103,7 +103,6 @@ namespace GUI.ViewModel
             return pageCount;
         }
 
-        public Func<IEnumerable<int>> GetWhiteList;
 
 
         private void OnExport()
@@ -132,7 +131,6 @@ namespace GUI.ViewModel
             }
             finally
             {
-                itemsCopy = null;
                 SaveToHelperText = $"Exported {savedCount} page(s) to {Global.OutputPath}";
                 OnPropertyChanged(nameof(IsPrintEnabled));
             }
@@ -160,6 +158,8 @@ namespace GUI.ViewModel
         public bool IsPrintEnabled => _createdPaths.Count > 0;
 
         public IList<ClickableCell> Cells { get; set; }
+
+        public Func<IEnumerable<int>> GetWhiteList;
 
         public int CheckedCount => Cells.Where(x => x.IsChecked).Count();
 
