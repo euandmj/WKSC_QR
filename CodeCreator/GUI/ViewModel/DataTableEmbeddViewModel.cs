@@ -58,11 +58,8 @@ namespace GUI.ViewModel
             if (cfg == null) return;
             try
             {
-                using (_ = new WaitCursor())
-                {
-                    _columnSchema = cfg.Schema;
-                    InitDataSource();
-                }
+                _columnSchema = cfg.Schema;
+                InitDataSource();
             }
             catch(Exception ex)
             {

@@ -40,33 +40,32 @@ namespace Data.CSV
         {
             try
             {
-                using (var reader = new StreamReader(path))
+                using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var reader = new StreamReader(fs, System.Text.Encoding.Default);
+                //string[] cells = null;
+
+                //if (!_schema.Equals(cells))
+                //    throw new InvalidDataException("csv file does not match the schema");
+
+                while (!reader.EndOfStream)
                 {
-                    //string[] cells = null;
+                    var cells = GetNextLine(reader);
 
-                    //if (!_schema.Equals(cells))
-                    //    throw new InvalidDataException("csv file does not match the schema");
+                    bool validLine = cells.Any(x => !string.IsNullOrWhiteSpace(x));
 
-                    while (!reader.EndOfStream)
+                    if (validLine)
                     {
-                        var cells = GetNextLine(reader);
+                        var items = _schema.ParseLines(cells);
 
-                        bool validLine = cells.Any(x => !string.IsNullOrWhiteSpace(x));
-
-                        if (validLine)
+                        if (items != null)
                         {
-                            var items = _schema.ParseLines(cells);
-
-                            if(items != null)
-                            {
-                                _dataTable.Rows.Add(items);
-                            }
+                            _dataTable.Rows.Add(items);
                         }
-
                     }
+
                 }
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 throw new CSVFailedToLoadException(ex.Message, ex);
             }
