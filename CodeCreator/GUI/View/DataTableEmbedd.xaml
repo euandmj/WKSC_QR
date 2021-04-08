@@ -67,13 +67,14 @@
                     CommandParameter="{Binding ElementName=dg, Path=SelectedItems}"
                     Command="{Binding CreateCommand}" />
             <Button Content="Export Flagged"
+                    Margin="0 5"
                     Command="{Binding ExportFlaggedCommand}" />
 
             <Button Content="Refresh"
                     Margin="0 40 0 0"
                     Command="{Binding RefreshCommand}" />
             <Button Content="Open Codes"
-                    Margin="0 3 0 0"
+                    Margin="0 5"
                     Command="{Binding OpenCommand}" />
 
             <!--<Button Content="Print"
