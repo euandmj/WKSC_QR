@@ -1,5 +1,6 @@
 ﻿using GUI.Configuration;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace GUI
@@ -18,26 +19,36 @@ namespace GUI
     public static class AppConfig
     {
         private static Config _lazyConfig = ConfigLoader.Load();
-        private static readonly FileSystemWatcher _fsWatcher = new FileSystemWatcher(Path.GetDirectoryName(_lazyConfig.SpreadsheetFile))
-        {
-            EnableRaisingEvents = true,
-            NotifyFilter = NotifyFilters.Attributes
-                                 | NotifyFilters.CreationTime
-                                 | NotifyFilters.DirectoryName
-                                 | NotifyFilters.FileName
-                                 | NotifyFilters.LastAccess
-                                 | NotifyFilters.LastWrite
-                                 | NotifyFilters.Security
-                                 | NotifyFilters.Size,
-            Filter = "*.csv"
-        };
+        private static readonly FileSystemWatcher _fsWatcher;
 
         static AppConfig()
         {
-            _fsWatcher.Changed += (s, e) =>
+
+            try
             {
-                ConfigChanged?.Invoke(s, e);
-            };
+                _fsWatcher = new FileSystemWatcher(Path.GetDirectoryName(_lazyConfig.SpreadsheetFile))
+                {
+                    EnableRaisingEvents = true,
+                    NotifyFilter = NotifyFilters.Attributes
+                                | NotifyFilters.CreationTime
+                                | NotifyFilters.DirectoryName
+                                | NotifyFilters.FileName
+                                | NotifyFilters.LastAccess
+                                | NotifyFilters.LastWrite
+                                | NotifyFilters.Security
+                                | NotifyFilters.Size,
+                    Filter = "*.csv"
+                };
+
+                _fsWatcher.Changed += (s, e) =>
+                {
+                    ConfigChanged?.Invoke(s, e);
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("failed creating file watcher - " + ex.Message);
+            }
         }
 
         public static Config Config
