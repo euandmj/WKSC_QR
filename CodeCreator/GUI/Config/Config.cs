@@ -17,6 +17,8 @@ namespace GUI.Configuration
         public string SailColumn { get; set; } = "A";
         [JsonProperty]
         public string OwnerColumn { get; set; } = "A";
+        [JsonProperty]
+        public string FlagColumn { get; set; } = "I";
 
         [JsonProperty]
         public DateTime ValidUntil { get; set; } = DateTime.Now.AddYears(1);
@@ -29,7 +31,8 @@ namespace GUI.Configuration
                     (YardItemCSVSchema.ZONE_Col, RowColumnn),
                     (YardItemCSVSchema.CLASS_Col, ClassColumn),
                     (YardItemCSVSchema.SAIL_Col, SailColumn),
-                    (YardItemCSVSchema.OWNER_Col, OwnerColumn));
+                    (YardItemCSVSchema.OWNER_Col, OwnerColumn),
+                    ("FLAGGED", FlagColumn));
             }
 
     }

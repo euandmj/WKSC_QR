@@ -38,28 +38,34 @@ namespace Data.Models
             }
         }
 
-        public object[] ParseLines(string[] cells)
+        private bool TryGetFlagged(DataRow dr)
         {
-            // catch conversion on each line
+            try
+            {
+                return dr["FLAGGED"].ToString().Length > 0;
+            }
+            catch { return false; }
+        }
+
+        public object[] ParseCells(string[] cells)
+        {
             try
             {
                 var objs = new List<object>(ColumnSchema.Columns.Count);
                 foreach (var col in ColumnSchema.Columns)
                 {
+                    // schema has specified a column that does not exist within the csv
+                    if (col.Value - 1 > cells.Length) continue;
+
                     objs.Add(ParseLine<string>(cells[col.Value]));
                 }
 
                 return objs.ToArray();             
             }
-            catch (Exception ex) { return null; }
-            //catch(IndexOutOfRangeException)
-            //{
-            //    throw;
-            //}
-            //catch(FormatException)
-            //{
-            //    throw;
-            //}
+            catch (Exception ex) 
+            { 
+                return null; 
+            }
         }
 
         public YardItem ParseRow(DataRow dr)
@@ -71,7 +77,8 @@ namespace Data.Models
                     Zone        = dr[ZONE_Col].ToString(),
                     BoatClass   = dr[CLASS_Col].ToString(),
                     SailNumber  = dr[SAIL_Col].ToString(),
-                    Owner       = dr[OWNER_Col].ToString()
+                    Owner       = dr[OWNER_Col].ToString(),
+                    Flagged     = TryGetFlagged(dr) 
                 };
             }
             catch (Exception ex) { return null; }

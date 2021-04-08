@@ -55,7 +55,7 @@ namespace Data.CSV
 
                     if (validLine)
                     {
-                        var items = _schema.ParseLines(cells);
+                        var items = _schema.ParseCells(cells);
 
                         if (items != null)
                         {

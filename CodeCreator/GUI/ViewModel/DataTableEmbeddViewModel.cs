@@ -42,6 +42,7 @@ namespace GUI.ViewModel
             //};
 
             CreateCommand = new Command(x => OnCreate(x));
+            ExportFlaggedCommand = new Command(x => OnExportFlagged());
             RefreshCommand = new Command(_ => Init(AppConfig.Config));
             OpenCommand = new Command(_ => Process.Start(Global.OutputPath));
 
@@ -95,8 +96,23 @@ namespace GUI.ViewModel
             page.ShowDialog();
         }
 
+        private void OnExportFlagged()
+        {
+            var itemsToExport = DataSource.Where(x => x.Flagged).ToList();
+
+            if(itemsToExport.Count == 0)
+            {
+                MessageBox.Show($"No flagged items detected. Currently looking in column {AppConfig.Config.FlagColumn}. Is this correct?");
+                return;
+            }
+
+            var page = new ExportItemsPage(itemsToExport.ToList(), parent);
+            page.ShowDialog();
+        }
+
 
         public ICommand CreateCommand { get; }
+        public ICommand ExportFlaggedCommand { get; }
         public ICommand RefreshCommand { get; }
         public ICommand OpenCommand { get; }
 

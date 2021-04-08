@@ -10,6 +10,6 @@ namespace Data.CSV
         IColumnSchema ColumnSchema { get; }
         T ParseRow(DataRow dr);
         IEnumerable<T> ParseTable(DataTable dr);
-        object[] ParseLines(string[] items);
+        object[] ParseCells(string[] items);
     }
 }

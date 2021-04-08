@@ -85,6 +85,13 @@
                                        x:Name="cbOwner"
                                        IsReadOnly="False" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="FLAGGED" />
+                <local:ColumnRowPicker PickerMode="Column"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FlaggedColumn, Mode=TwoWay}"
+                                       x:Name="cbFlagged"
+                                       IsReadOnly="False" />
+            </StackPanel>
 
             <Button Margin="15"
                     Content="Save Configuration"

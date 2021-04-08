@@ -11,6 +11,7 @@ namespace GUI.ViewModel
         private string classCol = AppConfig.Config.ClassColumn.ToString();
         private string sailNoCol = AppConfig.Config.SailColumn.ToString();
         private string ownerCol = AppConfig.Config.OwnerColumn.ToString();
+        private string flaggedCol = AppConfig.Config.FlagColumn.ToString();
         private string _selectedFile = AppConfig.Config.SpreadsheetFile;
 
         public TableWizardViewModel()
@@ -38,14 +39,15 @@ namespace GUI.ViewModel
         {
             using (_ = new WaitCursor())
             {
-                AppConfig.Config = (new Configuration.Config
+                AppConfig.Config = new Configuration.Config
                 {
                     SpreadsheetFile = SelectedCSVFile,
                     ClassColumn = ClassColumn,
                     OwnerColumn = OwnerColumn,
                     RowColumnn = RowColumn,
-                    SailColumn = SailNumberColumn
-                });
+                    SailColumn = SailNumberColumn,
+                    FlagColumn = FlaggedColumn
+                };
 
                 Configuration.ConfigLoader.Save(AppConfig.Config);
             }               
@@ -77,6 +79,12 @@ namespace GUI.ViewModel
         {
             get => ownerCol;
             set => SetProperty(ref ownerCol, value);
+        }
+
+        public string FlaggedColumn
+        {
+            get => flaggedCol;
+            set => SetProperty(ref flaggedCol, value);
         }
 
         public bool CanSave

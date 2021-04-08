@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 
 namespace Core.Models
 {
     [JsonObject]
+    [DebuggerDisplay("{" + nameof(Owner) + "}:{" + nameof(ZoneBoat) + "}")]
     public sealed class YardItem
         : IEquatable<YardItem>
     {
@@ -29,6 +31,9 @@ namespace Core.Models
         public bool Starred { get; set; }
         [JsonProperty]
         public string Zone { get; set; }
+
+        [JsonIgnore]
+        public bool Flagged { get; set; }
 
 
         [JsonIgnore] 
