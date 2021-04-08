@@ -16,6 +16,8 @@
             <Style TargetType="TextBlock">
                 <Setter Property="TextAlignment"
                         Value="Center" />
+                <Setter Property="Margin"
+                        Value="0 0 0 5" />
                 <Setter Property="FontSize"
                         Value="22" />
             </Style>
@@ -34,6 +36,11 @@
             </Hyperlink>
         </TextBlock>
 
+        <TextBlock>
+            <Hyperlink Click="HowToExportManual_Click">
+                <TextBlock Text="How to Export Selected Rows" />
+            </Hyperlink>
+        </TextBlock>
 
         <TextBlock>
             <Hyperlink Click="HowToDuration">

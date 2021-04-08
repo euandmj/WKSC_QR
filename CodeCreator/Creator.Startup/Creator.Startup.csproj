@@ -79,9 +79,18 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Creator.Startup_TemporaryKey.pfx" />
-    <Content Include="Help\Help_Import.docx" />
-    <Content Include="Help\Help_Export.docx" />
-    <Content Include="Help\Help_Duration.docx" />
+    <Content Include="Help\Help_Import.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Help_Export.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Help_Duration.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Help_ManExport.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GUI\Creator.GUI.csproj">
