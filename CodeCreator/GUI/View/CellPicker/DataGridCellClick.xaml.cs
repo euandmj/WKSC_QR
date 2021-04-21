@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using Core;
-using System.Windows.Shapes;
-using System.Diagnostics;
 
 namespace GUI.View.CellPicker
 {
@@ -30,6 +20,8 @@ namespace GUI.View.CellPicker
     {
         private bool disposedValue;
 
+        private readonly IList<ClickableCell> _cellCollection;
+
         public int Columns { get; set; } = 2;
         public int Rows { get; set; } = 5;       
 
@@ -39,7 +31,7 @@ namespace GUI.View.CellPicker
         {
             InitializeComponent();
 
-            CellCollection = new List<ClickableCell>(Columns * Rows);
+            _cellCollection = new List<ClickableCell>(Columns * Rows);
 
             // Create rows + columns
             dg.ColumnDefinitions.AddRange(Columns);
@@ -48,7 +40,7 @@ namespace GUI.View.CellPicker
             BuildCells();
         }
 
-        public readonly IList<ClickableCell> CellCollection;
+        public IList<ClickableCell> Cells => _cellCollection;
 
 
         private void BuildCells()
@@ -60,7 +52,7 @@ namespace GUI.View.CellPicker
 
                 var lbl = new ClickableCell(row + 1, col);
 
-                CellCollection.Add(lbl);
+                _cellCollection.Add(lbl);
                 dg.Children.Add(lbl);
 
 
@@ -88,20 +80,22 @@ namespace GUI.View.CellPicker
                     e.Handled = true;
                 }
             }
-
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (CellCollection is null) return;
+            if (_cellCollection is null) return;
 
             var n = (int)e.NewValue;
 
-            for(int i = 0; i < CellCollection.Count; i++)
+            for(int i = 0; i < _cellCollection.Count; i++)
             {
-                var ctl = CellCollection[i];
+                var ctl = _cellCollection[i];
 
-                ctl.IsChecked = i < n;
+                if (ctl.IsEnabled)
+                {
+                    ctl.IsChecked = i < n;
+                }
             }
         }
 
@@ -124,9 +118,9 @@ namespace GUI.View.CellPicker
 
         public IEnumerable<int> GetWhiteList()
         {
-            for(int i = 0; i < CellCollection.Count; i++)
+            for(int i = 0; i < _cellCollection.Count; i++)
             {
-                if(CellCollection[i].IsChecked)
+                if(_cellCollection[i].IsChecked)
                     yield return i;
             }
         }

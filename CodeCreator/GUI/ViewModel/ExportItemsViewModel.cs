@@ -35,7 +35,7 @@ namespace GUI.ViewModel
 #if DEBUG
             DbgImgSrc =
                 _qrEncoder.Encode(images.First()).ToBitmapImage();
-#endif
+#endif            
             _createdPaths = new HashSet<string>(_itemsToExport.Count);
             PrintCommand = new Command(x => OnPrint());
             ExportCommand = new Command(x => OnExport());

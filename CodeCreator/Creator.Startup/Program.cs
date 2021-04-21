@@ -9,7 +9,7 @@ namespace Creator.Startup
     class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             if (!Directory.Exists(Global.AppPath))
             {
@@ -23,6 +23,8 @@ namespace Creator.Startup
 
             try
             {
+                WriteLine("Starting up. You can minimise this window...");
+
                 var app = new App();
                 app.InitializeComponent();
                 app.Run();
@@ -31,10 +33,9 @@ namespace Creator.Startup
             {
                 WriteLine("Unexpected error occurred. Please try relaunching the program: ");
                 WriteLine(ex.Message);
-                WriteLine("press any key to exit");
+                WriteLine("press any key to exit");                
                 ReadKey();
             }
-
         }
     }
 }

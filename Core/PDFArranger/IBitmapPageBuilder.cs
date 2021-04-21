@@ -7,7 +7,7 @@ namespace Core.PDFArranger
         : IDisposable
     {
 
-
+        int Count { get; }
         public void Build();
         public IEnumerable<string> Save(string path); // TODO: set opts for file name?
     }

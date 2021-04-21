@@ -1,6 +1,7 @@
 ﻿using Core.Models;
 using GUI.ViewModel;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace GUI.View
@@ -16,13 +17,12 @@ namespace GUI.View
         {
             InitializeComponent();
 
-
             Owner = parent;
 
 
             DataContext = vm = new ExportItemsViewModel(imgs)
             {
-                Cells = dgcc.CellCollection,
+                Cells = dgcc.Cells,
                 GetWhiteList = dgcc.GetWhiteList
             };
         }
