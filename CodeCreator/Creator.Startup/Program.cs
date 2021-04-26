@@ -9,7 +9,7 @@ namespace Creator.Startup
     class Program
     {
         [STAThread]
-        static int Main(string[] args)
+        static void Main(string[] args)
         {
             if (!Directory.Exists(Global.AppPath))
             {
