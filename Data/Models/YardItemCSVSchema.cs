@@ -7,7 +7,7 @@ using System.Data;
 namespace Data.Models
 {
     public class YardItemCSVSchema
-        : ICSVSchema<YardItem>
+        : ICsvSchema<YardItem>
     {
         public const string ZONE_Col      = "ROW";
         public const string CLASS_Col     = "CLASS";

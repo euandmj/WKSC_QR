@@ -26,24 +26,24 @@ namespace GUI
 
             try
             {
-                _fsWatcher = new FileSystemWatcher(Path.GetDirectoryName(_lazyConfig.SpreadsheetFile))
-                {
-                    EnableRaisingEvents = true,
-                    NotifyFilter = NotifyFilters.Attributes
-                                | NotifyFilters.CreationTime
-                                | NotifyFilters.DirectoryName
-                                | NotifyFilters.FileName
-                                | NotifyFilters.LastAccess
-                                | NotifyFilters.LastWrite
-                                | NotifyFilters.Security
-                                | NotifyFilters.Size,
-                    Filter = "*.csv"
-                };
+                //_fsWatcher = new FileSystemWatcher(Path.GetDirectoryName(_lazyConfig.SpreadsheetFile))
+                //{
+                //    EnableRaisingEvents = true,
+                //    NotifyFilter = NotifyFilters.Attributes
+                //                | NotifyFilters.CreationTime
+                //                | NotifyFilters.DirectoryName
+                //                | NotifyFilters.FileName
+                //                | NotifyFilters.LastAccess
+                //                | NotifyFilters.LastWrite
+                //                | NotifyFilters.Security
+                //                | NotifyFilters.Size,
+                //    Filter = "*.csv"
+                //};
 
-                _fsWatcher.Changed += (s, e) =>
-                {
-                    ConfigChanged?.Invoke(s, e);
-                };
+                //_fsWatcher.Changed += (s, e) =>
+                //{
+                //    ConfigChanged?.Invoke(s, e);
+                //};
             }
             catch (Exception ex)
             {

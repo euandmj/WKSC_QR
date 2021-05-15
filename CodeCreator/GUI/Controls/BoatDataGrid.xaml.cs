@@ -1,5 +1,4 @@
-﻿using GUI.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI.View
+namespace GUI.Controls
 {
     /// <summary>
-    /// Interaction logic for DataTableEmbedd.xaml
+    /// Interaction logic for BoatDataGrid.xaml
     /// </summary>
-    public partial class DataTableEmbedd : UserControl
+    public partial class BoatDataGrid : DataGrid
     {
-        //private readonly DataTableEmbeddViewModel vm; 
-
-        public DataTableEmbedd()
+        public BoatDataGrid()
         {
             InitializeComponent();
-            DataContext = new DataTableEmbeddViewModel();
-
         }
     }
 }

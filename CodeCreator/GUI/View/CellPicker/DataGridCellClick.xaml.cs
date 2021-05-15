@@ -11,7 +11,7 @@ namespace GUI.View.CellPicker
     /// Interaction logic for DataGridCellClick.xaml
     /// 
     /// The Parent control which holds the datagrid with cells populated with 
-    /// <see cref="ClickableCell"/> referenced with <see cref="CellCollection"/>
+    /// <see cref="ClickableCell"/> referenced with <see cref="_cellCollection"/>
     /// 
     /// 
     /// 

@@ -1,6 +1,8 @@
-﻿using GUI.Commands;
+﻿using Core.Interfaces;
+using GUI.Commands;
 using GUI.View;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GUI
@@ -25,6 +27,18 @@ namespace GUI
             {
                 new HelpPage().ShowDialog();
             });
+        }
+
+        private void TabItem_Selected(object sender, RoutedEventArgs e)
+        {
+            if (sender is TabItem item)
+            {
+                if(item.Content is IRefreshable refr)
+                {
+
+                }
+            }
+
         }
     }
 }

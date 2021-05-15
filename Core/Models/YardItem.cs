@@ -25,6 +25,8 @@ namespace Core.Models
         public string BoatClass { get; set; }
         [JsonProperty]
         public DateTime DueDate { get; set; } = DateTime.MinValue;
+        [JsonIgnore]
+        public DateTime LastUpdated { get; set; } = DateTime.MinValue;
         [JsonProperty]
         public string SailNumber { get; set; }
         [JsonIgnore] 
@@ -57,7 +59,14 @@ namespace Core.Models
 
         public bool Equals(YardItem other)
         {
-            return this.Zone == other.Zone;
+            return (
+                this.Owner == other.Owner &&
+                this.BoatClass == other.BoatClass &&
+                this.DueDate == other.DueDate &&
+                this.SailNumber == other.SailNumber &&
+                this.Zone == other.Zone &&
+                this.Flagged == other.Flagged);
+
         }
 
         public static YardItem Invalid

@@ -14,7 +14,7 @@ namespace GUI.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected readonly IDataStore<YardItem> DataStore = DependencyService.Get<IDataStore<YardItem>>();
+        protected readonly IDataStore<YardItem, string> DataStore = DependencyService.Get<IDataStore<YardItem, string>>();
 
         private bool isBusy = false;
         private string title = string.Empty;

@@ -2,16 +2,22 @@
 using Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data.Services
 {
     public class YardItemDataStore
-        : IDataStore<YardItem>
+        : IDataStore<YardItem, Guid>
+        // TODO: align this new idatastore with mobile refactor
     {
         //protected readonly List<YardItem> _items;
         protected readonly HashStack<YardItem> _recentItems = new HashStack<YardItem>();
+
+        public event NewDataEvent<YardItem> Refreshed;
+
+        public ObservableCollection<YardItem> Items => throw new NotImplementedException();
 
         public YardItemDataStore()
         {
@@ -34,21 +40,16 @@ namespace Data.Services
 #endif
         }    
 
-        public async Task<YardItem> GetItem(Guid id)
+        public YardItem GetItem(Guid id)
         {
-            return await Task.FromResult(_recentItems.FirstOrDefault(x => x.Id == id));
+            return _recentItems.FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<YardItem>> GetItems()
+        public IEnumerable<YardItem> GetItems()
         {
             // Todo: if forceRefresh then reload from database.
-            return await Task.FromResult(_recentItems);
+            return _recentItems;
         }
-
-        //public async Task<IEnumerable<YardItem>> GetRecentItemsAsync()
-        //{
-        //    return await Task.FromResult(_recentItems);
-        //}
 
         public void AddItem(YardItem item)
         {
@@ -64,6 +65,36 @@ namespace Data.Services
             if (!item.Any()) return;
 
             _recentItems.Remove(item.First());
+        }
+
+        public void RefreshStore()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<YardItem> GetItemAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<YardItem>> GetItemsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<YardItem>> GetItemsAsync(Func<YardItem, bool> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public YardItem GetItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<YardItem> GetItems(Func<YardItem, bool> filter)
+        {
+            throw new NotImplementedException();
         }
 
         //public Task<bool> UpdateRecentItemAsync(YardItem item)

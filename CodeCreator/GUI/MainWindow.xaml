@@ -22,19 +22,36 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <local:DataTableEmbedd x:Name="ctlDatatable"
-                               Grid.Row="1"
-                               Grid.RowSpan="2"
-                               Grid.Column="0">
 
-        </local:DataTableEmbedd>
+        <TabControl x:Name="tabCtrl"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Grid.Column="0">
+            <TabItem Header="Table">
+                <local:DataTableEmbedd x:Name="ctlDatatable">
+
+                </local:DataTableEmbedd>
+            </TabItem>
+
+            <TabItem Header="Recently Changed"
+                     Selector.Selected="TabItem_Selected">
+                <local:RecentlyChangedItems />
+            </TabItem>
+            <TabItem Header="Paste" />
+            <TabItem Header="Settings">
+                <local:TableWizard x:Name="ctlWizard"
+                                   Grid.Row="1"
+                                   Grid.Column="1">
+
+                </local:TableWizard>
+            </TabItem>
+        </TabControl>
+        
+
+        
 
 
-        <local:TableWizard x:Name="ctlWizard"
-                           Grid.Row="1"
-                           Grid.Column="1">
-
-        </local:TableWizard>
+        
 
 
         <local:RecentQRFolder x:Name="ctlRecent"
@@ -61,10 +78,5 @@
                 <MenuItem Header="Help" Command="{Binding OpenHelpCommand}"/>
             </MenuItem>
         </Menu>
-
-
-
-
-
     </Grid>
 </Window>

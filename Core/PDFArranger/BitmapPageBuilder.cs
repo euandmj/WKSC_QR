@@ -25,6 +25,7 @@ namespace Core.PDFArranger
 
 
         public int Count => _pages.Count;
+        public string FileExtension { get; set; } = ".png";
 
 
         public void Build()
@@ -50,7 +51,7 @@ namespace Core.PDFArranger
             foreach(var page in _pages)
             {
                 var bmp = page.Bitmap;
-                var filename = Path.Combine(path, $"{Path.GetRandomFileName()}.png");
+                var filename = Path.Combine(path, $"{Path.GetRandomFileName()}{FileExtension}");
                 bmp.Save(filename, ImageFormat.Png);
 
 

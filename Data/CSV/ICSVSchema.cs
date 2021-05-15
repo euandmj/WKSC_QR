@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Data.CSV
 {
-    public interface ICSVSchema<T>
+    public interface ICsvSchema<T>
     {
         Type AssociatedType { get; }
         IColumnSchema ColumnSchema { get; }

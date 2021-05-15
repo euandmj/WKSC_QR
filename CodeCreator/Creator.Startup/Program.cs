@@ -1,4 +1,5 @@
-﻿using GUI;
+﻿using Autofac;
+using GUI;
 using System;
 using System.IO;
 using System.Windows;
@@ -23,6 +24,8 @@ namespace Creator.Startup
 
             try
             {
+                CreateDependencies();
+
                 WriteLine("Starting up. You can minimise this window...");
 
                 var app = new App();
@@ -36,6 +39,14 @@ namespace Creator.Startup
                 WriteLine("press any key to exit");                
                 ReadKey();
             }
+        }
+
+        static void CreateDependencies()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<GUI.Modules.Module>();
+
+            Core.DependencyInjection.ContainerClass.Initialise(builder.Build());
         }
     }
 }

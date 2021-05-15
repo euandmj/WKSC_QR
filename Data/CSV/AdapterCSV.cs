@@ -7,7 +7,7 @@ using System.Linq;
 namespace Data.CSV
 {
     public class AdapterCSV<T>
-        : IDisposable
+        : IDisposable where T : IEquatable<T>
     {
         private const char DELIMITER = ',';
         /*
@@ -15,16 +15,16 @@ namespace Data.CSV
          * Parse DataTable to YardItem[] 
          */
         protected DataTable _dataTable;
-        protected ICSVSchema<T> _schema;
-
+        protected ICsvSchema<T> _schema;
+        protected readonly string _path;
         public char Delimiter = DELIMITER;
         private bool disposedValue;
 
-        public AdapterCSV(ICSVSchema<T> schema)
+        public AdapterCSV(ICsvSchema<T> schema, string path)
         {
             if (schema.AssociatedType != typeof(T))
                 throw new ArgumentException("T and schema type mismatch", nameof(schema));
-
+            _path = path ?? throw new ArgumentNullException(nameof(path));
 
             _dataTable = new DataTable();
             _schema = schema;
@@ -35,18 +35,17 @@ namespace Data.CSV
             }
         }
 
-
-        public void ReadCSV(string path)
+        public void ReadCSV()
         {
             try
-            {
-                using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            { 
+                using var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 using var reader = new StreamReader(fs, System.Text.Encoding.Default);
                 //string[] cells = null;
 
                 //if (!_schema.Equals(cells))
                 //    throw new InvalidDataException("csv file does not match the schema");
-
+                
                 while (!reader.EndOfStream)
                 {
                     var cells = GetNextLine(reader);
@@ -71,7 +70,7 @@ namespace Data.CSV
             }
         }
 
-        public IEnumerable<T> GetItems()
+        public virtual IEnumerable<T> GetItems()
         {
             try
             {
@@ -83,6 +82,23 @@ namespace Data.CSV
 
             }
         }
+
+        public IEnumerable<T> GetDiffs(IEnumerable<T> otherItems)
+        {
+            //var otherItems = _schema.ParseTable(other);
+            var thisItems = GetItems();
+
+            foreach(var (other, @this) in otherItems.Zip(thisItems, Tuple.Create))
+            {
+                if(!@this.Equals(other))
+                {
+                    //yield return (other, @this);
+                    yield return @this;
+                }
+            }
+        }
+
+        public DataTable CopyDataTable() => _dataTable.Copy();
 
         private string[] GetNextLine(StreamReader stream)
         {
