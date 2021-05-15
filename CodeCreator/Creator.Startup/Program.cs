@@ -33,6 +33,7 @@ namespace Creator.Startup
             {
                 WriteLine("Unexpected error occurred. Please try relaunching the program: ");
                 WriteLine(ex.Message);
+                WriteLine(ex.StackTrace);
                 WriteLine("press any key to exit");                
                 ReadKey();
             }
