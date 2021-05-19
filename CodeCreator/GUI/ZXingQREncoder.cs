@@ -35,7 +35,7 @@ namespace GUI
 
         private string Serialize(TSource item)
         {
-            return JsonConvert.SerializeObject(item);
+            return JsonConvert.SerializeObject(item, Formatting.None);
         }
 
         public Bitmap Encode(TSource item)

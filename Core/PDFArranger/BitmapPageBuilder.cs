@@ -49,12 +49,13 @@ namespace Core.PDFArranger
         {
             foreach(var page in _pages)
             {
-                var bmp = page.Bitmap;
-                var filename = Path.Combine(path, $"{Path.GetRandomFileName()}.png");
-                bmp.Save(filename, ImageFormat.Png);
+                using (var bmp = page.CopyBitmap())
+                {
+                    var filename = Path.Combine(path, $"{Path.GetRandomFileName()}.png");
+                    bmp.Save(filename, ImageFormat.Png);
+                    yield return filename;
+                }
 
-
-                yield return filename;
             }
         }
 
