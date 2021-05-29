@@ -41,6 +41,17 @@ namespace Core.PDFArranger
 
         private IEnumerable<(float x, float y)> GetCoords()
         {
+            //yield return (62, 64);
+            //yield return (1255, 64);
+            //yield return (62, 740);
+            //yield return (1255, 740);
+            //yield return (62, 1420);
+            //yield return (1255, 1420);
+            //yield return (62, 2094);
+            //yield return (1255, 2094);
+            //yield return (62, 2772); 
+            //yield return (1255, 2772);
+
             for (float y = 0; y < PER_PAGE; y++)
             {
                 float posY = 5.25f + (y * 57.3f);

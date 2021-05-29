@@ -14,16 +14,16 @@ namespace Creator.GUI.Test
         private static readonly List<YardItem> Items
                = new List<YardItem>()
                {
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
-                new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" }
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" },
+                    new YardItem(Guid.Parse("0a3f673f-4ba4-4458-a266-4a1967f84aa3")) { Zone = "A2", BoatClass = "BoatClass.Falcon", Owner = "Bob Jones" }
                };
 
 
