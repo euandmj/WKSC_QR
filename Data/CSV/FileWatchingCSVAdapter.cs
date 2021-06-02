@@ -54,7 +54,7 @@ namespace Data.CSV
                     _rowLastUpdated[row] = DateTime.Now;
                 }
 
-                this._dataTable.Clear();
+                this._dataTable.Dispose();
                 this._dataTable = newDt;
             }
             catch (Exception ex)
@@ -63,9 +63,9 @@ namespace Data.CSV
             }
             finally
             {
+                ChangedEvent?.Invoke(EventArgs.Empty, GetRecentlyChanged);
                 LastUpdated = DateTime.Now;
             }
-            ChangedEvent?.Invoke(EventArgs.Empty, GetItems);
         }
 
         public IEnumerable<(T item, DateTime lastUpdated)> GetItemsWithLastUpdated()
@@ -79,12 +79,13 @@ namespace Data.CSV
                 });
         }
 
-        public IEnumerable<T> GetRecentlyChanged(int num)
+        public IEnumerable<T> GetRecentlyChanged()
         {
-            var rows = _rowLastUpdated.ToList();
+            var rows = _rowLastUpdated.Where(x => x.Value > LastUpdated).ToList();
             rows.Sort((a, b) => DateTime.Compare(a.Value, b.Value));
 
-            foreach(var row in rows.Take(num))
+
+            foreach(var row in rows)
             {
                 yield return _schema.ParseRow(_dataTable.Rows[row.Key]);
             }

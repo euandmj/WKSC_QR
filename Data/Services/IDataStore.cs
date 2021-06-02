@@ -1,15 +1,17 @@
-﻿using Data.Providers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Data.Services
 {
 
-    public interface IDataStore<TItem, in TKey> : IProvider<TItem, TKey>
+    public interface IDataStore<TItem, in TKey>
     {
         event NewDataEvent<TItem> Refreshed;
+        TItem GetItem(TKey key);
         Task<TItem> GetItemAsync(TKey id);
+        IEnumerable<TItem> GetItems();
+        IEnumerable<TItem> GetItems(Func<TItem, bool> filter);
         Task<IEnumerable<TItem>> GetItemsAsync(); 
         Task<IEnumerable<TItem>> GetItemsAsync(Func<TItem, bool> filter);
         void AddItem(TItem item);

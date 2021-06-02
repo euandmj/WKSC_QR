@@ -26,7 +26,7 @@ namespace GUI.ViewModels
         {
             try
             {
-                Item = await DataStore.GetItem(Guid.Parse(id));
+                Item = await DataStore.GetItemAsync(id);
             }
             catch (Exception)
             {

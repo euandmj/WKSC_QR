@@ -75,9 +75,9 @@ namespace Core
                     object leftCell = left.Rows[i].ItemArray[c];
                     object rightCell = right.Rows[i].ItemArray[c];
 
-                    if(leftCell != rightCell)
+                    if(!leftCell.Equals(rightCell))
                     {
-                        yield return c;
+                        yield return i;
                     }
                 }
             }

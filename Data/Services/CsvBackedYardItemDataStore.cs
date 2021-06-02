@@ -34,7 +34,7 @@ namespace Data.Services
         }
         
         private void SetCache(IEnumerable<YardItem> items)
-        {
+        {            
             _cache = _csvStore.GetItemsWithLastUpdated().Select(x =>
             {
                 x.item.LastUpdated = x.lastUpdated;
