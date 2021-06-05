@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.View"
         xmlns:cpkr="clr-namespace:GUI.View.CellPicker"
+        xmlns:viewmodel="clr-namespace:GUI.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:ExportItemsViewModel}"
         Closed="Window_Closed"
         mc:Ignorable="d"
         Title="ExportItemsPage"

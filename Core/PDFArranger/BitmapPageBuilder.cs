@@ -55,7 +55,6 @@ namespace Core.PDFArranger
                 bmp.Save(filename, ImageFormat.Png);
 
 
-                yield return filename;
             }
         }
 

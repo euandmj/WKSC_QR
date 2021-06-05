@@ -5,6 +5,7 @@ using System.Text;
 using Moq;
 using Core.PDFArranger;
 using System.Drawing;
+using Core.Models;
 
 namespace Core.Test
 {
@@ -56,34 +57,6 @@ namespace Core.Test
         }
 
 
-        [Test]
-        public void Build()
-        {
-            //var l = new List<Bitmap>();
-            var bmp = GetTestBitmap();
-            //for (int i = 0; i < 10; i++) l.Add(bmp);
-
-
-            using var bp = new Page(new[] { bmp });
-
-            bp.Build();
-
-            var outt = bp.Bitmap;
-
-
-            float y = 5.25f + 57.3f;
-            float x = 4.9f + 15;
-
-
-            var region = outt.Clone(new RectangleF(x, y, 100, 100), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            _ = bmp == region;
-
-            Assert.IsTrue(AreEqual(bmp, region));
-
-            
-
-        }
 
 
     }

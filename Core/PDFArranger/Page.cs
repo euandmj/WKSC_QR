@@ -24,22 +24,34 @@ namespace Core.PDFArranger
         private bool disposedValue;
 
         private readonly Graphics _graphics;
+        private readonly Bitmap _bitmap = new Bitmap(pxWidth, pxHeight); 
         private readonly IEnumerable<Bitmap> _codes;
 
         public Page(IEnumerable<Bitmap> codes)
         {
             _codes = codes;
-            _graphics = Graphics.FromImage(Bitmap);
+            _graphics = Graphics.FromImage(_bitmap);
             _graphics.PageUnit = GraphicsUnit.Millimeter;
         }
 
 
-        public Bitmap Bitmap { get; } = new Bitmap(pxWidth, pxHeight);
+        public Bitmap CopyBitmap() => _bitmap.Clone() as Bitmap;
 
         public string Name { get; set; }
 
         private IEnumerable<(float x, float y)> GetCoords()
         {
+            //yield return (62, 64);
+            //yield return (1255, 64);
+            //yield return (62, 740);
+            //yield return (1255, 740);
+            //yield return (62, 1420);
+            //yield return (1255, 1420);
+            //yield return (62, 2094);
+            //yield return (1255, 2094);
+            //yield return (62, 2772); 
+            //yield return (1255, 2772);
+
             for (float y = 0; y < PER_PAGE; y++)
             {
                 float posY = 5.25f + (y * 57.3f);
@@ -56,7 +68,7 @@ namespace Core.PDFArranger
         {
             if (_built) throw new InvalidProgramException("already built");
 
-            _graphics.FillRectangle(Brushes.White, 0, 0, mmWIDTH, mmHEIGHT);
+            _graphics.FillRectangle(Brushes.White, 0, 0, pxWidth, pxHeight);
 
             // enumerate the coordinates-codes            
             foreach (var ((x, y), bmp) in GetCoords().Zip(_codes, Tuple.Create))
@@ -95,7 +107,7 @@ namespace Core.PDFArranger
             {
                 if (disposing)
                 {
-                    Bitmap.Dispose();
+                    _bitmap.Dispose();
                     _graphics.Dispose();
                 }
                 disposedValue = true;

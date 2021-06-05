@@ -10,6 +10,10 @@ using ZXing.Rendering;
 
 namespace GUI
 {
+    /// <summary>
+    /// Requires a .net framework nuget dependency for ZXing
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
     public class ZXingQREncoder<TSource>
         : IQREncoder<TSource>
     {
@@ -35,7 +39,7 @@ namespace GUI
 
         private string Serialize(TSource item)
         {
-            return JsonConvert.SerializeObject(item);
+            return JsonConvert.SerializeObject(item, Formatting.None);
         }
 
         public Bitmap Encode(TSource item)
