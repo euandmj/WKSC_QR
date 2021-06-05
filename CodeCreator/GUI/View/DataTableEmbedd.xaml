@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GUI.View"
+             xmlns:ctrls="clr-namespace:GUI.Controls"
+             xmlns:viewmodel="clr-namespace:GUI.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:DataTableEmbeddViewModel}"
              VerticalContentAlignment="Stretch"
              mc:Ignorable="d"
              d:DesignHeight="450"
@@ -22,31 +25,13 @@
         <Label Content="{Binding DebugRowText}"
                Grid.Row="0" />
 
-        <DataGrid x:Name="dg"
-                  ItemsSource="{Binding DataSource}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                  IsReadOnly="True"
-                  SelectionMode="Extended"
-                  HorizontalScrollBarVisibility="Auto"
-                  VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.CanContentScroll="True"
-                  AutoGenerateColumns="False"
-                  FontSize="17"
-                  Grid.Row="1"
-                  Grid.Column="0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Owner"
-                                    Binding="{Binding Owner}" />
-                <DataGridTextColumn Header="Row"
-                                    Binding="{Binding Zone}" />
-                <DataGridTextColumn Header="Sail Number"
-                                    Binding="{Binding SailNumber}" />
-                <DataGridTextColumn Header="Class"
-                                    Binding="{Binding BoatClass}"
-                                    Width="*"/>
-            </DataGrid.Columns>
-
-        </DataGrid>
+        <ctrls:BoatDataGrid x:Name="dg"
+                            FontSize="24"
+                            Grid.Row="1"
+                            Grid.Column="0">
+            
+            
+        </ctrls:BoatDataGrid>
         
         <StackPanel 
                     Margin="10 0 0 0"

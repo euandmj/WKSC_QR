@@ -44,7 +44,8 @@ namespace GUI.View.FolderPicker
                                  | NotifyFilters.LastWrite
                                  | NotifyFilters.Security
                                  | NotifyFilters.Size,
-                IncludeSubdirectories = false
+                IncludeSubdirectories = false,
+                Filter = "*.png"
             };
 
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Autofac;
+using System.IO;
 using System.Windows;
 
 namespace GUI
@@ -11,6 +12,13 @@ namespace GUI
 
         public App()
         {
+
+            var builder = new ContainerBuilder();
+            _ = builder.RegisterModule(new Modules.Module());
+            Core.DependencyInjection.ContainerClass.Initialise(builder.Build());
+
+
+
         }
 
 

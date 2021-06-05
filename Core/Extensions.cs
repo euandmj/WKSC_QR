@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 
 namespace Core
@@ -60,6 +61,44 @@ namespace Core
                 yield return bucket.Take(count).ToArray();
         }
 
+
+        /// <summary>
+        /// Compare all rows between the two tables. Returning the number of rows where at least one cell differs.
+        /// </summary>
+        public static IEnumerable<int> CompareTables(this DataTable left, DataTable right)
+        {
+            for (int i = 0; i < Math.Min(left.Rows.Count, right.Rows.Count); i++)
+            {
+                for(int c = 0; c < Math.Min(left.Rows[i].ItemArray.Length,
+                                            right.Rows[i].ItemArray.Length); c++)
+                {
+                    object leftCell = left.Rows[i].ItemArray[c];
+                    object rightCell = right.Rows[i].ItemArray[c];
+
+                    if(!leftCell.Equals(rightCell))
+                    {
+                        yield return i;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source, 
+            Func<TSource, TKey> keySelector)
+        {
+            HashSet<TKey> seenKeys = new HashSet<TKey>();
+            foreach (TSource element in source)
+            {
+                if (seenKeys.Add(keySelector(element)))
+                {
+                    yield return element;
+                }
+            }
+        }
 
     }
 }

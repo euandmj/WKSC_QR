@@ -10,7 +10,7 @@
 *.userosscache
 *.sln.docstates
 
-storage.csv
+*.csv
 storage.xlsx
 
 

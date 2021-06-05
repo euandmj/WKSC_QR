@@ -1,31 +1,27 @@
-﻿using GUI.Commands;
-using GUI.View;
-using Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Encoding;
-using System.Windows.Media;
-using Data;
-using Data.Models;
-using System.Linq;
+﻿using Core.Models;
 using Data.CSV;
-using System.IO;
-using Newtonsoft.Json;
-using System.Windows;
+using Data.Models;
+using Data.Providers;
+using Data.Services;
+using GUI.Commands;
 using GUI.Configuration;
+using GUI.Providers;
+using GUI.View;
+using System;
 using System.Collections;
-using System.Windows.Input;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace GUI.ViewModel
 {
     public class DataTableEmbeddViewModel
         : BaseViewModel
     {
-        private ICollection<YardItem> _dataSource;
-        private IColumnSchema _columnSchema;
-
+        private readonly IProvider<YardItem, string> _dataStore;
         private YardItem _selectedItem;
 
 
@@ -41,47 +37,29 @@ namespace GUI.ViewModel
             //    //new YardItem() { Zone = "F12", BoatClass = BoatClass.Laser, Owner = "Indiana Jones" }
             //};
 
-            CreateCommand = new Command(x => OnCreate(x));
-            ExportFlaggedCommand = new Command(x => OnExportFlagged());
-            RefreshCommand = new Command(_ => Init(AppConfig.Config));
-            OpenCommand = new Command(_ => Process.Start(Global.OutputPath));
+            //_dataStore = Core.DependencyInjection.ContainerClass.ResolveType<IDataStore<YardItem, string>>();
+            _dataStore = new YardItemProvider(Refresh);
 
-            Init(AppConfig.Config);
+            CreateCommand           = new Command(x => OnCreate(x));
+            ExportFlaggedCommand    = new Command(x => OnExportFlagged());
+            RefreshCommand          = new Command(_ => Refresh(_dataStore.GetItems()));
+            OpenCommand             = new Command(_ => Process.Start(Global.OutputPath));
 
-            AppConfig.ConfigChanged += (s, e) =>
-            {
-                Init(AppConfig.Config);
-            };
+
+            Refresh(_dataStore.GetItems());
+
+
+            //_dataStore.Refreshed += (e, func) =>
+            //{
+            //    DataSource = new ObservableCollection<YardItem>(func());
+            //    OnPropertyChanged(nameof(DataSource));
+            //};
         }
 
-        private void Init(Config cfg)
+        private void Refresh(IEnumerable<YardItem> newItems)
         {
-            if (cfg == null) return;
-            try
-            {
-                _columnSchema = cfg.Schema;
-                InitDataSource();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Failed Loading Data Table.", MessageBoxButton.OK);
-            }
-        }
-
-        private void InitDataSource()
-        {
-            if (AppConfig.Config.SpreadsheetFile == null)
-            {
-                return;
-            }
-
-            using (var adapter = new AdapterCSV<YardItem>(new YardItemCSVSchema(_columnSchema)))
-            {
-                adapter.ReadCSV(AppConfig.Config.SpreadsheetFile);
-                DataSource = adapter.GetItems().ToList();
-                SelectedItem = null;
-                OnPropertyChanged(nameof(DebugRowText));
-            }
+            DataSource = new ObservableCollection<YardItem>(newItems);
+            OnPropertyChanged(nameof(DataSource));
         }
 
         private void OnCreate(object x)
@@ -126,11 +104,11 @@ namespace GUI.ViewModel
             }
         }
 
-        public ICollection<YardItem> DataSource
-        {
-            get => _dataSource;
-            set => SetProperty(ref _dataSource, value);
-        }
+        public ICollection<YardItem> DataSource { get; set; }
+        //{
+        //    get => _dataSource;
+        //    set => SetProperty(ref _dataSource, value);
+        //}
         public bool IsExportEnabled => SelectedItem != null;
         public string DebugRowText => $"Rows: {DataSource?.Count}";
 
