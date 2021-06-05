@@ -35,7 +35,7 @@ namespace Core.PDFArranger
         }
 
 
-        public Bitmap CopyBitmap() => _bitmap.Clone() as Bitmap;
+        public Bitmap Bitmap { get => _bitmap; }
 
         public string Name { get; set; }
 

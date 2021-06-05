@@ -67,6 +67,8 @@ namespace Core
         /// </summary>
         public static IEnumerable<int> CompareTables(this DataTable left, DataTable right)
         {
+            // FIXME: datatables only read in certain columns given the column schema. 
+            // therefore changes to columns that are not mapped to the schema do not show 'changed' by this. 
             for (int i = 0; i < Math.Min(left.Rows.Count, right.Rows.Count); i++)
             {
                 for(int c = 0; c < Math.Min(left.Rows[i].ItemArray.Length,
