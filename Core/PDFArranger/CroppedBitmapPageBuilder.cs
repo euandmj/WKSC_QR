@@ -11,7 +11,7 @@ namespace Core.PDFArranger
     {
         public CroppedBitmapPageBuilder(
             int cropValue,
-            IEnumerable<Bitmap> src)
+            IEnumerable<PrintableObject> src)
             : base(src.Skip(cropValue))
         {
             _pages.Add(new Page(src.Take(cropValue)));

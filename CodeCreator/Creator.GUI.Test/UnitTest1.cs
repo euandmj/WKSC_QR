@@ -34,7 +34,7 @@ namespace Creator.GUI.Test
 
             var bmps = encoder.Encode(Items);
 
-            using (var pagebuilder = new BitmapPageBuilder(bmps))
+            using (var pagebuilder = new BitmapPageBuilder(bmps.Select((x, i) => new PrintableObject { Text = Items[i].ZoneBoat, Bitmap = x })))
             {
                 pagebuilder.Build();
                 pagebuilder.Save(@"C:\WKSC_SCNR\out").ToList();

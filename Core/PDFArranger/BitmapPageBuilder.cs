@@ -15,7 +15,7 @@ namespace Core.PDFArranger
         private bool disposedValue;
         protected ICollection<Page> _pages = new List<Page>();
 
-        public BitmapPageBuilder(IEnumerable<Bitmap> src)
+        public BitmapPageBuilder(IEnumerable<PrintableObject> src)
         {
             foreach(var bucket in src.Batch(PER_PAGE))
             {

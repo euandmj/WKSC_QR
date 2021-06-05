@@ -5,6 +5,12 @@ using System.Linq;
 
 namespace Core.PDFArranger
 {
+    public class PrintableObject
+    {
+        public string Text { get; set; } = string.Empty;
+        public Bitmap Bitmap { get; set; }
+    }
+
     public class Page
         : IDisposable
     {
@@ -25,9 +31,9 @@ namespace Core.PDFArranger
 
         private readonly Graphics _graphics;
         private readonly Bitmap _bitmap = new Bitmap(pxWidth, pxHeight); 
-        private readonly IEnumerable<Bitmap> _codes;
+        private readonly IEnumerable<PrintableObject> _codes;
 
-        public Page(IEnumerable<Bitmap> codes)
+        public Page(IEnumerable<PrintableObject> codes)
         {
             _codes = codes;
             _graphics = Graphics.FromImage(_bitmap);
@@ -71,9 +77,10 @@ namespace Core.PDFArranger
             _graphics.FillRectangle(Brushes.White, 0, 0, pxWidth, pxHeight);
 
             // enumerate the coordinates-codes            
-            foreach (var ((x, y), bmp) in GetCoords().Zip(_codes, Tuple.Create))
+            foreach (var ((x, y), item) in GetCoords().Zip(_codes, Tuple.Create))
             {
-                _graphics.DrawImage(bmp, x, y);
+                _graphics.DrawString(item.Text, SystemFonts.DefaultFont, Brushes.Black, x, y-3);
+                _graphics.DrawImage(item.Bitmap, x, y);
             }
         }
 
@@ -90,12 +97,12 @@ namespace Core.PDFArranger
             var coords = GetCoords().ToList();
 
             // enumerate codes-whitelist
-            foreach(var (bmp, wl_i) in _codes.Zip(whitelist, Tuple.Create))
+            foreach(var (item, wl_i) in _codes.Zip(whitelist, Tuple.Create))
             {
                 // get the pixel coordinates of this particular white list indice
                 var (x, y) = coords.ElementAt(wl_i);
 
-                _graphics.DrawImage(bmp, x, y);
+                _graphics.DrawImage(item.Bitmap, x, y);
             }
         }
 

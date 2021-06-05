@@ -55,7 +55,7 @@ namespace GUI.ViewModel
             var cutItems = itemsCopy.Take(CheckedCount).ToArray();
             var bmps = _qrEncoder.Encode(cutItems);
 
-            using (var builder = new BitmapPageBuilder(bmps))
+            using (var builder = new BitmapPageBuilder(bmps.Select((x, i) => new PrintableObject { Bitmap = x, Text = cutItems[i].ZoneBoat })))
             {
                 var whiteList = new HashSet<int>(GetWhiteList());
 
@@ -64,7 +64,7 @@ namespace GUI.ViewModel
                 _createdPaths.AddRange(builder.Save(Global.OutputPath));
 
                 // clean up and remove used items
-                foreach (var bmp in bmps) 
+                foreach (var bmp in bmps)
                     bmp.Dispose();
                 foreach (var item in cutItems)
                     itemsCopy.Remove(item);
@@ -83,7 +83,7 @@ namespace GUI.ViewModel
 
                 var bitmaps = _qrEncoder.Encode(batch);
 
-                using (var pageBuilder = new BitmapPageBuilder(bitmaps))
+                using (var pageBuilder = new BitmapPageBuilder(bitmaps.Select((x, i) => new PrintableObject() { Bitmap = x, Text = items[i].ZoneBoat })))
                 {
                     pageBuilder.Build();
 
