@@ -47,11 +47,25 @@ namespace GUI.View
 
         public RecentlyChangedItems_ViewModel()
         {
-            dataStore = new Providers.RecentlyEditedYardItemProvider(5);
+            dataStore = new Providers.RecentlyEditedYardItemProvider(5, (items) => OnNewData(items));
 
             DataSource = new ObservableCollection<YardItem>(dataStore.GetItems());
         }
-
+        
         public ObservableCollection<YardItem> DataSource { get; set; }
+
+        private void OnNewData(IEnumerable<YardItem> items)
+        {
+            //foreach(var item in items)
+            //{
+            //    if (DataSource.Contains(item))
+            //    {
+            //        DataSource
+            //    }
+            //}
+            // TODO: update only those that have changed. 
+            DataSource = new ObservableCollection<YardItem>(items);
+            OnPropertyChanged(nameof(DataSource));
+        }
     }
 }

@@ -63,7 +63,9 @@ namespace Data.CSV
             }
             finally
             {
-                ChangedEvent?.Invoke(EventArgs.Empty, GetRecentlyChanged);
+                // TODO: update only those that have changed. 
+                //ChangedEvent?.Invoke(EventArgs.Empty, GetRecentlyChanged);
+                ChangedEvent?.Invoke(EventArgs.Empty, GetItems);
                 LastUpdated = DateTime.Now;
             }
         }

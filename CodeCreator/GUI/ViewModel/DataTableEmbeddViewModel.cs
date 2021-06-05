@@ -38,14 +38,16 @@ namespace GUI.ViewModel
             //};
 
             //_dataStore = Core.DependencyInjection.ContainerClass.ResolveType<IDataStore<YardItem, string>>();
-            _dataStore = new YardItemProvider();
+            _dataStore = new YardItemProvider(Refresh);
 
             CreateCommand           = new Command(x => OnCreate(x));
             ExportFlaggedCommand    = new Command(x => OnExportFlagged());
-            RefreshCommand          = new Command(_ => Refresh());
+            RefreshCommand          = new Command(_ => Refresh(_dataStore.GetItems()));
             OpenCommand             = new Command(_ => Process.Start(Global.OutputPath));
 
-            Refresh();
+
+            Refresh(_dataStore.GetItems());
+
 
             //_dataStore.Refreshed += (e, func) =>
             //{
@@ -54,9 +56,10 @@ namespace GUI.ViewModel
             //};
         }
 
-        private async void Refresh()
+        private void Refresh(IEnumerable<YardItem> newItems)
         {
-            DataSource = new ObservableCollection<YardItem>(_dataStore.GetItems());
+            DataSource = new ObservableCollection<YardItem>(newItems);
+            OnPropertyChanged(nameof(DataSource));
         }
 
         private void OnCreate(object x)

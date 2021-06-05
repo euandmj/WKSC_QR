@@ -14,7 +14,9 @@ namespace GUI.Providers
         private readonly IDataStore<YardItem, string> _dataStore;
         private readonly int _recentNumber;
 
-        public RecentlyEditedYardItemProvider(int numberRecent)
+        public RecentlyEditedYardItemProvider(
+            int numberRecent,
+            Action<IEnumerable<YardItem>> onNewData)
         {
             _recentNumber = numberRecent;
             _dataStore = ContainerClass.ResolveType<IDataStore<YardItem, string>>();
@@ -22,7 +24,7 @@ namespace GUI.Providers
 
             _dataStore.Refreshed += (e, func) =>
             {
-
+                onNewData(GetItems());
             };
         }
 

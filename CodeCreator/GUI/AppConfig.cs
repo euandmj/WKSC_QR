@@ -57,7 +57,7 @@ namespace GUI
             internal set
             {
                 _lazyConfig = value ?? throw new ArgumentNullException(nameof(value));
-                _fsWatcher.Path = Path.GetDirectoryName(value.SpreadsheetFile);
+                //_fsWatcher.Path = Path.GetDirectoryName(value.SpreadsheetFile);
                 ConfigChanged?.Invoke(null, EventArgs.Empty);
             }
         }
