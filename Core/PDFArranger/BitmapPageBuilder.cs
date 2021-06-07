@@ -38,7 +38,7 @@ namespace Core.PDFArranger
 
         public void BuildWithWhitelist(ISet<int> whitelist)
         {
-            var firstPage = _pages.First();
+            var firstPage = _pages.FirstOrDefault();
 
             if (firstPage is null) throw new InvalidProgramException("no first page built.");
 

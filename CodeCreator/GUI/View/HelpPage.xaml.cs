@@ -28,16 +28,28 @@ namespace GUI.View
             try
             {
                 dir = ApplicationDeployment.CurrentDeployment.DataDirectory + which;
-                Process.Start(dir);
+                OpenFile(dir);
             }
             catch(InvalidDeploymentException)
             {
                 dir = Path.Combine(Directory.GetCurrentDirectory() + which);
-                Process.Start(dir);
+                OpenFile(dir);
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Error opening help file " + dir, ex.Message);
+            }
+        }
+
+        private void OpenFile(string dir)
+        {
+            try
+            {
+                Process.Start(dir);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + " " + dir, "Error opening help file ");
             }
         }
 

@@ -25,6 +25,7 @@
 
         <TabControl x:Name="tabCtrl"
                     Grid.Row="1"
+                    FontSize="20"
                     Grid.RowSpan="2"
                     Grid.Column="0">
             <TabItem Header="Table">
@@ -37,7 +38,7 @@
                      Selector.Selected="TabItem_Selected">
                 <local:RecentlyChangedItems />
             </TabItem>
-            <TabItem Header="Paste" />
+            <TabItem Header="Paste Tool" />
             <TabItem Header="Settings">
                 <local:TableWizard x:Name="ctlWizard"
                                    Grid.Row="1"

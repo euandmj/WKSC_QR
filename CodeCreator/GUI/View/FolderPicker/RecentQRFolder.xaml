@@ -36,13 +36,15 @@
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Height"
-                            Value="25" />
+                            Value="auto" />
                 </Style>
             </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="{Binding Created}" Height="25" />
+                        <Label Content="{Binding ViewText}" />
+                        <!--<Image Source="{Binding Image}" />-->
+                        <!--Caused Issue with Must create DependencySource on same Thread as the DependencyObject-->
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

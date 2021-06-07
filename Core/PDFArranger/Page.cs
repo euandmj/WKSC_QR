@@ -102,6 +102,7 @@ namespace Core.PDFArranger
                 // get the pixel coordinates of this particular white list indice
                 var (x, y) = coords.ElementAt(wl_i);
 
+                _graphics.DrawString(item.Text, SystemFonts.DefaultFont, Brushes.Black, x, y - 3);
                 _graphics.DrawImage(item.Bitmap, x, y);
             }
         }

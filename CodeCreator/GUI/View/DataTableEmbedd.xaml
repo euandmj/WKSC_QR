@@ -19,11 +19,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>       
+        </Grid.RowDefinitions>
 
-        <Label Content="{Binding DebugRowText}"
-               Grid.Row="0" />
+        <StackPanel Orientation="Horizontal">
+        
+            <Label Content="{Binding DebugRowText}"
+                   Grid.Row="0" />
+        </StackPanel>
 
         <ctrls:BoatDataGrid x:Name="dg"
                             FontSize="24"

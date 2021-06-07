@@ -7,26 +7,55 @@
              xmlns:local="clr-namespace:GUI.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="0 0 0 100" ShowGridLines="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="*" />            
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
 
 
         <ctrls:BoatDataGrid x:Name="dg"
-                            Width="800"
+                            Margin="5"
                             Grid.Row="0"
-                            Grid.Column="1"
+                            Grid.Column="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             >
             
         </ctrls:BoatDataGrid>
-        
-            
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Padding"
+                            Value="3" />
+                    <Setter Property="Margin"
+                            Value="3" />
+                    <Setter Property="FontSize"
+                            Value="20" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Content="Export"
+                    IsEnabled="{Binding IsExportEnabled}"
+                    CommandParameter="{Binding ElementName=dg, Path=SelectedItems}"
+                    Command="{Binding CreateCommand}" />
+
+            <Button Content="Refresh"
+                    Command="{Binding RefreshCommand}" />
+            <Button Content="Open Codes"
+                    Command="{Binding OpenCommand}" />
+
+
+        </StackPanel>
+
+
     </Grid>
 </UserControl>

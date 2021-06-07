@@ -152,6 +152,7 @@
     <Compile Include="Providers\YardItemProvider.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ExportItemsViewModel.cs" />
+    <Compile Include="ViewModel\RecentlyChangedItemsViewModel.cs" />
     <Compile Include="ViewModel\TableWizardViewModel.cs" />
     <Compile Include="ViewModel\DataTableEmbeddViewModel.cs" />
     <Compile Include="View\CellPicker\ClickableCell.xaml.cs">

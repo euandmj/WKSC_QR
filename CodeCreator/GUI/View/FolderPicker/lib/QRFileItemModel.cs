@@ -41,6 +41,8 @@ namespace GUI.View.FolderPicker
         public int Y { get; set; }
         public DateTime Created { get; set; }
 
+        public string ViewText => $"{FileName} - {Created}";
+
 
         public SortMode Mode
         {

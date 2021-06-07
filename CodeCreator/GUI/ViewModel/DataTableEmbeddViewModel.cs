@@ -60,18 +60,27 @@ namespace GUI.ViewModel
         {
             DataSource = new ObservableCollection<YardItem>(newItems);
             OnPropertyChanged(nameof(DataSource));
+            OnPropertyChanged(nameof(DebugRowText));
         }
 
         private void OnCreate(object x)
         {
-            var ll = x as IList;
+            try
+            {
+                var ll = x as IList;
                 
-            if (ll.Count == 0) return;
+                if (ll.Count == 0) return;
 
-            var list = ll.Cast<YardItem>();
+                var list = ll.Cast<YardItem>();
 
-            var page = new ExportItemsPage(list.ToList(), parent);
-            page.ShowDialog();
+                var page = new ExportItemsPage(list.ToList(), parent);
+                page.ShowDialog();
+
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         private void OnExportFlagged()
@@ -80,7 +89,7 @@ namespace GUI.ViewModel
 
             if(itemsToExport.Count == 0)
             {
-                MessageBox.Show($"No flagged items detected. Currently looking in column {AppConfig.Config.FlagColumn}. Is this correct?");
+                MessageBox.Show($"No flagged items detected. Currently looking in column {AppConfig.Config.FlagColumn}. This can be changed in settings.");
                 return;
             }
 
@@ -110,7 +119,10 @@ namespace GUI.ViewModel
         //    set => SetProperty(ref _dataSource, value);
         //}
         public bool IsExportEnabled => SelectedItem != null;
-        public string DebugRowText => $"Rows: {DataSource?.Count}";
+        public string DebugRowText
+            => DataSource?.Count > 0
+            ? $"Rows: {DataSource?.Count}"
+            : "Rows: 0 - Please ensure settings are correct.";
 
     }
 }
