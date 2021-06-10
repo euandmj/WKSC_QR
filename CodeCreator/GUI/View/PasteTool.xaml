@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="GUI.View.PasteTool"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GUI.View"
+             d:DataContext="{d:DesignInstance Type=local:PasteToolViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Width="auto"
+              Height="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="MinWidth"
+                            Value="50" />
+                    <Setter Property="Margin"
+                            Value="3" />
+                </Style>
+            </Grid.Resources>
+
+
+            <TextBox Grid.Row="1"
+                     Grid.Column="0" 
+                     Text="{Binding Owner}"/>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="Owner" />
+            <!---->
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Text="{Binding Row}"/>
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Content="Row" />
+            <!---->
+            <TextBox Grid.Row="1"
+                     Grid.Column="2" 
+                     Text="{Binding Class}"/>
+            <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Content="Class" />
+            <!---->            
+            <TextBox Grid.Row="1"
+                     Grid.Column="3" 
+                     Text="{Binding SailNumber}"/>
+            <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Content="Sail Number" />
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="4"
+                        Margin="5"                        
+                        Grid.Row="1">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Width"
+                                Value="35" />
+                        <Setter Property="Height"
+                                Value="35" />
+                        <Setter Property="Margin"
+                                Value="5" />
+                    </Style>
+                </StackPanel.Resources>
+                    
+                
+                <Button Command="{Binding ResetCommand, Mode=OneTime}">
+                    <Image Source="{Binding ResetImage, Mode=OneTime}" />
+                </Button>
+                <Button Command="{Binding PasteCommand, Mode=OneTime}">
+                    <Image Source="{Binding PasteImage, Mode=OneTime}" />
+                </Button>
+            </StackPanel>
+            
+            <Button Width="auto"
+                    Height="35"
+                    Content="Export"
+                    Margin="0 25 0 0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="5"
+                    Grid.Row="2"
+                    TabIndex="0"
+                    Command="{Binding ExportCommand}" />
+           
+
+        </Grid>
+    </Grid>
+</UserControl>

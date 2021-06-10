@@ -38,7 +38,9 @@
                      Selector.Selected="TabItem_Selected">
                 <local:RecentlyChangedItems />
             </TabItem>
-            <TabItem Header="Paste Tool" />
+            <TabItem Header="Paste Tool">
+                <local:PasteTool />
+            </TabItem>
             <TabItem Header="Settings">
                 <local:TableWizard x:Name="ctlWizard"
                                    Grid.Row="1"
