@@ -1,5 +1,7 @@
 ﻿using GUI.Commands;
+using GUI.Configuration;
 using Microsoft.Win32;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GUI.ViewModel
@@ -7,6 +9,7 @@ namespace GUI.ViewModel
     class TableWizardViewModel
         : BaseViewModel
     {
+
         private string rowCol = AppConfig.Config.RowColumnn.ToString();
         private string classCol = AppConfig.Config.ClassColumn.ToString();
         private string sailNoCol = AppConfig.Config.SailColumn.ToString();
@@ -50,11 +53,14 @@ namespace GUI.ViewModel
                 };
 
                 Configuration.ConfigLoader.Save(AppConfig.Config);
+
+                MessageBox.Show("Please restart for changes to take effect.", "Restart required", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }               
         }
 
         public ICommand SaveConfigCommand { get; set; }
         public ICommand LoadFileCommand { get; set; }
+
         public string SelectedCSVFile
         {
             get => _selectedFile;

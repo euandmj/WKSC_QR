@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GUI.View"
+             xmlns:viewmodel="clr-namespace:GUI.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:TableWizardViewModel}"
              mc:Ignorable="d"
              Margin="5"
              d:DesignHeight="450"
@@ -75,7 +77,7 @@
                 <Label Content="Sail Number &quot;SAIL NO&quot;" />
                 <local:ColumnRowPicker PickerMode="Column"
                                        x:Name="cbSail"
-                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.SailNumberColumn, Mode=TwoWay}"
+                                       SelectedValue="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.Config.SailColumn, Mode=TwoWay}"
                                        IsReadOnly="False" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">

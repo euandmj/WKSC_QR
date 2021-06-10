@@ -32,6 +32,15 @@ namespace Data.Services
                 Refreshed?.Invoke(e, func);
             };
         }
+
+        public void Reinitialise()
+        {
+            //if (_csvStore is null) return;
+            //_csvStore.Dispose();
+            //_csvStore = new FileWatchingCSVAdapter<YardItem>(new YardItemCSVSchema(columnSchema), filename);
+
+            //SetCache(_csvStore.GetItems());
+        }
         
         private void SetCache(IEnumerable<YardItem> items)
         {            
