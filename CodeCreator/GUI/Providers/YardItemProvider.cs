@@ -15,7 +15,7 @@ namespace GUI.Providers
         public YardItemProvider(
             Action<IEnumerable<YardItem>> onNewData)
         {
-            _dataStore = ContainerClass.ResolveType<IDataStore<YardItem, string>>();
+            _dataStore = AutofacResolver.ResolveType<IDataStore<YardItem, string>>();
 
             _dataStore.Refreshed += (e, func) =>
             {

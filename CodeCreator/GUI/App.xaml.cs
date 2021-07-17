@@ -15,7 +15,7 @@ namespace GUI
 
             var builder = new ContainerBuilder();
             _ = builder.RegisterModule(new Modules.Module());
-            Core.DependencyInjection.ContainerClass.Initialise(builder.Build());
+            Core.DependencyInjection.AutofacResolver.Initialise(builder.Build());
 
 
 

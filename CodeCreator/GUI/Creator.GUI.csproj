@@ -161,7 +161,7 @@
     <Compile Include="View\CellPicker\DataGridCellClick.xaml.cs">
       <DependentUpon>DataGridCellClick.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CellPicker\lib\CellCheckedEventArgs.cs" />
+    <Compile Include="View\CellPicker\CellCheckedEventArgs.cs" />
     <Compile Include="View\ColumnRowPicker.xaml.cs">
       <DependentUpon>ColumnRowPicker.xaml</DependentUpon>
     </Compile>

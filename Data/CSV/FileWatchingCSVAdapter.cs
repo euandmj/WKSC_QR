@@ -39,6 +39,8 @@ namespace Data.CSV
             _fsWatcher.Changed += (s, e) => RefreshStore();
         }
 
+        ~FileWatchingCSVAdapter() => Dispose(false);
+
         public DateTime LastUpdated { get; private set; }
 
         private void RefreshStore()
@@ -47,7 +49,7 @@ namespace Data.CSV
             {
                 using var tempAdapter = new AdapterCSV<T>(_schema, _path);
                 tempAdapter.ReadCSV();
-                using var newDt = tempAdapter.CopyDataTable();
+                var newDt = tempAdapter.CopyDataTable();
 
                 foreach (var row in this._dataTable.CompareTables(newDt))
                 {
@@ -83,8 +85,10 @@ namespace Data.CSV
 
         public IEnumerable<T> GetRecentlyChanged()
         {
-            var rows = _rowLastUpdated.Where(x => x.Value > LastUpdated).ToList();
-            rows.Sort((a, b) => DateTime.Compare(a.Value, b.Value));
+            var rows = _rowLastUpdated
+                .Where(x => x.Value > LastUpdated)
+                .OrderBy(x => x.Value);
+            //rows.Sort((a, b) => DateTime.Compare(a.Value, b.Value));
 
 
             foreach(var row in rows)
@@ -92,5 +96,8 @@ namespace Data.CSV
                 yield return _schema.ParseRow(_dataTable.Rows[row.Key]);
             }
         }
+
+        
+
     }
 }

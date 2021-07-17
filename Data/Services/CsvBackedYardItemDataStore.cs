@@ -28,6 +28,7 @@ namespace Data.Services
 
             _csvStore.ChangedEvent += (e, func) =>
             {
+                //TODO: enumerates twice. dont like.
                 SetCache(func());
                 Refreshed?.Invoke(e, func);
             };
@@ -46,7 +47,7 @@ namespace Data.Services
         {            
             _cache = _csvStore.GetItemsWithLastUpdated().Select(x =>
             {
-                x.item.LastUpdated = x.lastUpdated;
+                x.item.LastUpdated = x.lastUpdated; // padding datetime into YardItem is necessary here because _csvStore treats it as T. 
                 return x.item;
             }).ToList();
         }

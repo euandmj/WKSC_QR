@@ -33,6 +33,10 @@
                             Value="50" />
                     <Setter Property="Margin"
                             Value="3" />
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Center" />
+                    <Setter Property="TextAlignment"
+                            Value="Center" />
                 </Style>
             </Grid.Resources>
 

@@ -3,7 +3,7 @@ using System;
 
 namespace Core.DependencyInjection
 {
-    public static class ContainerClass
+    public static class AutofacResolver
     {
         private static IContainer _container;
 

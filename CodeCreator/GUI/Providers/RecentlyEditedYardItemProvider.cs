@@ -19,7 +19,7 @@ namespace GUI.Providers
             Action<IEnumerable<YardItem>> onNewData)
         {
             _recentNumber = numberRecent;
-            _dataStore = ContainerClass.ResolveType<IDataStore<YardItem, string>>();
+            _dataStore = AutofacResolver.ResolveType<IDataStore<YardItem, string>>();
 
 
             _dataStore.Refreshed += (e, func) =>

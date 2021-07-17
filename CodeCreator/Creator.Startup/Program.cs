@@ -2,7 +2,6 @@
 using GUI;
 using System;
 using System.IO;
-using System.Windows;
 using static System.Console;
 
 namespace Creator.Startup
@@ -25,7 +24,6 @@ namespace Creator.Startup
             try
             {
                 CreateDependencies();
-
                 WriteLine("Starting up. You can minimise this window...");
 
                 var app = new App();
@@ -34,9 +32,11 @@ namespace Creator.Startup
             }
             catch (Exception ex)
             {
+                //Core.Utils.Set4Ground(Title, s => Title = s);
+                Core.Utils.Set4Ground();
                 WriteLine("Unexpected error occurred. Please try relaunching the program: ");
-                WriteLine(ex.Message);
                 WriteLine(ex.StackTrace);
+                WriteLine(ex.Message);
                 WriteLine("press any key to exit");                
                 ReadKey();
             }
@@ -47,7 +47,8 @@ namespace Creator.Startup
             var builder = new ContainerBuilder();
             builder.RegisterModule<GUI.Modules.Module>();
 
-            Core.DependencyInjection.ContainerClass.Initialise(builder.Build());
+            Core.DependencyInjection.AutofacResolver.Initialise(builder.Build());
         }
+
     }
 }
