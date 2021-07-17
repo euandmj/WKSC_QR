@@ -11,27 +11,26 @@ namespace GUI.View.CellPicker
     /// Interaction logic for DataGridCellClick.xaml
     /// 
     /// The Parent control which holds the datagrid with cells populated with 
-    /// <see cref="ClickableCell"/> referenced with <see cref="_cellCollection"/>
+    /// <see cref="Cell"/> referenced with <see cref="_cellCollection"/>
     /// 
     /// 
     /// 
     /// </summary>
-    public partial class DataGridCellClick : UserControl, IDisposable
+    public partial class Picker : UserControl, IDisposable
     {
         private bool disposedValue;
 
-        private readonly IList<ClickableCell> _cellCollection;
+        private readonly IList<Cell> _cellCollection;
 
         public int Columns { get; set; } = 2;
-        public int Rows { get; set; } = 5;       
+        public int Rows { get; set; } = 5;
+        public int CheckedCount { get; private set; }
 
-        public int CheckedCount { get; set; }
-
-        public DataGridCellClick()
+        public Picker()
         {
             InitializeComponent();
 
-            _cellCollection = new List<ClickableCell>(Columns * Rows);
+            _cellCollection = new List<Cell>(Columns * Rows);
 
             // Create rows + columns
             dg.ColumnDefinitions.AddRange(Columns);
@@ -40,7 +39,7 @@ namespace GUI.View.CellPicker
             BuildCells();
         }
 
-        public IList<ClickableCell> Cells => _cellCollection;
+        public IList<Cell> Cells => _cellCollection;
 
 
         private void BuildCells()
@@ -50,7 +49,7 @@ namespace GUI.View.CellPicker
                 int row = i / Columns;
                 int col = i % Columns;
 
-                var lbl = new ClickableCell(row + 1, col);
+                var lbl = new Cell(row + 1, col);
 
                 _cellCollection.Add(lbl);
                 dg.Children.Add(lbl);
@@ -62,16 +61,14 @@ namespace GUI.View.CellPicker
             }
         }
 
-        private void OnChecked(object sender, RoutedEventArgs e)
-            => CheckedCount++;
+        private void OnChecked(object sender, RoutedEventArgs e) => CheckedCount++;
 
-        private void OnUnchecked(object sender, RoutedEventArgs e)
-            => CheckedCount--;
+        private void OnUnchecked(object sender, RoutedEventArgs e) => CheckedCount--;
 
 
         private void OnCellClickProxy(object sender, MouseButtonEventArgs e)
         {
-            if(sender is ClickableCell cell)
+            if (sender is Cell cell)
             {
                 // if theres only one checked cell block the event args to
                 // stop it being unticked
@@ -88,7 +85,7 @@ namespace GUI.View.CellPicker
 
             var n = (int)e.NewValue;
 
-            for(int i = 0; i < _cellCollection.Count; i++)
+            for (int i = 0; i < _cellCollection.Count; i++)
             {
                 var ctl = _cellCollection[i];
 
@@ -105,7 +102,7 @@ namespace GUI.View.CellPicker
             {
                 if (disposing)
                 {
-                    foreach(var ctl in dg.Children.OfType<ClickableCell>())
+                    foreach (var ctl in dg.Children.OfType<Cell>())
                     {
                         ctl.PreviewMouseLeftButtonDown -= this.OnCellClickProxy;
                         ctl.Unchecked -= this.OnUnchecked;
@@ -118,9 +115,9 @@ namespace GUI.View.CellPicker
 
         public IEnumerable<int> GetWhiteList()
         {
-            for(int i = 0; i < _cellCollection.Count; i++)
+            for (int i = 0; i < _cellCollection.Count; i++)
             {
-                if(_cellCollection[i].IsChecked)
+                if (_cellCollection[i].IsChecked)
                     yield return i;
             }
         }
@@ -131,64 +128,10 @@ namespace GUI.View.CellPicker
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
+
     }
 
 
-    public static class DataGridExtensions
-    {
-        public static void AddRange(
-            this ColumnDefinitionCollection @this,
-            int num,
-            ColumnDefinition template = null)
-        {
-            if(template is null) template = new ColumnDefinition();
-            for(int i = 0; i < num; i++)
-            {
-                @this.Add(new ColumnDefinition()
-                {
-                    Width = template.Width,
-                    MaxWidth = template.MaxWidth,
-                    MinWidth = template.MinWidth
-                });
-            }
-        }
-
-        public static void AddRange(
-            this RowDefinitionCollection @this,
-            int num,
-            RowDefinition template = null)
-        {
-            if(template is null) template = new RowDefinition();
-            for (int i = 0; i < num; i++)
-            {
-                @this.Add(new RowDefinition()
-                {
-                    Height = template.Height,
-                    MaxHeight = template.MaxHeight,
-                    MinHeight = template.MinHeight
-                });
-            }
-        }
-
-        public static void AddRange(
-            this UIElementCollection @this, 
-            IEnumerable<UIElement> eles)
-        {
-            foreach(var ele in eles)
-            {
-                @this.Add(ele);
-            }
-        }
-
-        public static IEnumerable<T> FindAll<T>(this UIElementCollection @this, Func<T, bool> func)
-        {
-            foreach (var child in @this)
-            {
-                if (child.GetType() == typeof(T))
-                {
-                    if (func((T)child)) yield return (T)child;
-                }
-            }
-        }
-    }
+    
 }

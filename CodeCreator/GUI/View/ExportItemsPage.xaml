@@ -36,12 +36,12 @@
                    HorizontalAlignment="Center" />
         </StackPanel>
 
-        <cpkr:DataGridCellClick Width="350"
+        <cpkr:Picker Width="350"
                                 x:Name="dgcc"
                                 
                                 Grid.Row="1">
 
-        </cpkr:DataGridCellClick>
+        </cpkr:Picker>
 
 
 

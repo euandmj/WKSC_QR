@@ -157,7 +157,7 @@ namespace GUI.ViewModel
 
         public bool IsPrintEnabled => _createdPaths.Count > 0;
 
-        public IList<ClickableCell> Cells { get; set; }
+        public IList<Cell> Cells { get; set; }
 
         public Func<IEnumerable<int>> GetWhiteList;
 

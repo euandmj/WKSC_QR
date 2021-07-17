@@ -155,13 +155,12 @@
     <Compile Include="ViewModel\RecentlyChangedItemsViewModel.cs" />
     <Compile Include="ViewModel\TableWizardViewModel.cs" />
     <Compile Include="ViewModel\DataTableEmbeddViewModel.cs" />
-    <Compile Include="View\CellPicker\ClickableCell.xaml.cs">
-      <DependentUpon>ClickableCell.xaml</DependentUpon>
+    <Compile Include="View\CellPicker\Cell.xaml.cs">
+      <DependentUpon>Cell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CellPicker\DataGridCellClick.xaml.cs">
-      <DependentUpon>DataGridCellClick.xaml</DependentUpon>
+    <Compile Include="View\CellPicker\Picker.xaml.cs">
+      <DependentUpon>Picker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CellPicker\CellCheckedEventArgs.cs" />
     <Compile Include="View\ColumnRowPicker.xaml.cs">
       <DependentUpon>ColumnRowPicker.xaml</DependentUpon>
     </Compile>
@@ -218,11 +217,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CellPicker\ClickableCell.xaml">
+    <Page Include="View\CellPicker\Cell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CellPicker\DataGridCellClick.xaml">
+    <Page Include="View\CellPicker\Picker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
